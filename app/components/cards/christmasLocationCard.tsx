@@ -96,6 +96,19 @@ export default function ChristmasLocationCard(){
 
     return(
         <div className="christmas-location-card-container">
+            <div key="roperito" className="christmas-location-card">
+                <h3>Roperito Solidario</h3>
+                <p>Colegio Champagnat Marcelo T de Alvear 1631 </p>
+                <ul>
+                    {daysToInterval({"0": "8:00-17:00", "1": "8:00-17:00", "2": "8:00-17:00", "3": "8:00-17:00", "4": "8:00-17:00"}).map((interval, idx) => (
+                        <li key={idx}>{interval}</li>
+                    ))}
+                </ul>
+                <Link href="https://maps.app.goo.gl/kmqQowYs4CANKMs57?g_st=ipc" target="_blank" rel="noopener noreferrer" className='christmas-location-link'>
+                    Ver en Google Maps
+                </Link>
+                <p><strong>ACLARAR QUE ES PARA ROPERITO</strong></p>
+            </div>
             {retPoints.map((point, index) => 
                 point.associatedCompany === true ? (
                     <div key={index} className="christmas-location-card associated-company">
