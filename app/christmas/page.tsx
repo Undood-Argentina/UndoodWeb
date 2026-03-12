@@ -1,10 +1,14 @@
+import { redirect } from 'next/navigation';
 import {ChristmasForm} from "@/app/components/forms/christmasForm";
 import Image from "next/image";
 import './christmas.css'
 import ChristmasLocationCard from "../components/cards/christmasLocationCard";
 
+// Campaign disabled — redirect to home
+const CHRISTMAS_DISABLED = true;
 
 export default function ChristmasPage() {
+    if (CHRISTMAS_DISABLED) redirect('/');
     return(
         <main>
             <header className="christmas-header">

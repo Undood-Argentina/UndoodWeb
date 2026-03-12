@@ -1,7 +1,12 @@
-import {Model, DataTypes} from "sequelize";
+import {Model, DataTypes, Sequelize} from "sequelize";
 import {conectDB} from "../config";
 
-const sequelize = await conectDB();
+// Campaign disabled — skip DB connection
+const CHRISTMAS_DISABLED = true;
+
+const sequelize = CHRISTMAS_DISABLED
+    ? (null as unknown as Sequelize)
+    : await conectDB();
 
 class User extends Model {}
 User.init({

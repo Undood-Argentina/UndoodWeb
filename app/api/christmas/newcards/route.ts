@@ -2,9 +2,11 @@ import { sendMail } from "../send/route";
 import { User, Child } from "../models";
 import { env } from "process";
 
-
+// Campaign disabled
+const CHRISTMAS_DISABLED = true;
 
 export async function GET() {
+    if (CHRISTMAS_DISABLED) return new Response('Christmas campaign is disabled', { status: 503 });
     const noCardChildren = await Child.findAll({ where: { card: false } });
     const fails : number[] = [];
 

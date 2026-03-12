@@ -1,5 +1,8 @@
 import {User, Child, RetPoint} from '../models';
 
+// Campaign disabled
+const CHRISTMAS_DISABLED = true;
+
 async function readUsers(){
     try {
         const users =  await User.findAll();
@@ -28,6 +31,7 @@ async function readRetPoints(){
 }
 
 export async function GET(req:Request) {
+    if (CHRISTMAS_DISABLED) return new Response('Christmas campaign is disabled', { status: 503 });
     const url = new URL(req.url);
     const type = url.searchParams.get('type');
 

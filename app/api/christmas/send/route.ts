@@ -9,6 +9,9 @@ import {
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
+// Campaign disabled
+const CHRISTMAS_DISABLED = true;
+
 interface NewUserBody {
     name: string;
     email: string;
@@ -318,6 +321,7 @@ export async function sendMail(to: string, userName: string, childrenId: number 
 }
 
 export async function POST(req: Request) {
+    if (CHRISTMAS_DISABLED) return new Response('Christmas campaign is disabled', { status: 503 });
     const body = await req.json() as NewUserBody;
 
     const userResponse = await addUser(body);
