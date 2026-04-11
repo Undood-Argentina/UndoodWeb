@@ -26,7 +26,7 @@ async function readRetPoints(){
         const retPoints =  await RetPoint.findAll();
         return new Response (JSON.stringify(retPoints), {status: 200});
     } catch (error) {
-        return new Response ('Error al leer puntos de retiro', {status: 500, statusText: (error as Error).message});
+        return new Response ('Error al leer puntos de retiro', {status: 500, |statusText: (error as Error).message});
     }
 }
 
