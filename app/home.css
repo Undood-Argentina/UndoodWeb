@@ -188,14 +188,14 @@
         height: auto;
     }
     .main-home-frontpage-text p{
-        font-size: 1.5vw;
+        font-size: 1.2vw;
     }
     .frontpage-about h1{
         font-size: 3vw;
         text-align: center;
     }
     .frontpage-about h3, .frontpage-programs h2{
-        font-size: 1.5vw;
+        font-size: 1.6vw;
         font-weight: 500;
         margin: 0;
     }
@@ -218,10 +218,10 @@
         order:1!important;
     }
     .frontpage-programs h2{
-        font-size: 3.5vw;
+        font-size: 2.8vw;
     }
     .frontpage-programs p{
-        font-size: 2vw;
+        font-size: 1.6vw;
     }
     /* Impacto */
     .impact-grid{
@@ -237,10 +237,10 @@
         gap: 2vw;
     }
     .impact-title h2{
-        font-size: 3.5vw;
+        font-size: 2.8vw;
     }
     .impact-title p{
-        font-size: 2vw;
+        font-size: 1.6vw;
         font-weight: 500;
     }
     .items{
@@ -282,14 +282,14 @@
         margin-right: -0.1vw;
     }
     .home-colaborations-text h2{
-        font-size: 3.5vw;
+        font-size: 2.8vw;
     }
     .home-colaborations-text p{
-        font-size: 2vw;
+        font-size: 1.6vw;
         line-height: 1.5;
     }
     .home-button{
-        font-size: 2vw;
-        padding: 1vw 3vw;
+        font-size: 1.6vw;
+        padding: 0.8vw 2.4vw;
     }
 }
