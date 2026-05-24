@@ -10,6 +10,7 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.6",
     "csv-parse": "^6.1.0",
     "formik": "^2.4.6",
     "i18next": "^24.2.3",
