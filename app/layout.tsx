@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 
 export const metadata: Metadata = {
@@ -72,6 +73,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let gtmId = process.env.NEXT_PUBLIC_GTM_ID || "";
   return (
     <html lang="es">
       <body>
@@ -83,6 +85,7 @@ export default function RootLayout({
           <Footer/>
         </main>
       </body>
+      <GoogleTagManager gtmId={gtmId} />
     </html>
   );
 }
