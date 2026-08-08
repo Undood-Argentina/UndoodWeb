@@ -1,0 +1,444 @@
+* {
+    box-sizing: border-box;
+}
+
+.pg-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+.pg-card {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    gap: 32px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eeeeee;
+}
+
+/* ================================================
+    HEADER
+================================================= */
+
+.pg-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+    line-height: 24px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.pg-step {
+    flex-shrink: 0;
+    color: #D1D5DC;
+    white-space: nowrap;
+}
+
+.pg-step-active {
+    color: #1B3C7A;
+}
+
+.pg-step-line {
+    flex: 1;
+    height: 2px;
+    background: #E5E7EB;
+}
+
+/* ================================================
+    FORM
+================================================= */
+
+.pg-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.pg-section-2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+
+.pg-donation-amount-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.pg-next-step-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.pg-title {
+    color: #404040;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+}
+
+/* ================================================
+    DONATION OPTIONS
+================================================= */
+
+.pg-amount-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.pg-amount-option {
+    min-height: 63px;
+    border: 1.5px solid #E6E6E6;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #11527B;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+/* .pg-amount-option:hover:not(:disabled) {
+    border-color: #93c5fd;
+} */
+
+.pg-amount-selected {
+    border-color: #137EBE;
+    background: #F1F8FE;
+    color: brand/600;
+    font-weight: 700;
+}
+
+.pg-amount-option:disabled {
+    cursor: not-allowed;
+}
+
+.pg-disabled {
+    opacity: 0.5;
+}
+
+/* ================================================
+    CUSTOM AMOUNT
+================================================= */
+
+.pg-custom-amount {
+    margin-top: 20px;
+}
+
+.pg-money-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.pg-money-input span {
+    padding-left: 15px;
+    font-weight: 600;
+    color: #525252;
+}
+
+.pg-money-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 12px;
+    font-size: 16px;
+}
+
+/* ================================================
+    INPUTS
+================================================= */
+
+.pg-field {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.pg-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #404040;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pg-input {
+    width: 100%;
+    height: 50px;
+    padding: 0 14px;
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    outline: none;
+    color: #171717;
+    background: #ffffff;
+    font-size: 16px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.pg-input:focus {
+    border-color: #2563eb;
+    box-shadow:
+        0 0 0 3px rgba(
+            37,
+            99,
+            235,
+            0.12
+        );
+}
+
+.pg-input-error {
+    border-color: #dc2626;
+}
+
+.pg-error {
+    display: block;
+    margin-top: 6px;
+    color: #dc2626;
+    font-size: 13px;
+}
+
+.pg-general-error {
+    margin-top: 14px;
+}
+
+/* ================================================
+    FORM
+================================================= */
+
+.pg-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pg-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.pg-input {
+    height: 47.06px;
+    opacity: 1;
+
+    border: 1.53px solid #D1D5DC;
+    border-radius: 16px;
+
+    padding: 12px 16px;
+    
+    box-sizing: border-box;
+    outline: none;
+}
+
+.pg-input:focus {
+    outline: none;
+    border: 1.53px solid #D1D5DC;
+    box-shadow: none;
+}
+
+.pg-label {
+    display: block;
+    padding-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pg-required {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+/* ================================================
+    CHECKBOX
+================================================= */
+
+.pg-checkbox-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #525252;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.pg-checkbox-wrapper input {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 20px;
+    height: 20px;
+
+    border: 2px solid #D1D5DC;
+    border-radius: 6px;
+
+    margin: 0;
+    margin-top: 1px;
+
+    cursor: pointer;
+    flex-shrink: 0;
+
+    background: white;
+}
+
+.pg-checkbox-wrapper input:checked {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+/* ================================================
+    TOTAL
+================================================= */
+
+.pg-total {
+    color: #11527B;
+    font-size: 20px;
+    font-weight: 700;
+}
+.pg-donate-total {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+/* ================================================
+    BUTTON
+================================================= */
+
+.pg-primary-button {
+    width: 100%;
+    height: 48px;
+    padding: 12px 24px 12px 24px;
+    border: 1px;
+    border-color: #137EBE;
+    border-radius: 26px;
+    background: #137EBE;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.1s ease;
+}
+
+.pg-primary-button:hover {
+    background: #1d4ed8;
+}
+
+.pg-primary-button:active {
+    transform: scale(0.99);
+}
+
+/* ================================================
+    FOOTER
+================================================= */
+
+.pg-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: #525252;
+    font-size: 13px;
+}
+
+.pg-security-item {
+    font-size: 14px;
+    font-weight: 400;
+    color: #99A1AF;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.pg-footer-separator {
+    width: 1px;
+    height: 14px;
+    background: #FCE7F3;
+}
+
+.pg-security-icon {
+    font-size: 16px;
+}
+
+/* ================================================
+    RESPONSIVE
+================================================= */
+
+@media (max-width: 600px) {
+
+    .pg-container {
+        padding: 16px 10px;
+    }
+
+    .pg-card {
+        border-radius: 14px;
+    }
+
+    .pg-header {
+        padding: 18px 10px;
+        gap: 5px;
+        font-size: 12px;
+    }
+
+    .pg-step-separator {
+        font-size: 10px;
+    }
+
+    .pg-form {
+        padding: 24px 20px;
+    }
+
+    .pg-title {
+        font-size: 23px;
+        margin-bottom: 22px;
+    }
+
+    .pg-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .pg-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

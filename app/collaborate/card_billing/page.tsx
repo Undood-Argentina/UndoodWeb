@@ -3,354 +3,357 @@
 import { onSubmit } from './on_submit';
 import { useEffect } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
+import PaymentGateway from '@/app/components/forms/paymentGateway';
 
 export default function Billing() {
-  useEffect(() => {
-    async function init() {
-      await loadMercadoPago();
 
-      const mp = new window.MercadoPago(
-        process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY!
-      );
+  return <PaymentGateway />;
+  // useEffect(() => {
+  //   async function init() {
+  //     await loadMercadoPago();
 
-      const cardNumberElement = mp.fields
-        .create("cardNumber", {
-          placeholder: "Número de la tarjeta",
-        })
-        .mount("form-checkout__cardNumber");
+  //     const mp = new window.MercadoPago(
+  //       process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY!
+  //     );
 
-      mp.fields
-        .create("expirationDate", {
-          placeholder: "MM/YY",
-        })
-        .mount("form-checkout__expirationDate");
+  //     const cardNumberElement = mp.fields
+  //       .create("cardNumber", {
+  //         placeholder: "Número de la tarjeta",
+  //       })
+  //       .mount("form-checkout__cardNumber");
 
-      const securityCodeElement = mp.fields
-        .create("securityCode", {
-          placeholder: "Código de seguridad",
-        })
-        .mount("form-checkout__securityCode");
+  //     mp.fields
+  //       .create("expirationDate", {
+  //         placeholder: "MM/YY",
+  //       })
+  //       .mount("form-checkout__expirationDate");
 
-      function createSelectOptions(
-        elem: HTMLSelectElement,
-        options: any[],
-        labelsAndKeys = { label: "name", value: "id" }
-      ) {
-        const { label, value } = labelsAndKeys;
+  //     const securityCodeElement = mp.fields
+  //       .create("securityCode", {
+  //         placeholder: "Código de seguridad",
+  //       })
+  //       .mount("form-checkout__securityCode");
 
-        elem.options.length = 0;
+  //     function createSelectOptions(
+  //       elem: HTMLSelectElement,
+  //       options: any[],
+  //       labelsAndKeys = { label: "name", value: "id" }
+  //     ) {
+  //       const { label, value } = labelsAndKeys;
 
-        const tempOptions = document.createDocumentFragment();
+  //       elem.options.length = 0;
 
-        options.forEach((option) => {
-          const opt = document.createElement("option");
-          opt.value = option[value];
-          opt.textContent = option[label];
-          tempOptions.appendChild(opt);
-        });
+  //       const tempOptions = document.createDocumentFragment();
 
-        elem.appendChild(tempOptions);
-      }
+  //       options.forEach((option) => {
+  //         const opt = document.createElement("option");
+  //         opt.value = option[value];
+  //         opt.textContent = option[label];
+  //         tempOptions.appendChild(opt);
+  //       });
 
-      try {
-        const identificationTypes = await mp.getIdentificationTypes();
+  //       elem.appendChild(tempOptions);
+  //     }
 
-        createSelectOptions(
-          document.getElementById(
-            "form-checkout__identificationType"
-          ) as HTMLSelectElement,
-          identificationTypes
-        );
-      } catch (e) {
-        console.error("Error getting identificationTypes:", e);
-      }
+  //     try {
+  //       const identificationTypes = await mp.getIdentificationTypes();
 
-      const paymentMethodElement = document.getElementById(
-        "paymentMethodId"
-      ) as HTMLInputElement;
+  //       createSelectOptions(
+  //         document.getElementById(
+  //           "form-checkout__identificationType"
+  //         ) as HTMLSelectElement,
+  //         identificationTypes
+  //       );
+  //     } catch (e) {
+  //       console.error("Error getting identificationTypes:", e);
+  //     }
 
-      const issuerElement = document.getElementById(
-        "form-checkout__issuer"
-      ) as HTMLSelectElement;
+  //     const paymentMethodElement = document.getElementById(
+  //       "paymentMethodId"
+  //     ) as HTMLInputElement;
 
-      const installmentsElement = document.getElementById(
-        "form-checkout__installments"
-      ) as HTMLSelectElement;
+  //     const issuerElement = document.getElementById(
+  //       "form-checkout__issuer"
+  //     ) as HTMLSelectElement;
 
-      const issuerPlaceholder = "Banco emisor";
-      const installmentsPlaceholder = "Cuotas";
+  //     const installmentsElement = document.getElementById(
+  //       "form-checkout__installments"
+  //     ) as HTMLSelectElement;
 
-      function clearHTMLSelectChildrenFrom(element: HTMLSelectElement) {
-        [...element.children].forEach((child) => child.remove());
-      }
+  //     const issuerPlaceholder = "Banco emisor";
+  //     const installmentsPlaceholder = "Cuotas";
 
-      function createSelectElementPlaceholder(
-        element: HTMLSelectElement,
-        placeholder: string
-      ) {
-        const option = document.createElement("option");
-        option.textContent = placeholder;
-        option.disabled = true;
-        option.selected = true;
-        element.appendChild(option);
-      }
+  //     function clearHTMLSelectChildrenFrom(element: HTMLSelectElement) {
+  //       [...element.children].forEach((child) => child.remove());
+  //     }
 
-      function clearSelectsAndSetPlaceholders() {
-        clearHTMLSelectChildrenFrom(issuerElement);
-        createSelectElementPlaceholder(
-          issuerElement,
-          issuerPlaceholder
-        );
+  //     function createSelectElementPlaceholder(
+  //       element: HTMLSelectElement,
+  //       placeholder: string
+  //     ) {
+  //       const option = document.createElement("option");
+  //       option.textContent = placeholder;
+  //       option.disabled = true;
+  //       option.selected = true;
+  //       element.appendChild(option);
+  //     }
 
-        clearHTMLSelectChildrenFrom(installmentsElement);
-        createSelectElementPlaceholder(
-          installmentsElement,
-          installmentsPlaceholder
-        );
-      }
+  //     function clearSelectsAndSetPlaceholders() {
+  //       clearHTMLSelectChildrenFrom(issuerElement);
+  //       createSelectElementPlaceholder(
+  //         issuerElement,
+  //         issuerPlaceholder
+  //       );
 
-      function updatePCIFieldsSettings(paymentMethod: any) {
-        const settings = paymentMethod.settings[0];
+  //       clearHTMLSelectChildrenFrom(installmentsElement);
+  //       createSelectElementPlaceholder(
+  //         installmentsElement,
+  //         installmentsPlaceholder
+  //       );
+  //     }
 
-        cardNumberElement.update({
-          settings: settings.card_number,
-        });
+  //     function updatePCIFieldsSettings(paymentMethod: any) {
+  //       const settings = paymentMethod.settings[0];
 
-        securityCodeElement.update({
-          settings: settings.security_code,
-        });
-      }
+  //       cardNumberElement.update({
+  //         settings: settings.card_number,
+  //       });
 
-      async function getIssuers(paymentMethod: any, bin: string) {
-        try {
-          return await mp.getIssuers({
-            paymentMethodId: paymentMethod.id,
-            bin,
-          });
-        } catch (e) {
-          console.error("error getting issuers:", e);
-          return [];
-        }
-      }
+  //       securityCodeElement.update({
+  //         settings: settings.security_code,
+  //       });
+  //     }
 
-      async function updateIssuer(paymentMethod: any, bin: string) {
-        let issuerOptions = [paymentMethod.issuer];
+  //     async function getIssuers(paymentMethod: any, bin: string) {
+  //       try {
+  //         return await mp.getIssuers({
+  //           paymentMethodId: paymentMethod.id,
+  //           bin,
+  //         });
+  //       } catch (e) {
+  //         console.error("error getting issuers:", e);
+  //         return [];
+  //       }
+  //     }
 
-        if (
-          paymentMethod.additional_info_needed.includes("issuer_id")
-        ) {
-          issuerOptions = await getIssuers(paymentMethod, bin);
-        }
+  //     async function updateIssuer(paymentMethod: any, bin: string) {
+  //       let issuerOptions = [paymentMethod.issuer];
 
-        createSelectOptions(issuerElement, issuerOptions);
-      }
+  //       if (
+  //         paymentMethod.additional_info_needed.includes("issuer_id")
+  //       ) {
+  //         issuerOptions = await getIssuers(paymentMethod, bin);
+  //       }
 
-      async function updateInstallments(
-        paymentMethod: any,
-        bin: string
-      ) {
-        try {
-          const installments = await mp.getInstallments({
-            amount: (
-              document.getElementById(
-                "transactionAmount"
-              ) as HTMLInputElement
-            ).value,
-            bin,
-            paymentTypeId: "credit_card",
-          });
+  //       createSelectOptions(issuerElement, issuerOptions);
+  //     }
 
-          const installmentOptions =
-            installments[0].payer_costs;
+  //     async function updateInstallments(
+  //       paymentMethod: any,
+  //       bin: string
+  //     ) {
+  //       try {
+  //         const installments = await mp.getInstallments({
+  //           amount: (
+  //             document.getElementById(
+  //               "transactionAmount"
+  //             ) as HTMLInputElement
+  //           ).value,
+  //           bin,
+  //           paymentTypeId: "credit_card",
+  //         });
 
-          createSelectOptions(
-            installmentsElement,
-            installmentOptions,
-            {
-              label: "recommended_message",
-              value: "installments",
-            }
-          );
-        } catch (e) {
-          console.error("error getting installments:", e);
-        }
-      }
+  //         const installmentOptions =
+  //           installments[0].payer_costs;
 
-      let currentBin: string | undefined;
+  //         createSelectOptions(
+  //           installmentsElement,
+  //           installmentOptions,
+  //           {
+  //             label: "recommended_message",
+  //             value: "installments",
+  //           }
+  //         );
+  //       } catch (e) {
+  //         console.error("error getting installments:", e);
+  //       }
+  //     }
 
-      cardNumberElement.on(
-        "binChange",
-        async (data: { bin?: string }) => {
-          const { bin } = data;
+  //     let currentBin: string | undefined;
 
-          try {
-            if (!bin && paymentMethodElement.value) {
-              clearSelectsAndSetPlaceholders();
-              paymentMethodElement.value = "";
-            }
+  //     cardNumberElement.on(
+  //       "binChange",
+  //       async (data: { bin?: string }) => {
+  //         const { bin } = data;
 
-            if (bin && bin !== currentBin) {
-              const { results } =
-                await mp.getPaymentMethods({ bin });
+  //         try {
+  //           if (!bin && paymentMethodElement.value) {
+  //             clearSelectsAndSetPlaceholders();
+  //             paymentMethodElement.value = "";
+  //           }
 
-              const paymentMethod = results[0];
+  //           if (bin && bin !== currentBin) {
+  //             const { results } =
+  //               await mp.getPaymentMethods({ bin });
 
-              paymentMethodElement.value = paymentMethod.id;
+  //             const paymentMethod = results[0];
 
-              updatePCIFieldsSettings(paymentMethod);
-              await updateIssuer(paymentMethod, bin);
-              await updateInstallments(paymentMethod, bin);
-            }
+  //             paymentMethodElement.value = paymentMethod.id;
 
-            currentBin = bin;
-          } catch (e) {
-            console.error(
-              "error getting payment methods:",
-              e
-            );
-          }
-        }
-      );
+  //             updatePCIFieldsSettings(paymentMethod);
+  //             await updateIssuer(paymentMethod, bin);
+  //             await updateInstallments(paymentMethod, bin);
+  //           }
 
-      const formElement = document.getElementById(
-        "form-checkout"
-      ) as HTMLFormElement;
+  //           currentBin = bin;
+  //         } catch (e) {
+  //           console.error(
+  //             "error getting payment methods:",
+  //             e
+  //           );
+  //         }
+  //       }
+  //     );
 
-      formElement.addEventListener("submit", createCardToken);
+  //     const formElement = document.getElementById(
+  //       "form-checkout"
+  //     ) as HTMLFormElement;
 
-      async function createCardToken(event: Event) {
-        try {
-          const tokenElement = document.getElementById(
-            "token"
-          ) as HTMLInputElement;
+  //     formElement.addEventListener("submit", createCardToken);
 
-          if (!tokenElement.value) {
-            event.preventDefault();
+  //     async function createCardToken(event: Event) {
+  //       try {
+  //         const tokenElement = document.getElementById(
+  //           "token"
+  //         ) as HTMLInputElement;
 
-            const token = await mp.fields.createCardToken({
-              cardholderName: (
-                document.getElementById(
-                  "form-checkout__cardholderName"
-                ) as HTMLInputElement
-              ).value,
-              identificationType: (
-                document.getElementById(
-                  "form-checkout__identificationType"
-                ) as HTMLSelectElement
-              ).value,
-              identificationNumber: (
-                document.getElementById(
-                  "form-checkout__identificationNumber"
-                ) as HTMLInputElement
-              ).value,
-            });
+  //         if (!tokenElement.value) {
+  //           event.preventDefault();
 
-            tokenElement.value = token.id;
-            formElement.requestSubmit();
-          }
-        } catch (e) {
-          console.error("error creating card token:", e);
-        }
-      }
-    }
+  //           const token = await mp.fields.createCardToken({
+  //             cardholderName: (
+  //               document.getElementById(
+  //                 "form-checkout__cardholderName"
+  //               ) as HTMLInputElement
+  //             ).value,
+  //             identificationType: (
+  //               document.getElementById(
+  //                 "form-checkout__identificationType"
+  //               ) as HTMLSelectElement
+  //             ).value,
+  //             identificationNumber: (
+  //               document.getElementById(
+  //                 "form-checkout__identificationNumber"
+  //               ) as HTMLInputElement
+  //             ).value,
+  //           });
 
-    init();
-  }, []);
+  //           tokenElement.value = token.id;
+  //           formElement.requestSubmit();
+  //         }
+  //       } catch (e) {
+  //         console.error("error creating card token:", e);
+  //       }
+  //     }
+  //   }
 
-  return (
-    <div>
-      <form
-        id="form-checkout"
-        onSubmit={onSubmit}
-      >
-        <input
-          id="transactionAmount"
-          name="transactionAmount"
-          type="number"
-          min="1"
-          step="0.01"
-          placeholder="Monto"
-        />
+  //   init();
+  // }, []);
+
+  // return (
+  //   <div>
+  //     <form
+  //       id="form-checkout"
+  //       onSubmit={onSubmit}
+  //     >
+  //       <input
+  //         id="transactionAmount"
+  //         name="transactionAmount"
+  //         type="number"
+  //         min="1"
+  //         step="0.01"
+  //         placeholder="Monto"
+  //       />
       
-        <div
-          id="form-checkout__cardNumber"
-          className="container"
-        ></div>
+  //       <div
+  //         id="form-checkout__cardNumber"
+  //         className="container"
+  //       ></div>
 
-        <div
-          id="form-checkout__expirationDate"
-          className="container"
-        ></div>
+  //       <div
+  //         id="form-checkout__expirationDate"
+  //         className="container"
+  //       ></div>
 
-        <div
-          id="form-checkout__securityCode"
-          className="container"
-        ></div>
+  //       <div
+  //         id="form-checkout__securityCode"
+  //         className="container"
+  //       ></div>
 
-        <input
-          type="text"
-          id="form-checkout__cardholderName"
-          placeholder="Titular de la tarjeta"
-        />
+  //       <input
+  //         type="text"
+  //         id="form-checkout__cardholderName"
+  //         placeholder="Titular de la tarjeta"
+  //       />
 
-        <select
-          id="form-checkout__issuer"
-          name="issuer"
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Banco emisor
-          </option>
-        </select>
+  //       <select
+  //         id="form-checkout__issuer"
+  //         name="issuer"
+  //         defaultValue=""
+  //       >
+  //         <option value="" disabled>
+  //           Banco emisor
+  //         </option>
+  //       </select>
 
-        <select
-          id="form-checkout__installments"
-          name="installments"
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Cuotas
-          </option>
-        </select>
+  //       <select
+  //         id="form-checkout__installments"
+  //         name="installments"
+  //         defaultValue=""
+  //       >
+  //         <option value="" disabled>
+  //           Cuotas
+  //         </option>
+  //       </select>
 
-        <select
-          id="form-checkout__identificationType"
-          name="identificationType"
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Tipo de documento
-          </option>
-        </select>
+  //       <select
+  //         id="form-checkout__identificationType"
+  //         name="identificationType"
+  //         defaultValue=""
+  //       >
+  //         <option value="" disabled>
+  //           Tipo de documento
+  //         </option>
+  //       </select>
 
-        <input
-          type="text"
-          id="form-checkout__identificationNumber"
-          name="identificationNumber"
-          placeholder="Número do documento"
-        />
+  //       <input
+  //         type="text"
+  //         id="form-checkout__identificationNumber"
+  //         name="identificationNumber"
+  //         placeholder="Número do documento"
+  //       />
 
-        <input
-          type="email"
-          id="form-checkout__email"
-          name="email"
-          placeholder="E-mail"
-        />
+  //       <input
+  //         type="email"
+  //         id="form-checkout__email"
+  //         name="email"
+  //         placeholder="E-mail"
+  //       />
 
-        <input id="token" name="token" type="hidden" />
-        <input
-          id="paymentMethodId"
-          name="paymentMethodId"
-          type="hidden"
-        />
+  //       <input id="token" name="token" type="hidden" />
+  //       <input
+  //         id="paymentMethodId"
+  //         name="paymentMethodId"
+  //         type="hidden"
+  //       />
 
-        <button
-          type="submit"
-          id="form-checkout__submit"
-        >
-          Pagar
-        </button>
-      </form>
-    </div>
-  );
+  //       <button
+  //         type="submit"
+  //         id="form-checkout__submit"
+  //       >
+  //         Pagar
+  //       </button>
+  //     </form>
+  //   </div>
+  // );
 }
