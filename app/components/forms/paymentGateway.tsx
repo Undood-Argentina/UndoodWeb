@@ -814,13 +814,13 @@ export default function PaymentGateway({
                 "Ingresá tu nombre.";
         }
 
-        // if (
-        //     !lastName.trim()
-        // ) {
+        if (
+            !lastName.trim()
+        ) {
 
-        //     newErrors.lastName =
-        //         "Ingresá tu apellido.";
-        // }
+            newErrors.lastName =
+                "Ingresá tu apellido.";
+        }
 
         if (
             !email.trim()
