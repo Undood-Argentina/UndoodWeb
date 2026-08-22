@@ -1,0 +1,755 @@
+.higiene-header {
+    position: relative;
+    background-color: #FDF2F8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: stretch;
+    overflow: hidden;
+}
+
+.higiene-header-container {
+    padding-top: 150px;
+    padding-inline: 16px;
+    gap: 40px;
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.higiene-blur-2 {
+    position: absolute;
+    width: 459px;
+    height: 459px;
+    border-radius: 100%;
+    filter: blur(32px);
+    background-color: #F075AA26
+}
+
+.higiene-blur-1 {
+    position: absolute;
+    width: 422px;
+    height: 422px;
+    border-radius: 100%;
+    filter: blur(32px);
+    background-color: #F075AA26
+}
+
+.higiene-header .higiene-blur-2 {
+    position: absolute;
+    right: -108px;
+    bottom: -255px;
+}
+
+.higiene-header .higiene-blur-1 {
+    position: absolute;
+    left: -188px;
+
+    top: -288.5px;
+}
+
+.higiene-header-column {
+    max-width: 768px;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+}
+
+.higiene-header-content {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.higiene-header-h1-text {
+    font-size: 60px;
+    font-weight: 700;
+    font-style: bold;
+    letter-spacing: -2%;
+    text-align: center;
+
+}
+
+.higiene-text-black {
+    color: #272727;
+}
+
+.higiene-text-pink {
+    color: #DB2777;
+}
+
+.higiene-header-paragraph-text {
+    font-size: 20px;
+    line-height: 30px;
+    font-style: normal;
+    font-weight: 500;
+    text-align: center;
+    color: #500724;
+}
+
+.higiene-header-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+
+.higiene-button {
+    border-style: none;
+    border-radius: 12px;
+    min-width: 152px;
+    min-height: 52px;
+    padding: 12px 24px 12px 24px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.higiene-button-pink {
+    background-color: #DB2777;
+    color: white;
+}
+
+.higiene-button-white {
+    background-color: white;
+    color: #500724
+}
+
+image {
+    width: 576.4px;
+    height: 205px;
+}
+
+.higiene-problematica {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    padding-inline: 16px;
+    gap: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.higiene-problematica-container {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    max-width: 1280px;
+}
+
+.higiene-problematica-content {
+    gap: 24px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.higiene-problematica-h2-text {
+    color: #272727;
+    line-height: 44px;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -2%;
+}
+
+.higiene-problematica-paragraph-text {
+    color: #535353;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.higiene-problematica-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.higiene-problematica-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 16px;
+}
+
+.higiene-problematica-card-pink {
+    background-color:  #FDF2F8;
+}
+
+.higiene-problematica-card-pink .higiene-problematica-card-caption {
+    color: #500724;
+    background-color: #FBCFE8;
+}
+
+
+.higiene-problematica-card-caption {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    width: fit-content;
+}
+
+.higiene-problematica-card-paragraph {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #272727;
+}
+
+.higiene-problematica-card-red {
+    background-color:  #FEF2F2;
+}
+
+.higiene-problematica-card-red .higiene-problematica-card-caption {
+    color: #450A0A;
+    background-color: #FECACA;
+}
+
+
+.higiene-problematica-card-blue {
+    background-color:  #E2F1FC
+}
+
+.higiene-problematica-card-blue .higiene-problematica-card-caption {
+    color: #0D2C44;
+    background-color: #C0E2F7;
+}
+
+.higiene-promesas {
+    padding-top: 120px;
+    padding-bottom: 120px;
+    padding-inline: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.higiene-promesas-container {
+    max-width: 1280px;
+    gap: 56px;
+    display: flex;
+    flex-direction: column;
+}
+
+.higiene-promesas-title {
+    font-weight: 700;
+    font-style: bold;
+    font-size: 36px;
+    letter-spacing: -2%;
+    line-height: 44px;
+    color: #272727;
+}
+
+.higiene-promesas-row {
+    display: flex;
+    flex-direction: row;
+
+    gap: 24px;
+}
+
+.higiene-promesas-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: #FDF2F8;
+    padding: 32px;
+    border-radius: 16px;
+}
+
+.higiene-promesas-card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.higiene-promesas-card-header-caption {
+    border-radius: 12px;
+    min-width: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    max-width: 56px;
+    background-color: #FBCFE8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.higiene-promesas-card-header-caption svg {
+    width: 32px;
+    height: 32px;
+    color: #BE185D
+}
+
+.higiene-promesas-card-header-title {
+    font-weight: 700;
+    font-size: 20px;
+    font-style: bold;
+    line-height: 30px;
+    color: #272727
+}
+
+.higiene-promesas-card-paragraph {
+    font-size: 16px;
+    font-weight: 500px;
+    color: #535353;
+    line-height: 24px;
+}
+
+
+.higiene-donar {
+    position: relative;
+    height: 700px;
+    background-color: #FDF2F8;
+    overflow: hidden;
+}
+
+.higiene-donar .higiene-blur-2 {
+    position: absolute;
+    right: -131px;
+    top: -30px;
+}
+
+.higiene-donar .higiene-blur-1 {
+    position: absolute;
+    left: -196px;
+    bottom: -78.361px;
+}
+
+
+.higiene-gestion {
+    padding: 120px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    background: #FFF;
+}
+
+.higiene-gestion-container {
+    display: flex;
+    max-width: 1280px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 64px;
+    align-self: stretch;
+}
+
+.higiene-gestion-container h1 {
+    color: var(--neutral-800, #272727);
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: -0.72px;
+}
+
+.higiene-gestion-row {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    flex: 1;
+    align-self: stretch;
+}
+
+.higiene-gestion-card {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    flex: 1;
+}
+
+.higiene-gestion-card-header {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    height: 318px;
+    gap: 40px;
+    border-radius: 16px 16px 0 0;
+}
+
+.higiene-gestion-card-red {
+    background: var(--red-300, #FCA5A5);
+}
+
+.higiene-gestion-card-pink {
+    background: var(--Accent-Color-1-300, #F9A8D4);
+}
+
+.higiene-gestion-card-blue {
+    background: var(--brand-300, #87CCF2);
+}
+
+.higiene-gestion-card-content {
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    padding: var(--item-spacing-m, 32px) 24px;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 0 0 16px 16px;
+    border-right: var(--stroke-weight-1, 1px) solid var(--red-300, #FCA5A5);
+    border-bottom: var(--Stroke-Divider-Width, 1px) solid var(--red-300, #FCA5A5);
+    border-left: var(--Stroke-Divider-Width, 1px) solid var(--red-300, #FCA5A5);
+}
+
+.higiene-gestion-card-content h3 {
+    overflow: hidden;
+    color: var(--neutral-800, #272727);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+.higiene-gestion-card-content p {
+    overflow: hidden;
+    color: var(--neutral-600, #535353);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.higiene-gestion-card-caption {
+    display: flex;
+    padding: 6px 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 23px;
+    top: 23.18px;
+    border-radius: 6px;
+    background: #FFF;
+    z-index: 3;
+}
+
+.higiene-gestion-card-caption p {
+    color: var(--neutral-800, #272727);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.higiene-banner {
+    display: flex;
+    padding: var(--Section-Padding-padding-section-medium, 80px) 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.higiene-banner-container {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    max-width: 1280px;
+    padding: 120px 56px;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 120px;
+    align-self: stretch;
+    border-radius: 24px;
+    background: linear-gradient(148deg, #F48DBB 44.76%, #F2418A 102.22%);
+}
+
+.higiene-banner-content {
+    display: flex;
+    max-width: 645px;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 2;
+}
+
+.higiene-banner-content h1 {
+    color: var(--Color-White, #FFF);
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: -0.96px;
+}
+
+.higiene-banner-content p {
+    color: var(--neutral-50, #FAFAFA);
+    /* Text lg/Medium */
+    font-family: Raleway;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px; /* 155.556% */
+}
+
+.higiene-banner-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    z-index: 2;
+}
+
+.higiene-banner-button {
+    border-style: none;
+    display: flex;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 12px;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px; /* 155.556% */
+}
+
+.higiene-banner-button-pink {
+    background: var(--Accent-Color-1-600, #DB2777);
+    color: var(--Color-White, #FFF);
+}
+
+.higiene-banner-button-white {
+    background: var(--Color-White, #FFF);
+    color: var(--Accent-Color-1-950, #500724);
+}
+
+
+.higiene-banner-circle {
+    position: absolute;
+    width: 426px;
+    height: 413px;
+    border-radius: 16777200px;
+    opacity: 0.2;
+    background: var(--Accent-Color-1-200, #FBCFE8);
+    z-index: 1; /* Los coloca por detrás del contenido */
+    pointer-events: none; /* Evita que tapen los botones o enlaces al hacer clic */
+}
+
+.higiene-banner-circle-1 {
+    bottom: -265.18px;
+    left: 0px;
+}
+
+.higiene-banner-circle-2 {
+    right: -65px;
+    top: -234px;
+}
+
+@media (max-width: 768px) {
+    .higiene-header-actions {
+        flex-direction: column;
+    }
+
+    .higiene-header-paragraph-text {
+        width: 272px;
+    }
+
+    .higiene-problematica {
+        flex-direction: column;
+        gap: 80px;
+        padding: 80px 16px 40px 16px
+    }
+
+    .higiene-problematica-container {
+        flex-direction: column;
+        margin-inline: 0px;
+        gap: 56px;
+    }
+
+    .higiene-problematica-content {
+        gap: 24px;
+    }
+
+    .higiene-problematica-column {
+        gap: 24px;
+    }
+
+    .higiene-promesas-row {
+        flex-direction: column;
+    }
+
+    .higiene-gestion-row {
+        flex-direction: column;
+    }
+    
+    .higiene-banner-container {
+        flex-direction: column;
+        gap: 60px;
+        padding: 60px 24px 36px 24px;
+    }
+
+    .higiene-banner-content {
+        align-items: center;
+    }
+
+    .higiene-banner-content h1 {
+        text-align: center;
+    }
+
+    .higiene-banner-content p {
+        text-align: center;
+        width: 308px;
+    }
+
+    .higiene-problematica-content {
+        max-width: max-content;
+    }
+}
+
+
+.higiene-gestion-header-1 {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.higiene-gestion-header-p-1 {
+    position: absolute;
+    left: 49px;
+    top: 103.18px;
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 69.349px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    z-index: 1;
+}
+
+.higiene-gestion-header-p-2 {
+    position: absolute;
+    left: 142px;
+    top: 85.18px;
+    color: #FFF;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    z-index: 1;
+}
+
+.higiene-gestion-header-img-1 {
+    position: absolute;
+    width: 249px;
+    height: 266px;
+    aspect-ratio: 15/16;
+    left: 86px;
+    top: 170px;
+    border-radius: 26.112px;
+    
+    box-shadow: inset 0 0 0 6px rgba(248, 113, 113, 0.85);
+    background: url(/campania-higiene-2.png) lightgray 0px -27px / 99.841% 220.562% no-repeat;
+    z-index: 2;
+}
+
+.higiene-gestion-header-img-2 {
+    width: 124px;
+    height: 110px;
+    aspect-ratio: 62/55;
+    position: absolute;
+    left: 75px;
+    bottom: 62.82px;
+    background: url(/campania-higiene-3.png) -43.324px -6.367px / 288.902% 217.114% no-repeat;
+    z-index: 2;
+}
+.higiene-gestion-header-img-3 {
+    position: absolute;
+    width: 165.233px;
+    height: 268.713px;
+    transform: rotate(8.944deg);
+    aspect-ratio: 99/161;
+    top: 13.18px;
+    left: 141px;
+    background: url(/campania-higiene-4.png) -89.041px -15.37px / 186.869% 114.907% no-repeat;
+    z-index: 1;
+}
+.higiene-gestion-header-img-4 {
+    width: 138px;
+    height: 160px;
+    transform: rotate(4.359deg);
+    aspect-ratio: 69/80;
+    position: absolute;
+    left: 230px;
+    bottom: 73.793px;
+    background: url(/campania-higiene-5.png) -111.206px -8.621px / 400.245% 230.141% no-repeat;
+    z-index: 2;
+}
+.higiene-gestion-header-img-5 {
+    position: absolute;
+    width: 102.63px;
+    height: 100.271px;
+    top: 104px;
+    aspect-ratio: 87/85;
+    background: url(/campania-higiene-6.png) -1106.721px -290.904px / 1874.724% 1280% no-repeat;
+}
+.higiene-gestion-header-img-6 {
+    position: absolute;
+    width: 102.63px;
+    height: 66.061px;
+    left: 51.5px;
+    top: 21.2px;
+    aspect-ratio: 87/56;
+    background: url(/campania-higiene-7.png)
+}
+.higiene-gestion-header-img-7 {
+    position: absolute;
+    width: 102.63px;
+    height: 66.061px;
+    left: 91.6px;
+    aspect-ratio: 87/56;
+    background: url(/campania-higiene-8.png)
+}
+
+.higiene-gestion-header-img-8 {
+    position: absolute;
+    width: 73.139px;
+    height: 60.162px;
+    right: 0px;
+    top: 57.8px;
+    aspect-ratio: 62/51;
+    background: url(/campania-higiene-9.png)
+}
+.higiene-gestion-header-img-9 {
+    position: absolute;
+    width: 37.749px;
+    height: 56.623px;
+    right: 40.1px;
+    top: 104px;
+    aspect-ratio: 2/3;
+    background: url(/campania-higiene-10.png)
+}
+.higiene-gestion-header-img-10 {
+    position: absolute;
+    width: 268.961px;
+    height: 478.939px;
+    top: 66.1px;
+    left: 70.4px;
+    aspect-ratio: 41/73;
+    background: url(/campania-higiene-11.png) -53.084px -30.671px / 133.772% 106.306% no-repeat;
+}
+
+.higiene-gestion-header-2 {
+    position: relative;
+    flex: 1;
+}
+
+.higiene-gestion-header-3 {
+    flex: 1;
+    position: absolute;
+    left: 11px;
+    width: 371.208px;
+    height: 545px;
+    bottom: -254.18px;
+}
