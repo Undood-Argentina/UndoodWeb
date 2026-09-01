@@ -5,17 +5,25 @@
     justify-content: center;
     align-items: flex-start;
     align-self: stretch;
+    max-height: 710px;
     overflow: hidden;
 }
 
 .higiene-header-container {
-    padding-top: 150px;
+    padding-top: 120px;
     padding-inline: 16px;
     gap: 40px;
     max-width: 1280px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.campania-higiene-image-1 {
+    width: 654px;
+    height: 309px;
+    aspect-ratio: 218/103;
+    background: url(/campania-higiene-1.png) 0px -126.755px / 100.002% 141.021% no-repeat;
 }
 
 .higiene-blur-2 {
@@ -50,7 +58,7 @@
 }
 
 .higiene-header-column {
-    max-width: 768px;
+    max-width: 922px;
     flex-direction: column;
     display: flex;
     justify-content: space-between;
@@ -83,6 +91,7 @@
 }
 
 .higiene-header-paragraph-text {
+    max-width: 768px;
     font-size: 20px;
     line-height: 30px;
     font-style: normal;
@@ -156,10 +165,12 @@ image {
 }
 
 .higiene-problematica-paragraph-text {
-    color: #535353;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 500;
+    color: #DB2777;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    align-self: stretch;
 }
 
 .higiene-problematica-column {
@@ -227,6 +238,7 @@ image {
     padding-bottom: 120px;
     padding-inline: 16px;
     display: flex;
+    background-color: #FDF2F8;
     justify-content: center;
     align-items: center;
 }
@@ -258,8 +270,8 @@ image {
     flex: 1;
     display: flex;
     flex-direction: column;
+    background-color: #FFFFFF;
     gap: 16px;
-    background-color: #FDF2F8;
     padding: 32px;
     border-radius: 16px;
 }
@@ -300,29 +312,10 @@ image {
 .higiene-promesas-card-paragraph {
     font-size: 16px;
     font-weight: 500px;
-    color: #535353;
+    color: #272727;
     line-height: 24px;
 }
 
-
-.higiene-donar {
-    position: relative;
-    height: 700px;
-    background-color: #FDF2F8;
-    overflow: hidden;
-}
-
-.higiene-donar .higiene-blur-2 {
-    position: absolute;
-    right: -131px;
-    top: -30px;
-}
-
-.higiene-donar .higiene-blur-1 {
-    position: absolute;
-    left: -196px;
-    bottom: -78.361px;
-}
 
 
 .higiene-gestion {
@@ -455,21 +448,23 @@ image {
     position: relative;
     display: flex;
     max-width: 1280px;
-    padding: 120px 56px;
+    padding: 80px 56px;
     flex: 1;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 120px;
     align-self: stretch;
     border-radius: 24px;
-    background: linear-gradient(148deg, #F48DBB 44.76%, #F2418A 102.22%);
+    border-radius: 24px;
+    background: var(--linear1, linear-gradient(148deg, #F48DBB 46.3%, var(--Accent-Color-1-300, #F9A8D4) 102.22%));
+
 }
 
 .higiene-banner-content {
     display: flex;
     max-width: 645px;
     flex-direction: column;
-    gap: 24px;
+    gap: 40px;
     z-index: 2;
 }
 
@@ -482,22 +477,26 @@ image {
     letter-spacing: -0.96px;
 }
 
-.higiene-banner-content p {
-    color: var(--neutral-50, #FAFAFA);
-    /* Text lg/Medium */
-    font-family: Raleway;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px; /* 155.556% */
+.higiene-blur-3 {
+    position: absolute;
+    width: 544px;
+    height: 544px;
+    position: absolute;
+    right: 33px;
+
+    top: -82px;
+    fill: #F9A8D4;
+    filter: blur(32px);
 }
 
-.higiene-banner-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    z-index: 2;
+.higiene-banner-image-1 {
+    width: 650px;
+    height: 300px;
+    aspect-ratio: 13/6;
+    position: absolute;
+    right: 0;
+    bottom: -7.941px;
+    background: url(/campania-higiene-12.png) 50% / cover no-repeat;
 }
 
 .higiene-banner-button {
@@ -509,6 +508,7 @@ image {
     gap: 8px;
     align-self: stretch;
     border-radius: 12px;
+    max-width: 224px;
 
     font-size: 18px;
     font-style: normal;
@@ -548,67 +548,6 @@ image {
     top: -234px;
 }
 
-@media (max-width: 768px) {
-    .higiene-header-actions {
-        flex-direction: column;
-    }
-
-    .higiene-header-paragraph-text {
-        width: 272px;
-    }
-
-    .higiene-problematica {
-        flex-direction: column;
-        gap: 80px;
-        padding: 80px 16px 40px 16px
-    }
-
-    .higiene-problematica-container {
-        flex-direction: column;
-        margin-inline: 0px;
-        gap: 56px;
-    }
-
-    .higiene-problematica-content {
-        gap: 24px;
-    }
-
-    .higiene-problematica-column {
-        gap: 24px;
-    }
-
-    .higiene-promesas-row {
-        flex-direction: column;
-    }
-
-    .higiene-gestion-row {
-        flex-direction: column;
-    }
-    
-    .higiene-banner-container {
-        flex-direction: column;
-        gap: 60px;
-        padding: 60px 24px 36px 24px;
-    }
-
-    .higiene-banner-content {
-        align-items: center;
-    }
-
-    .higiene-banner-content h1 {
-        text-align: center;
-    }
-
-    .higiene-banner-content p {
-        text-align: center;
-        width: 308px;
-    }
-
-    .higiene-problematica-content {
-        max-width: max-content;
-    }
-}
-
 
 .higiene-gestion-header-1 {
     flex: 1;
@@ -618,11 +557,12 @@ image {
 
 .higiene-gestion-header-p-1 {
     position: absolute;
-    left: 49px;
+    left: 38px;
     top: 103.18px;
     color: rgba(255, 255, 255, 0.50);
     font-size: 69.349px;
     font-style: normal;
+    font-family: Montserrat;
     font-weight: 600;
     line-height: 150%;
     z-index: 1;
@@ -630,7 +570,7 @@ image {
 
 .higiene-gestion-header-p-2 {
     position: absolute;
-    left: 142px;
+    left: 162px;
     top: 85.18px;
     color: #FFF;
     font-size: 24px;
@@ -642,15 +582,15 @@ image {
 
 .higiene-gestion-header-img-1 {
     position: absolute;
-    width: 249px;
-    height: 266px;
-    aspect-ratio: 15/16;
-    left: 86px;
-    top: 170px;
+    width: 255px;
+    height: 222px;
+    aspect-ratio: 85/74;
+    left: 94px;
+    top: 216px;
     border-radius: 26.112px;
     
     box-shadow: inset 0 0 0 6px rgba(248, 113, 113, 0.85);
-    background: url(/campania-higiene-2.png) lightgray 0px -27px / 99.841% 220.562% no-repeat;
+    background: url(/campania-higiene-2.png) lightgray 0px -76.82px / 99.841% 270.238% no-repeat;
     z-index: 2;
 }
 
@@ -670,7 +610,7 @@ image {
     height: 268.713px;
     transform: rotate(8.944deg);
     aspect-ratio: 99/161;
-    top: 13.18px;
+    top: 30px;
     left: 141px;
     background: url(/campania-higiene-4.png) -89.041px -15.37px / 186.869% 114.907% no-repeat;
     z-index: 1;
@@ -681,7 +621,7 @@ image {
     transform: rotate(4.359deg);
     aspect-ratio: 69/80;
     position: absolute;
-    left: 230px;
+    left: 225px;
     bottom: 73.793px;
     background: url(/campania-higiene-5.png) -111.206px -8.621px / 400.245% 230.141% no-repeat;
     z-index: 2;
@@ -752,4 +692,223 @@ image {
     width: 371.208px;
     height: 545px;
     bottom: -254.18px;
+}
+
+.higiene-donar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #FCE7F3;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    padding-inline: 16px;
+    overflow: hidden;
+}
+
+.higiene-donar .higiene-blur-2 {
+    position: absolute;
+    right: -131px;
+    top: -30px;
+    border-radius: var(--corner-radius-33554400, 33554400px);
+    background: rgba(240, 117, 170, 0.21);
+    filter: blur(32px);
+}
+
+.higiene-donar .higiene-blur-1 {
+    position: absolute;
+    left: -196px;
+    bottom: -78.361px;
+    border-radius: var(--corner-radius-33554400, 33554400px);
+    background: rgba(240, 117, 170, 0.21);
+    filter: blur(32px);
+}
+
+.higiene-donar-container {
+    max-width: var(--Container-container-large, 1280px);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    z-index: 1;
+    gap: 16px;
+}
+
+.higiene-donar-info {
+    display: flex;
+    max-width: 600px;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+}
+
+.higiene-donar-info h1 {
+    align-self: stretch;
+    color: #272727;
+    font-family: Montserrat;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px; /* 122.222% */
+    letter-spacing: -0.72px;
+}
+
+.higiene-donar-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 16px;
+    align-self: stretch;
+}
+
+.higiene-donar-info-card {
+    display: flex;
+    flex-direction: row;
+    height: 130px;
+    padding: 24px;
+    align-items: center;
+    flex: 1 0 0;
+    border-radius: 16px;
+    background: #FFF;
+    overflow: hidden;
+}
+
+.higiene-donar-info-card p {
+    color: #404040;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.higiene-donar-image-1 {
+    width: 103px;
+    height: 95px;
+    aspect-ratio: 103/95;
+    background: url(/campania-higiene-13.png) -32.972px -3.43px / 159% 114.267% no-repeat;
+    transform: scaleX(-1);
+}
+
+.higiene-donar-image-2 {
+    width: 103px;
+    height: 105px;
+    aspect-ratio: 103/105;
+    background: url(/campania-higiene-14.png) -25.983px 0px / 152.197% 100% no-repeat;
+}
+
+.higiene-donar-image-3 {
+    width: 103px;
+    height: 103px;
+    aspect-ratio: 1/1;
+    background: url(/campania-higiene-15.png) -47.019px -17.359px / 201.331% 134.783% no-repeat;
+}
+
+.higiene-donar-image-4 {
+    width: 103px;
+    height: 109px;
+    aspect-ratio: 103/109;
+    background: url(/campania-higiene-16.png) -44.639px -9.877px / 186.82% 117.737% no-repeat;
+}
+
+.image-container {
+    min-width: 50%
+}
+
+
+.higiene-donar-pasarela {
+    background: #FFF;
+    display: flex;
+    width: 500px;
+    min-width: 500px;
+    max-width: 500px;
+    height: 100%;
+    border-radius: 16px;
+
+}
+
+
+@media (max-width: 768px) {
+    .higiene-header {
+        max-height: none;
+    }
+    .higiene-header-actions {
+        flex-direction: column;
+    }
+
+    .higiene-header-paragraph-text {
+        width: 272px;
+    }
+
+    .higiene-problematica {
+        flex-direction: column;
+        gap: 80px;
+        padding: 80px 16px 40px 16px
+    }
+
+    .higiene-problematica-container {
+        flex-direction: column;
+        margin-inline: 0px;
+        gap: 56px;
+    }
+
+    .higiene-problematica-content {
+        gap: 24px;
+    }
+
+    .higiene-problematica-column {
+        gap: 24px;
+    }
+
+    .higiene-promesas-row {
+        flex-direction: column;
+    }
+
+    .higiene-gestion-row {
+        flex-direction: column;
+    }
+    
+    .higiene-banner-container {
+        flex-direction: column;
+        gap: 60px;
+        padding: 60px 24px 36px 24px;
+    }
+
+    .higiene-banner-content {
+        align-items: center;
+    }
+
+    .higiene-banner-content h1 {
+        text-align: center;
+    }
+
+    .higiene-banner-content p {
+        text-align: center;
+        width: 308px;
+    }
+
+    .higiene-problematica-content {
+        max-width: max-content;
+    }
+
+    .higiene-donar {
+        padding-block: 0px;
+        padding-inline: 0px;
+    }
+
+    .higiene-donar-info {
+        padding-inline: 16px;
+        padding-block: 60px;
+    }
+
+    .higiene-donar-container {
+        flex-direction: column;
+    }
+
+    .higiene-donar-pasarela {
+        max-width: none;
+        width: 100%;
+        height: 500px;
+    }
 }

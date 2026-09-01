@@ -11,12 +11,13 @@ export default function HigienePage() {
                 <div className="higiene-header-column">
                     <div className="higiene-header-content">
                         <div>
-                            <h1 className="higiene-header-h1-text higiene-text-black">Doná kits menstruales</h1>
-                            <h1 className="higiene-header-h1-text higiene-text-pink">Cambiá una realidad.</h1>
+                            <h1 className="higiene-header-h1-text">
+                                <span className="higiene-text-black">Doná y cambia una realidad sobre la</span>{" "}
+                                <span className="higiene-text-pink">higiene menstrual</span>
+                            </h1>
                         </div>
                         <p className="higiene-header-paragraph-text">
-                            Tu donación le da a una niña en situación de hogar acceso a productos de higiene 
-                            menstrual, educacion sobre su cuerpo y la dignidad que toda mujer merece.
+                            Tu donación permite que cada adolescente tenga acceso a productos de higiene menstrual, educación sobre su cuerpo y la dignidad que toda mujer merece.
                         </p>
                     </div>
                     <div className="higiene-header-actions"> 
@@ -24,7 +25,8 @@ export default function HigienePage() {
                         <button className="higiene-button higiene-button-white">¿Cómo funciona?</button>
                     </div>
                 </div>
-                <Image src="/campania-higiene-1.png" alt="kit-menstrual" width={576.4} height={205}></Image>
+
+                <div className="campania-higiene-image-1"></div>
             </div>
             <div className="higiene-blur-2"></div>
             <div className="higiene-blur-1"></div>
@@ -33,24 +35,54 @@ export default function HigienePage() {
         <section className="higiene-problematica">
             <div className="higiene-problematica-container">
                 <div className="higiene-problematica-content">
-                    <h2 className="higiene-problematica-h2-text">Cada mes, miles de niñas improvisan soluciones en sus períodos porque no tienen lo básico.</h2>
-                    <p className="higiene-problematica-paragraph-text">Desde Undood queremos darles a todas las chicas en hogares transitorios, no solo el acceso a productos de higiene si no, el acompañamiento y educación que toda niña merece.</p>
+                    <h2 className="higiene-problematica-h2-text">En hogares transitorios, muchas adolescentes no tienen acceso a productos de higiene menstrual.</h2>
+                    <p className="higiene-problematica-paragraph-text">Queremos cambiar eso, dándoles acceso, posibilidad de elegir e información.</p>
                 </div>
                 <div className="higiene-problematica-column">
                     <div className="higiene-problematica-card higiene-problematica-card-pink">
                         <div className="higiene-problematica-card-caption"><p>Realidad</p></div>
-                        <p className="higiene-problematica-card-paragraph">En situaciones de vulnerabilidad, las niñas enfrentan más barreras para acceder a salud menstrual digna y los productos de salud menstrual son escasos.</p>
+                        <p className="higiene-problematica-card-paragraph">Detectamos junto a los hogares con los que trabajamos que el acceso a productos de higiene menstrual es una de las necesidades más frecuentes y difíciles de cubrir.</p>
                     </div>
                     <div className="higiene-problematica-card higiene-problematica-card-red">
                         <div className="higiene-problematica-card-caption"><p>Impacto</p></div>
-                        <p className="higiene-problematica-card-paragraph">Para muchas niñas menstruar significa vergüenza, faltar a sus actividades y ....Para muchas niñas menstruar significa vergüenza, faltar a sus actividades y ....</p>
+                        <p className="higiene-problematica-card-paragraph">No tener acceso a estos productos significa no poder participar en sus actividades del día a día o tener que improvisar con lo que encuentren sin sentirse cuidadas.</p>
                     </div>
                     <div className="higiene-problematica-card higiene-problematica-card-blue">
                         <div className="higiene-problematica-card-caption"><p>Meta de Undood</p></div>
-                        <p className="higiene-problematica-card-paragraph">Llevar 10.000 kits menstruales a hogares de niños xxx antes de fin de año., recaudamos fondos para llevar kits menstruales directamente a los hogares.</p>
+                        <p className="higiene-problematica-card-paragraph">Abastecer a más de 10 hogares en la provincia de Buenos Aires, asegurando que cada adolescente pueda elegir el producto de higiene menstrual que mejor se adapte a sus necesidades.</p>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section className="higiene-donar">
+            <div className="higiene-donar-container">
+                <div className="higiene-donar-info">
+                    <h1 className="higiene-donar-info-title">Tu donación permite que las adolescentes puedan acceder y elegir productos sanitarios de su preferencia.</h1>
+                    <div className="higiene-donar-info-grid">
+                        <div className="higiene-donar-info-card">
+                            <div className="image-container"><div className="higiene-donar-image-1"></div></div>
+                            <p>Toallitas descartables</p>
+                        </div>
+                        <div className="higiene-donar-info-card">
+                            <div className="image-container"><div className="higiene-donar-image-2"></div></div>
+                            <p>Toallitas reutilizables</p>
+                        </div>
+                        <div className="higiene-donar-info-card">
+                            <div className="image-container"><div className="higiene-donar-image-3"></div></div>
+                            <p>Tampones</p>
+                        </div>
+                        <div className="higiene-donar-info-card">
+                            <div className="image-container"><div className="higiene-donar-image-4"></div></div>
+                            <p>Copa menstrual</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="higiene-donar-pasarela"></div>
+            </div>
+            <div className="higiene-blur-2"></div>
+            <div className="higiene-blur-1"></div>
         </section>
 
         <section className="higiene-promesas">
@@ -67,24 +99,9 @@ export default function HigienePage() {
                             </p>
                         </div>
                         <p className="higiene-promesas-card-paragraph">
-                            Abastecer en la necesidad de productos de un solo uso para higiene menstrual de más de 10 hogares en la provincia de Buenos Aires.
+                            Recaudamos fondos para comprar productos y llevarlos directamente a los hogares con los que trabajamos hace más de 8 años.
                         </p>
                     </div>
-
-                    <div className="higiene-promesas-card">
-                        <div className="higiene-promesas-card-header">
-                            <div className="higiene-promesas-card-header-caption">
-                                <Icon icon="ion:female" />
-                            </div>
-                            <p className="higiene-promesas-card-header-title">
-                                Educación menstrual
-                            </p>
-                        </div>
-                        <p className="higiene-promesas-card-paragraph">
-                            Talleres adecuados a la edad que enseñan salud del ciclo, higiene y autoconocimiento corporal. 
-                        </p>
-                    </div>
-
 
                     <div className="higiene-promesas-card">
                         <div className="higiene-promesas-card-header">
@@ -92,23 +109,33 @@ export default function HigienePage() {
                                 <Icon icon="solar:hand-heart-outline" />
                             </div>
                             <p className="higiene-promesas-card-header-title">
-                                Acompañamiento
+                                Posibilidad de elegir
                             </p>
                         </div>
                         <p className="higiene-promesas-card-paragraph">
-                            Adultas de confianza y pares que convierten un momento vulnerable en una oportunidad de sentirse vista, escuchada y acompañada.
+                            Cada adolescente tiene necesidades y preferencias diferentes, y creemos que poder elegir también es parte del cuidado.
+                        </p>
+                    </div>
+
+
+                    <div className="higiene-promesas-card">
+                        <div className="higiene-promesas-card-header">
+                            <div className="higiene-promesas-card-header-caption">
+                                <Icon icon="ion:female" />
+                            </div>
+                            <p className="higiene-promesas-card-header-title">
+                                Información y educación
+                            </p>
+                        </div>
+                        <p className="higiene-promesas-card-paragraph">
+                            Trabajamos con una ginecóloga matriculada para generar contenido informativo sobre el uso, cuidados e higiene de cada producto. 
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section className="higiene-donar">
-            <div className="higiene-donar-container">
-            </div>
-            <div className="higiene-blur-2"></div>
-            <div className="higiene-blur-1"></div>
-        </section>
+
         <section className="higiene-gestion">
             <div className="higiene-gestion-container">
                 <h1>¿Cómo gestionamos tu donación?</h1>
@@ -122,7 +149,7 @@ export default function HigienePage() {
                         </div>
                         <div className="higiene-gestion-card-content">
                             <h3>Recibimos tu donación</h3>
-                            <p>Tu donación llega a la cuenta directa de los organizadores de Undood</p>
+                            <p>Tu aporte llega directamente a Undood. Vos no tenés que comprar ni enviar ningún producto.</p>
                         </div>
                     </div>
 
@@ -134,8 +161,8 @@ export default function HigienePage() {
                             <GestionDonacionPaso2></GestionDonacionPaso2>
                         </div>
                         <div className="higiene-gestion-card-content">
-                            <h3>Armado de kits según necesidades</h3>
-                            <p>Compramos los productos y armamos los kits siguiendo la urgencia que presenta cada hogar</p>
+                            <h3>Compramos y cada adolescente elige</h3>
+                            <p>Con los fondos recaudados compramos los productos. Cada adolescente elige el de su preferencia.</p>
                         </div>
                     </div>
 
@@ -147,25 +174,25 @@ export default function HigienePage() {
                             <GestionDonacionPaso3></GestionDonacionPaso3>
                         </div>
                         <div className="higiene-gestion-card-content">
-                            <h3>Distribución a las niñas en hogares</h3>
-                            <p>Entregamos los kits a los hogares de acogida con los que trabajamos hace más de 15 años</p>
+                            <h3>Entregamos en los hogares</h3>
+                            <p>Llevamos los productos directamente a los hogares. Las adolescentes los reciben de forma personalizada.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <section className="higiene-banner">
             <div className="higiene-banner-container">
                 <div className="higiene-banner-content">
-                    <h1>Sé la razón por la que una niña se siente cuidada</h1>
-                    <p>Una donación hoy significa productos seguros, educación honesta y el mensaje de que todas la niñas pueden vivir su ciclo acompañadas.</p>
-                </div>
-                <div className="higiene-banner-actions">
+                    <h1>Sé la razón por la que una adolescente se sienta acompañada en su ciclo menstrual</h1>
                     <button className="higiene-banner-button higiene-banner-button-pink">Quiero ayudar</button>
-                    <button className="higiene-banner-button higiene-banner-button-white">Compartir la campaña</button>
                 </div>
-                <div className="higiene-banner-circle higiene-banner-circle-1"></div>
-                <div className="higiene-banner-circle higiene-banner-circle-2"></div>
+                <div className="higiene-blur-3">
+                    <img src={"/blur.svg"} className="higiene-glow" />
+                </div>
+                
+                <div className="higiene-banner-image-1"></div>
             </div>
         </section>
     </main>)
