@@ -36,13 +36,13 @@ const PaymentGatewayBillingData = forwardRef<
     const validate = (): boolean => {
         const newErrors: Record<string, string> = {};
 
-        // if (!firstName.trim()) {
-        //     newErrors.firstName = "Ingresá tu nombre.";
-        // }
+        if (!firstName.trim()) {
+            newErrors.firstName = "Ingresá tu nombre.";
+        }
 
-        // if (!lastName.trim()) {
-        //     newErrors.lastName = "Ingresá tu apellido.";
-        // }
+        if (!lastName.trim()) {
+            newErrors.lastName = "Ingresá tu apellido.";
+        }
 
         if (!email.trim()) {
             newErrors.email = "Ingresá tu correo electrónico.";
