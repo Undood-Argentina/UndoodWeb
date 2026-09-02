@@ -1,0 +1,710 @@
+
+* {
+    box-sizing: border-box;
+}
+
+/* ================================================================
+   CONTAINER
+================================================================ */
+
+.pg-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+/* ================================================================
+   CARD
+================================================================ */
+
+.pg-card {
+    width: 100%;
+    max-width: 500px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    padding: 32px;
+
+    gap: 32px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+
+    border: 1px solid #eeeeee;
+}
+
+/* ================================================================
+   HEADER
+================================================================ */
+
+.pg-header {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    gap: 8px;
+
+    line-height: 24px;
+
+    font-size: 16px;
+
+    font-weight: 500;
+}
+
+.pg-step {
+    flex-shrink: 0;
+
+    padding-left: 4px;
+    padding-right: 4px;
+
+    color: #d1d5dc;
+
+    white-space: nowrap;
+}
+
+.pg-step-active {
+    color: #1b3c7a;
+}
+
+.pg-step-line {
+    flex: 1;
+
+    height: 2px;
+
+    background: #e5e7eb;
+}
+
+/* ================================================================
+   FORM
+================================================================ */
+
+.pg-section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 48px;
+}
+
+.pg-section-2 {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 32px;
+}
+
+.pg-donation-amount-info-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 40px;
+}
+
+.pg-next-step-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+.pg-title {
+    margin: 0;
+
+    color: #404040;
+
+    font-size: 24px;
+
+    line-height: 32px;
+
+    font-weight: 700;
+}
+
+/* ================================================================
+   DONATION OPTIONS
+================================================================ */
+
+.pg-amount-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+}
+
+.pg-amount-option {
+    min-height: 63px;
+
+    border: 1.5px solid #e6e6e6;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #11527b;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.pg-amount-selected {
+    border-color: #137ebe;
+
+    background: #f1f8fe;
+
+    color: #137ebe;
+
+    font-weight: 700;
+}
+
+.pg-amount-option:disabled {
+    cursor: not-allowed;
+}
+
+.pg-disabled {
+    opacity: 0.5;
+}
+
+/* ================================================================
+   CUSTOM AMOUNT
+================================================================ */
+
+.pg-custom-amount {
+    margin-top: 20px;
+}
+
+.pg-money-input {
+    display: flex;
+
+    align-items: center;
+
+    border: 1px solid #d4d4d4;
+
+    border-radius: 10px;
+
+    height: 50px;
+
+    overflow: hidden;
+}
+
+.pg-money-input span {
+    padding-left: 15px;
+
+    font-weight: 600;
+
+    color: #525252;
+}
+
+.pg-money-input input {
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    padding: 0 12px;
+
+    font-size: 16px;
+}
+
+/* ================================================================
+   INPUTS
+================================================================ */
+
+.pg-field {
+    width: 100%;
+
+    min-width: 0;
+
+    margin-bottom: 0;
+}
+
+.pg-label {
+    display: block;
+
+    padding-bottom: 6px;
+
+    color: #404040;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.pg-required {
+    color: #ef4444;
+
+    margin-left: 2px;
+}
+
+.pg-input {
+    width: 100%;
+
+    height: 47.06px;
+
+    padding:
+        12px
+        16px;
+
+    border:
+        1.53px
+        solid
+        #d1d5dc;
+
+    border-radius: 16px;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    color: #171717;
+
+    background: #ffffff;
+
+    font-size: 16px;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    transition:
+        border-color 0.2s ease;
+}
+
+/*
+ * IMPORTANTE:
+ *
+ * Não existe box-shadow no focus.
+ *
+ * Isso evita o "brilho" que você tinha
+ * anteriormente.
+ */
+
+.pg-input:focus {
+    outline: none;
+
+    border:
+        1.53px
+        solid
+        #d1d5dc;
+
+    box-shadow: none;
+}
+
+.pg-input:focus-visible {
+    outline: none;
+
+    box-shadow: none;
+}
+
+.pg-input-error {
+    border-color: #dc2626;
+}
+
+.pg-error {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #dc2626;
+
+    font-size: 13px;
+}
+
+.pg-general-error {
+    margin-top: 14px;
+}
+
+/* ================================================================
+   FORM COLUMN
+================================================================ */
+
+.pg-form-column {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+.pg-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+/* ================================================================
+   MERCADO PAGO SECURE FIELDS
+================================================================ */
+
+/*
+ * Estos elementos son contenedores de los iframes
+ * que crea Mercado Pago.
+ *
+ * NO son <input> normales.
+ */
+
+.pg-mp-field {
+    width: 100%;
+
+    height: 47.06px;
+
+    padding:
+        12px
+        16px;
+
+    border:
+        1.53px
+        solid
+        #d1d5dc;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    transition:
+        border-color 0.2s ease;
+}
+
+/*
+ * Mercado Pago coloca su iframe dentro
+ * de este contenedor.
+ */
+
+.pg-mp-field iframe {
+    width: 100% !important;
+
+    height: 100% !important;
+
+    border: none !important;
+
+    outline: none !important;
+
+    box-shadow: none !important;
+
+    background: transparent !important;
+}
+
+.pg-mp-field:focus-within {
+    border:
+        1.53px
+        solid
+        #d1d5dc;
+
+    box-shadow: none;
+}
+
+.pg-mp-field-error {
+    border-color: #dc2626;
+}
+
+/* ================================================================
+   CHECKBOX
+================================================================ */
+
+.pg-checkbox-wrapper {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    color: #525252;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    cursor: pointer;
+}
+
+.pg-checkbox-wrapper input {
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 20px;
+
+    height: 20px;
+
+    border:
+        2px
+        solid
+        #d1d5dc;
+
+    border-radius: 6px;
+
+    margin: 0;
+
+    margin-top: 1px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+
+    position: relative;
+}
+
+.pg-checkbox-wrapper input:checked {
+    background: #2563eb;
+
+    border-color: #2563eb;
+}
+
+/*
+ * Checkmark.
+ */
+
+.pg-checkbox-wrapper input:checked::after {
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+
+    height: 9px;
+
+    border:
+        solid
+        #ffffff;
+
+    border-width:
+        0
+        2px
+        2px
+        0;
+
+    transform:
+        rotate(45deg);
+
+    left: 6px;
+
+    top: 3px;
+}
+
+/* ================================================================
+   TOTAL
+================================================================ */
+
+.pg-total {
+    color: #11527b;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+.pg-donate-total {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+/* ================================================================
+   BUTTON
+================================================================ */
+
+.pg-primary-button {
+    width: 100%;
+
+    height: 48px;
+
+    padding:
+        12px
+        24px;
+
+    border:
+        1px
+        solid
+        #137ebe;
+
+    border-radius: 26px;
+
+    background: #137ebe;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.1s ease;
+}
+
+.pg-primary-button:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+.pg-primary-button:active:not(:disabled) {
+    transform: scale(0.99);
+}
+
+.pg-primary-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+/* ================================================================
+   FOOTER
+================================================================ */
+
+.pg-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    padding-top: 16px;
+
+    padding-bottom: 16px;
+
+    color: #525252;
+
+    font-size: 13px;
+}
+
+.pg-security-item {
+    font-size: 14px;
+
+    font-weight: 400;
+
+    color: #99a1af;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.pg-footer-separator {
+    width: 1px;
+
+    height: 14px;
+
+    background: #d1d5dc;
+
+    flex-shrink: 0;
+}
+
+.pg-security-icon {
+    font-size: 16px;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+
+@media (max-width: 600px) {
+
+    .pg-container {
+        padding:
+            16px
+            10px;
+    }
+
+    .pg-card {
+        border-radius: 14px;
+
+        padding: 24px;
+    }
+
+    .pg-header {
+        padding:
+            0
+            4px;
+
+        gap: 5px;
+
+        font-size: 12px;
+    }
+
+    .pg-step {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .pg-title {
+        font-size: 23px;
+
+        line-height: 30px;
+    }
+
+    .pg-row {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .pg-footer {
+        gap: 10px;
+
+        font-size: 12px;
+    }
+
+    .pg-security-item {
+        font-size: 12px;
+    }
+}
