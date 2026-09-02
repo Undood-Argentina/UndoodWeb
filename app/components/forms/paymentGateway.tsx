@@ -9,6 +9,8 @@ import React, {
 // @ts-ignore: allow CSS side-effect import without module declarations
 import "./payment_gateway.css";
 
+import { handlePaymentSubmit } from "./payment_gateway_handle_submit";
+
 import {
     loadMercadoPago,
 } from "@mercadopago/sdk-js";
@@ -192,268 +194,23 @@ export default function PaymentGateway({
         event: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
 
-        event.preventDefault();
-
-
-
-        if (
-            processingPayment
-        ) {
-            return;
-        }
-        const valid = paymentDataRef.current?.validate();
-
-        if (
-            !valid
-        ) {
-            return;
-        }
-
-        const mp = paymentDataRef.current?.getMercadoPagoInstance();
-
-        if (
-            !mp
-        ) {
-            setErrors((prev) => ({
-                ...prev,
-                payment:
-                    "El formulario de pago no está disponible.",
-            }));
-
-            return;
-        }
-
-        try {
-            console.log("aca 4");
-            setProcessingPayment(
-                true
-            );
-
-            setErrors((prev) => ({
-                ...prev,
-                payment: "",
-            }));
-
-            // ====================================================
-            // CARDHOLDER
-            // ====================================================
-
-            const cardholderName =
-                `${firstName.trim()} ${lastName.trim()}`;
-
-            // ====================================================
-            // CREATE MERCADO PAGO TOKEN
-            // ====================================================
-
-            /*
-             * Mercado Pago genera el token desde sus
-             * campos seguros.
-             *
-             * En ningún momento obtenemos:
-             *
-             * - número de tarjeta
-             * - fecha de vencimiento
-             * - CVV
-             */
-
-            const cardToken =
-                await mp.fields.createCardToken({
-                    cardholderName,
-
-                    identificationType:
-                        "DNI",
-
-                    identificationNumber:
-                        dni.trim(),
-                });
-
-            if (
-                !cardToken?.id
-            ) {
-
-                setErrors((prev) => ({
-                    ...prev,
-                    payment:
-                        "No se pudo validar la tarjeta.",
-                }));
-
-                setProcessingPayment(
-                    false
-                );
-
-                return;
-            }
-
-            // ====================================================
-            // AMOUNT
-            // ====================================================
-
-            const amount =
-                String(
-                    selectedAmount
-                );
-
-            // ====================================================
-            // BODY
-            // ====================================================
-
-            const body = {
-                type: "online",
-
-                processing_mode:
-                    "automatic",
-
-                total_amount:
-                    amount,
-
-                external_reference:
-                    crypto.randomUUID(),
-
-                payer: {
-                    email,
-                },
-
-                transactions: {
-                    payments: [
-                        {
-                            amount,
-
-                            payment_method: {
-                                id:
-                                    paymentMethodId,
-
-                                type:
-                                    "credit_card",
-
-                                token:
-                                    cardToken.id,
-
-                                installments:
-                                    1,
-                            },
-                        },
-                    ],
-                },
-            };
-            console.log(body)
-
-            // ====================================================
-            // SEND TO BACKEND
-            // ====================================================
-
-            const response =
-                await fetch(
-                    "/api/process_order",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json",
-                        },
-
-                        body:
-                            JSON.stringify(
-                                body
-                            ),
-                    }
-                );
-
-            console.log(response)
-            // ====================================================
-            // ERROR
-            // ====================================================
-
-            if (
-                !response.ok
-            ) {
-
-                const errorText =
-                    await response.text();
-
-                console.error(
-                    errorText
-                );
-
-                setErrors((prev) => ({
-                    ...prev,
-                    payment:
-                        "No se pudo procesar el pago.",
-                }));
-
-                setProcessingPayment(
-                    false
-                );
-
-                return;
-            }
-
-            // ====================================================
-            // SUCCESS
-            // ====================================================
-
-            const data =
-                await response.json();
-
-            console.log(
-                data
-            );
-
-            const paymentData:
-                DonationData = {
-
-                donationAmount:
-                    selectedAmount,
-
-                reports,
-
-                personalData: {
-                    firstName,
-                    lastName,
-                    email,
-                    postalCode
-                },
-
-                paymentData: {
-
-                    dni,
-
-                    cardToken:
-                        cardToken.id,
-
-                    paymentMethodId,
-
-                    installments: 1,
-                },
-            };
-
-            onSubmit(
-                paymentData
-            );
-
-            setProcessingPayment(
-                false
-            );
-
-        } catch (error) {
-
-            console.error(
-                "Error procesando pago:",
-                error
-            );
-
-            setErrors((prev) => ({
-                ...prev,
-                payment:
-                    "No se pudo procesar el pago.",
-            }));
-
-            setProcessingPayment(
-                false
-            );
-        }
+        await handlePaymentSubmit({
+            event,
+            processingPayment,
+            setProcessingPayment,
+            paymentDataRef,
+            setErrors,
+            firstName,
+            lastName,
+            email,
+            dni,
+            postalCode,
+            selectedAmount,
+            paymentMethodId,
+            reports,
+            onSubmit,
+        });
     };
-
     // ========================================================
     // RENDER
     // ========================================================
