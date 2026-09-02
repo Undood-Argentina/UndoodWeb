@@ -13,6 +13,19 @@ import {
     loadMercadoPago,
 } from "@mercadopago/sdk-js";
 
+import PaymentGatewayAmountSelection, {
+    PaymentGatewayAmountSelectionRef,
+} from "./paymentGatewayAmountSelection";
+
+import PaymentGatewayBillingData, {
+    PaymentGatewayBillingDataRef,
+} from "./paymentGatewayBillingData";
+
+
+import PaymentGatewayPaymentData, {
+    PaymentGatewayPaymentDataRef,
+} from "./paymentGatewayPaymentData";
+
 // ============================================================
 // TYPES
 // ============================================================
@@ -21,11 +34,11 @@ interface PersonalData {
     firstName: string;
     lastName: string;
     email: string;
+    postalCode: string;
 }
 
 interface PaymentData {
     dni: string;
-    postalCode: string;
 
     // Token generado por Mercado Pago.
     // Nunca se almacenan los datos reales de la tarjeta.
@@ -45,141 +58,30 @@ interface DonationData {
 }
 
 interface PaymentGatewayProps {
-    initialDonationAmount?: number | null;
-    lockedDonationAmount?: boolean;
-    initialReports?: boolean;
-
-    // Se mantiene por compatibilidad con el componente anterior.
     onSubmit?: (data: DonationData) => void;
 
     onStepChange?: (step: number) => void;
 }
 
-interface InputProps {
-    label: string;
-    value: string;
-    onChange: (value: string) => void;
-    placeholder?: string;
-    error?: string;
-    type?: string;
-    maxLength?: number;
-}
-
-type DonationOption =
-    | 5000
-    | 10000
-    | 15000
-    | "custom";
-
-// ============================================================
-// MERCADO PAGO TYPES
-// ============================================================
-
-interface MercadoPagoField {
-    mount: (elementId: string) => void;
-
-    unmount?: () => void;
-
-    on: (
-        event: string,
-        callback: (data: any) => void
-    ) => void;
-}
-
-interface MercadoPagoFields {
-    create: (
-        type: string,
-        options: {
-            placeholder?: string;
-        }
-    ) => MercadoPagoField;
-
-    createCardToken: (data: {
-        cardholderName: string;
-        identificationType: string;
-        identificationNumber: string;
-    }) => Promise<{
-        id: string;
-    }>;
-}
-
-interface MercadoPagoInstance {
-    fields: MercadoPagoFields;
-
-    getIdentificationTypes: () => Promise<any[]>;
-
-    getPaymentMethods: (params: {
-        bin: string;
-    }) => Promise<{
-        results: any[];
-    }>;
-
-    getInstallments: (params: {
-        amount: string;
-        bin: string;
-        paymentTypeId: string;
-    }) => Promise<any[]>;
-}
-
-// ============================================================
-// INPUT COMPONENT
-// ============================================================
-
-const Input = ({
-    label,
-    value,
-    onChange,
-    placeholder,
-    error,
-    type = "text",
-    maxLength,
-}: InputProps): React.ReactElement => {
-    return (
-        <div className="pg-field">
-            <label className="pg-label">
-                {label}
-                <span className="pg-required">
-                    *
-                </span>
-            </label>
-
-            <input
-                className={`pg-input ${
-                    error
-                        ? "pg-input-error"
-                        : ""
-                }`}
-                type={type}
-                value={value}
-                onChange={(event) =>
-                    onChange(
-                        event.target.value
-                    )
-                }
-                placeholder={placeholder}
-                maxLength={maxLength}
-            />
-
-            {error && (
-                <span className="pg-error">
-                    {error}
-                </span>
-            )}
-        </div>
-    );
-};
 
 // ============================================================
 // PAYMENT GATEWAY
 // ============================================================
 
 export default function PaymentGateway({
-    initialDonationAmount = null,
-    lockedDonationAmount = false,
-    initialReports = false,
     onSubmit = () => {},
     onStepChange = () => {},
 }: PaymentGatewayProps) {
+
+    const amountSelectionRef =
+        useRef<PaymentGatewayAmountSelectionRef>(null);
+
+    const billingDataRef =
+        useRef<PaymentGatewayBillingDataRef>(null);
+
+    const paymentDataRef =
+        useRef<PaymentGatewayPaymentDataRef>(null);
+
 
     // ========================================================
     // STEP
@@ -192,34 +94,8 @@ export default function PaymentGateway({
     // DONATION
     // ========================================================
 
-    const [donationAmount, setDonationAmount] =
-        useState<
-            number |
-            DonationOption |
-            null
-        >(
-            initialDonationAmount !== null &&
-            ![5000, 10000, 15000].includes(
-                initialDonationAmount
-            )
-                ? "custom"
-                : initialDonationAmount
-        );
-
-    const [customAmount, setCustomAmount] =
-        useState<string>(
-            initialDonationAmount !== null &&
-            ![5000, 10000, 15000].includes(
-                initialDonationAmount
-            )
-                ? String(initialDonationAmount)
-                : ""
-        );
-
     const [reports, setReports] =
-        useState<boolean>(
-            initialReports
-        );
+        useState<boolean>(false);
 
     // ========================================================
     // PERSONAL DATA
@@ -244,66 +120,6 @@ export default function PaymentGateway({
     const [postalCode, setPostalCode] =
         useState<string>("");
 
-    /*
-     * IMPORTANTE:
-     *
-     * NO existen estados:
-     *
-     * cardNumber
-     * expirationDate
-     * cvv
-     *
-     * Los maneja Mercado Pago dentro de sus
-     * campos seguros.
-     */
-
-    // ========================================================
-    // MERCADO PAGO REFS
-    // ========================================================
-
-    const mercadoPagoRef =
-        useRef<MercadoPagoInstance | null>(
-            null
-        );
-
-    const cardNumberFieldRef =
-        useRef<MercadoPagoField | null>(
-            null
-        );
-
-    const expirationDateFieldRef =
-        useRef<MercadoPagoField | null>(
-            null
-        );
-
-    const securityCodeFieldRef =
-        useRef<MercadoPagoField | null>(
-            null
-        );
-
-    // ========================================================
-    // MERCADO PAGO STATE
-    // ========================================================
-
-    const [paymentMethodId, setPaymentMethodId] =
-        useState<string>("");
-
-    const [installments, setInstallments] =
-        useState<number>(0);
-
-    const [installmentOptions, setInstallmentOptions] =
-        useState<
-            {
-                value: number;
-                label: string;
-            }[]
-        >([]);
-
-    const [mercadoPagoReady, setMercadoPagoReady] =
-        useState<boolean>(false);
-
-    const [processingPayment, setProcessingPayment] =
-        useState<boolean>(false);
 
     // ========================================================
     // ERRORS
@@ -318,584 +134,9 @@ export default function PaymentGateway({
     // DONATION HELPERS
     // ========================================================
 
-    const isCustomAmount =
-        donationAmount === "custom";
 
-    const selectedAmount: number =
-        donationAmount === "custom"
-            ? Number(customAmount)
-            : typeof donationAmount === "number"
-              ? donationAmount
-              : 0;
+    const [selectedAmount, setSelectedAmount] = useState<number>(0)
 
-    const selectDonationAmount = (
-        amount:
-            | 5000
-            | 10000
-            | 15000
-    ): void => {
-
-        if (lockedDonationAmount) {
-            return;
-        }
-
-        setDonationAmount(amount);
-
-        setErrors((prev) => ({
-            ...prev,
-            donationAmount: "",
-        }));
-    };
-
-    const selectCustomAmount = (): void => {
-
-        if (lockedDonationAmount) {
-            return;
-        }
-
-        setDonationAmount("custom");
-
-        setErrors((prev) => ({
-            ...prev,
-            donationAmount: "",
-        }));
-    };
-
-    const handleCustomAmountChange = (
-        value: string
-    ): void => {
-
-        if (lockedDonationAmount) {
-            return;
-        }
-
-        const numericValue =
-            value.replace(/\D/g, "");
-
-        setCustomAmount(
-            numericValue
-        );
-
-        setErrors((prev) => ({
-            ...prev,
-            donationAmount: "",
-        }));
-    };
-
-    // ========================================================
-    // MERCADO PAGO INITIALIZATION
-    // ========================================================
-
-    useEffect(() => {
-
-        if (currentStep !== 3) {
-            return;
-        }
-
-        let cancelled = false;
-
-        const initializeMercadoPago =
-            async (): Promise<void> => {
-
-                try {
-
-                    await loadMercadoPago();
-
-                    if (cancelled) {
-                        return;
-                    }
-
-                    const publicKey =
-                        process.env
-                            .NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY;
-
-                    if (!publicKey) {
-
-                        console.error(
-                            "Mercado Pago public key is not configured."
-                        );
-
-                        setErrors((prev) => ({
-                            ...prev,
-                            payment:
-                                "No se pudo inicializar Mercado Pago.",
-                        }));
-
-                        return;
-                    }
-
-                    const mp =
-                        new window.MercadoPago(
-                            publicKey
-                        ) as unknown as MercadoPagoInstance;
-
-                    mercadoPagoRef.current =
-                        mp;
-
-                    // ====================================================
-                    // CARD NUMBER
-                    // ====================================================
-
-                    const cardNumberField =
-                        mp.fields.create(
-                            "cardNumber",
-                            {
-                                placeholder:
-                                    "0000 0000 0000 0000",
-                            }
-                        );
-
-                    cardNumberField.mount(
-                        "pg-card-number"
-                    );
-
-                    cardNumberFieldRef.current =
-                        cardNumberField;
-
-                    // ====================================================
-                    // EXPIRATION DATE
-                    // ====================================================
-
-                    const expirationDateField =
-                        mp.fields.create(
-                            "expirationDate",
-                            {
-                                placeholder:
-                                    "MM/AA",
-                            }
-                        );
-
-                    expirationDateField.mount(
-                        "pg-expiration-date"
-                    );
-
-                    expirationDateFieldRef.current =
-                        expirationDateField;
-
-                    // ====================================================
-                    // SECURITY CODE
-                    // ====================================================
-
-                    const securityCodeField =
-                        mp.fields.create(
-                            "securityCode",
-                            {
-                                placeholder:
-                                    "123",
-                            }
-                        );
-
-                    securityCodeField.mount(
-                        "pg-security-code"
-                    );
-
-                    securityCodeFieldRef.current =
-                        securityCodeField;
-
-                    // ====================================================
-                    // BIN CHANGE
-                    // ====================================================
-
-                    cardNumberField.on(
-                        "binChange",
-                        async (
-                            data: {
-                                bin?: string;
-                            }
-                        ) => {
-
-                            const bin =
-                                data.bin;
-
-                            if (!bin) {
-
-                                setPaymentMethodId(
-                                    ""
-                                );
-
-                                setInstallmentOptions(
-                                    []
-                                );
-
-                                setInstallments(
-                                    0
-                                );
-
-                                return;
-                            }
-
-                            try {
-
-                                // ----------------------------------------
-                                // PAYMENT METHOD
-                                // ----------------------------------------
-
-                                const paymentMethodsResponse =
-                                    await mp.getPaymentMethods(
-                                        {
-                                            bin,
-                                        }
-                                    );
-
-                                const paymentMethod =
-                                    paymentMethodsResponse
-                                        ?.results?.[0];
-
-                                if (
-                                    !paymentMethod?.id
-                                ) {
-
-                                    setPaymentMethodId(
-                                        ""
-                                    );
-
-                                    setInstallmentOptions(
-                                        []
-                                    );
-
-                                    setInstallments(
-                                        0
-                                    );
-
-                                    return;
-                                }
-
-                                setPaymentMethodId(
-                                    paymentMethod.id
-                                );
-
-                                // ----------------------------------------
-                                // INSTALLMENTS
-                                // ----------------------------------------
-
-                                const installmentsResponse =
-                                    await mp.getInstallments(
-                                        {
-                                            amount:
-                                                String(
-                                                    selectedAmount
-                                                ),
-                                            bin,
-                                            paymentTypeId:
-                                                "credit_card",
-                                        }
-                                    );
-
-                                const payerCosts =
-                                    installmentsResponse
-                                        ?.[
-                                            0
-                                        ]
-                                        ?.payer_costs ??
-                                    [];
-
-                                const options =
-                                    payerCosts.map(
-                                        (
-                                            cost: any
-                                        ) => ({
-                                            value:
-                                                Number(
-                                                    cost.installments
-                                                ),
-                                            label:
-                                                cost.recommended_message ??
-                                                `${cost.installments} cuotas`,
-                                        })
-                                    );
-
-                                setInstallmentOptions(
-                                    options
-                                );
-
-                                if (
-                                    options.length > 0
-                                ) {
-
-                                    setInstallments(
-                                        options[0]
-                                            .value
-                                    );
-
-                                } else {
-
-                                    setInstallments(
-                                        0
-                                    );
-                                }
-
-                            } catch (
-                                error
-                            ) {
-
-                                console.error(
-                                    "Error obteniendo información de Mercado Pago:",
-                                    error
-                                );
-
-                                setPaymentMethodId(
-                                    ""
-                                );
-
-                                setInstallmentOptions(
-                                    []
-                                );
-
-                                setInstallments(
-                                    0
-                                );
-                            }
-                        }
-                    );
-
-                    // ====================================================
-                    // READY
-                    // ====================================================
-
-                    if (!cancelled) {
-
-                        setMercadoPagoReady(
-                            true
-                        );
-                    }
-
-                } catch (error) {
-
-                    console.error(
-                        "Error inicializando Mercado Pago:",
-                        error
-                    );
-
-                    if (!cancelled) {
-
-                        setErrors((prev) => ({
-                            ...prev,
-                            payment:
-                                "No se pudo inicializar el pago.",
-                        }));
-                    }
-                }
-            };
-
-        initializeMercadoPago();
-
-        // ========================================================
-        // CLEANUP
-        // ========================================================
-
-        return () => {
-
-            cancelled = true;
-
-            try {
-                cardNumberFieldRef.current
-                    ?.unmount?.();
-            } catch {}
-
-            try {
-                expirationDateFieldRef.current
-                    ?.unmount?.();
-            } catch {}
-
-            try {
-                securityCodeFieldRef.current
-                    ?.unmount?.();
-            } catch {}
-
-            cardNumberFieldRef.current =
-                null;
-
-            expirationDateFieldRef.current =
-                null;
-
-            securityCodeFieldRef.current =
-                null;
-
-            mercadoPagoRef.current =
-                null;
-
-            setMercadoPagoReady(
-                false
-            );
-
-            setPaymentMethodId(
-                ""
-            );
-
-            setInstallmentOptions(
-                []
-            );
-
-            setInstallments(
-                0
-            );
-        };
-
-        /*
-         * IMPORTANTE:
-         *
-         * Este effect solamente depende de currentStep.
-         *
-         * No depende de:
-         * - dni
-         * - firstName
-         * - lastName
-         * - email
-         * - paymentMethodId
-         * - installments
-         *
-         * Por lo tanto, los renders producidos por
-         * setState NO vuelven a crear los iframes
-         * de Mercado Pago.
-         *
-         * Esto evita el problema de perder el foco
-         * al escribir.
-         */
-
-    }, [currentStep]);
-
-    // ========================================================
-    // VALIDATION
-    // ========================================================
-
-    const validateStep1 = (): boolean => {
-
-        const newErrors:
-            Record<string, string> = {};
-
-        if (
-            donationAmount === null
-        ) {
-
-            newErrors.donationAmount =
-                "Seleccioná un monto.";
-        }
-
-        if (
-            donationAmount ===
-            "custom"
-        ) {
-
-            const amount =
-                Number(customAmount);
-
-            if (
-                !customAmount ||
-                Number.isNaN(amount) ||
-                amount <= 0
-            ) {
-
-                newErrors.donationAmount =
-                    "Ingresá un monto válido.";
-            }
-        }
-
-        setErrors(
-            newErrors
-        );
-
-        return (
-            Object.keys(
-                newErrors
-            ).length === 0
-        );
-    };
-
-    const validateStep2 = (): boolean => {
-
-        const newErrors:
-            Record<string, string> = {};
-
-        if (
-            !firstName.trim()
-        ) {
-
-            newErrors.firstName =
-                "Ingresá tu nombre.";
-        }
-
-        if (
-            !lastName.trim()
-        ) {
-
-            newErrors.lastName =
-                "Ingresá tu apellido.";
-        }
-
-        if (
-            !email.trim()
-        ) {
-
-            newErrors.email =
-                "Ingresá tu correo electrónico.";
-
-        } else if (
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                email
-            )
-        ) {
-
-            newErrors.email =
-                "Ingresá un correo electrónico válido.";
-        }
-
-        setErrors(
-            newErrors
-        );
-
-        return (
-            Object.keys(
-                newErrors
-            ).length === 0
-        );
-    };
-
-    const validateStep3 =
-        (): boolean => {
-
-            const newErrors:
-                Record<string, string> = {};
-
-            if (!dni.trim()) {
-
-                newErrors.dni =
-                    "Ingresá tu DNI.";
-            }
-
-            if (
-                !postalCode.trim()
-            ) {
-
-                newErrors.postalCode =
-                    "Ingresá tu código postal.";
-            }
-
-            if (
-                !mercadoPagoReady
-            ) {
-
-                newErrors.payment =
-                    "El formulario de pago todavía no está listo.";
-            }
-
-            if (
-                !paymentMethodId
-            ) {
-
-                newErrors.payment =
-                    "Ingresá un número de tarjeta válido.";
-            }
-
-            setErrors(
-                newErrors
-            );
-
-            return (
-                Object.keys(
-                    newErrors
-                ).length === 0
-            );
-        };
 
     // ========================================================
     // NAVIGATION
@@ -916,33 +157,36 @@ export default function PaymentGateway({
         );
     };
 
-    const handleNextFromStep1 =
-        (): void => {
+    const handleNextFromStep1 = (): void => {
+        const valid = amountSelectionRef.current?.validate();
 
-            if (
-                !validateStep1()
-            ) {
-                return;
-            }
+        if (!valid) {
+            return;
+        }
 
-            goToStep(2);
-        };
+        goToStep(2);
+    };
 
-    const handleNextFromStep2 =
-        (): void => {
+    const handleNextFromStep2 = (): void => {
+        const valid = billingDataRef.current?.validate();
 
-            if (
-                !validateStep2()
-            ) {
-                return;
-            }
+        if (!valid) {
+            return;
+        }
 
-            goToStep(3);
-        };
+        goToStep(3);
+    };
 
     // ========================================================
     // SUBMIT
     // ========================================================
+
+    const [ready, setReady] = useState<boolean>(false);
+
+    const [paymentMethodId, setPaymentMethodId] =
+        useState<string>("");
+
+    const [processingPayment, setProcessingPayment] = useState<boolean>(false);
 
     const handleSubmit = async (
         event: React.FormEvent<HTMLFormElement>
@@ -950,25 +194,26 @@ export default function PaymentGateway({
 
         event.preventDefault();
 
+
+
         if (
             processingPayment
         ) {
             return;
         }
+        const valid = paymentDataRef.current?.validate();
 
         if (
-            !validateStep3()
+            !valid
         ) {
             return;
         }
 
-        const mp =
-            mercadoPagoRef.current;
+        const mp = paymentDataRef.current?.getMercadoPagoInstance();
 
         if (
             !mp
         ) {
-
             setErrors((prev) => ({
                 ...prev,
                 payment:
@@ -979,7 +224,7 @@ export default function PaymentGateway({
         }
 
         try {
-
+            console.log("aca 4");
             setProcessingPayment(
                 true
             );
@@ -1052,11 +297,6 @@ export default function PaymentGateway({
             // BODY
             // ====================================================
 
-            /*
-             * Esto conserva la misma estructura
-             * que tenía tu onSubmit anterior.
-             */
-
             const body = {
                 type: "online",
 
@@ -1095,6 +335,7 @@ export default function PaymentGateway({
                     ],
                 },
             };
+            console.log(body)
 
             // ====================================================
             // SEND TO BACKEND
@@ -1118,6 +359,7 @@ export default function PaymentGateway({
                     }
                 );
 
+            console.log(response)
             // ====================================================
             // ERROR
             // ====================================================
@@ -1157,16 +399,6 @@ export default function PaymentGateway({
                 data
             );
 
-            /*
-             * Se mantiene el callback existente por
-             * compatibilidad con el componente padre.
-             *
-             * IMPORTANTE:
-             *
-             * El callback recibe el token de Mercado Pago,
-             * nunca los datos reales de la tarjeta.
-             */
-
             const paymentData:
                 DonationData = {
 
@@ -1179,20 +411,19 @@ export default function PaymentGateway({
                     firstName,
                     lastName,
                     email,
+                    postalCode
                 },
 
                 paymentData: {
 
                     dni,
 
-                    postalCode,
-
                     cardToken:
                         cardToken.id,
 
                     paymentMethodId,
 
-                    installments,
+                    installments: 1,
                 },
             };
 
@@ -1281,163 +512,14 @@ export default function PaymentGateway({
                 {currentStep === 1 && (
 
                     <div className="pg-section">
-
-                        <div className="pg-donation-amount-info-container">
-
-                            <h2 className="pg-title">
-                                ¿Cuánto querés donar?
-                            </h2>
-
-                            <div className="pg-amount-grid">
-
-                                <button
-                                    type="button"
-                                    disabled={
-                                        lockedDonationAmount
-                                    }
-                                    className={`pg-amount-option ${
-                                        donationAmount === 5000
-                                            ? "pg-amount-selected"
-                                            : ""
-                                    } ${
-                                        lockedDonationAmount &&
-                                        donationAmount !== 5000
-                                            ? "pg-disabled"
-                                            : ""
-                                    }`}
-                                    onClick={() =>
-                                        selectDonationAmount(
-                                            5000
-                                        )
-                                    }
-                                >
-                                    $5.000
-                                </button>
-
-                                <button
-                                    type="button"
-                                    disabled={
-                                        lockedDonationAmount
-                                    }
-                                    className={`pg-amount-option ${
-                                        donationAmount === 10000
-                                            ? "pg-amount-selected"
-                                            : ""
-                                    } ${
-                                        lockedDonationAmount &&
-                                        donationAmount !== 10000
-                                            ? "pg-disabled"
-                                            : ""
-                                    }`}
-                                    onClick={() =>
-                                        selectDonationAmount(
-                                            10000
-                                        )
-                                    }
-                                >
-                                    $10.000
-                                </button>
-
-                                <button
-                                    type="button"
-                                    disabled={
-                                        lockedDonationAmount
-                                    }
-                                    className={`pg-amount-option ${
-                                        donationAmount === 15000
-                                            ? "pg-amount-selected"
-                                            : ""
-                                    } ${
-                                        lockedDonationAmount &&
-                                        donationAmount !== 15000
-                                            ? "pg-disabled"
-                                            : ""
-                                    }`}
-                                    onClick={() =>
-                                        selectDonationAmount(
-                                            15000
-                                        )
-                                    }
-                                >
-                                    $15.000
-                                </button>
-
-                                <button
-                                    type="button"
-                                    disabled={
-                                        lockedDonationAmount
-                                    }
-                                    className={`pg-amount-option ${
-                                        donationAmount === "custom"
-                                            ? "pg-amount-selected"
-                                            : ""
-                                    } ${
-                                        lockedDonationAmount &&
-                                        donationAmount !== "custom"
-                                            ? "pg-disabled"
-                                            : ""
-                                    }`}
-                                    onClick={
-                                        selectCustomAmount
-                                    }
-                                >
-                                    Otro monto
-                                </button>
-
-                            </div>
-
-                            {isCustomAmount && (
-
-                                <div className="pg-custom-amount">
-
-                                    <label className="pg-label">
-                                        Monto
-                                    </label>
-
-                                    <div className="pg-money-input">
-
-                                        <span>
-                                            $
-                                        </span>
-
-                                        <input
-                                            type="text"
-                                            value={
-                                                customAmount
-                                            }
-                                            disabled={
-                                                lockedDonationAmount
-                                            }
-                                            onChange={(
-                                                event
-                                            ) =>
-                                                handleCustomAmountChange(
-                                                    event.target.value
-                                                )
-                                            }
-                                            placeholder="Ingresá el monto"
-                                        />
-
-                                    </div>
-
-                                    {errors.donationAmount && (
-
-                                        <span className="pg-error">
-                                            {
-                                                errors.donationAmount
-                                            }
-                                        </span>
-
-                                    )}
-
-                                </div>
-
-                            )}
-
-                        </div>
+                        <PaymentGatewayAmountSelection
+                        ref={amountSelectionRef}
+                        amount_option_1={5000}
+                        amount_option_2={10000}
+                        amount_option_3={15000}
+                        onAmountSelected={(amount: number)=>{setSelectedAmount(amount)}}/>
 
                         <div className="pg-next-step-container">
-
                             <label className="pg-checkbox-wrapper">
 
                                 <input
@@ -1461,17 +543,6 @@ export default function PaymentGateway({
 
                             </label>
 
-                            {errors.donationAmount &&
-                                !isCustomAmount && (
-
-                                    <span className="pg-error pg-general-error">
-                                        {
-                                            errors.donationAmount
-                                        }
-                                    </span>
-
-                                )}
-
                             <button
                                 type="button"
                                 className="pg-primary-button"
@@ -1494,141 +565,13 @@ export default function PaymentGateway({
                 {currentStep === 2 && (
 
                     <div className="pg-section-2">
-
-                        <h2 className="pg-title">
-                            Tus datos
-                        </h2>
-
-                        <div className="pg-form-column">
-
-                            <div className="pg-row">
-
-                                <div className="pg-field">
-
-                                    <label className="pg-label">
-                                        Nombre
-                                        <span className="pg-required">
-                                            *
-                                        </span>
-                                    </label>
-
-                                    <input
-                                        className={`pg-input ${
-                                            errors.firstName
-                                                ? "pg-input-error"
-                                                : ""
-                                        }`}
-                                        type="text"
-                                        value={
-                                            firstName
-                                        }
-                                        onChange={(
-                                            event
-                                        ) =>
-                                            setFirstName(
-                                                event.target.value
-                                            )
-                                        }
-                                        placeholder="Tu nombre"
-                                    />
-
-                                    {errors.firstName && (
-
-                                        <span className="pg-error">
-                                            {
-                                                errors.firstName
-                                            }
-                                        </span>
-
-                                    )}
-
-                                </div>
-
-                                <div className="pg-field">
-
-                                    <label className="pg-label">
-                                        Apellido
-                                        <span className="pg-required">
-                                            *
-                                        </span>
-                                    </label>
-
-                                    <input
-                                        className={`pg-input ${
-                                            errors.lastName
-                                                ? "pg-input-error"
-                                                : ""
-                                        }`}
-                                        type="text"
-                                        value={
-                                            lastName
-                                        }
-                                        onChange={(
-                                            event
-                                        ) =>
-                                            setLastName(
-                                                event.target.value
-                                            )
-                                        }
-                                        placeholder="Tu apellido"
-                                    />
-
-                                    {errors.lastName && (
-
-                                        <span className="pg-error">
-                                            {
-                                                errors.lastName
-                                            }
-                                        </span>
-
-                                    )}
-
-                                </div>
-
-                            </div>
-
-                            <div className="pg-field">
-
-                                <label className="pg-label">
-                                    Correo electrónico
-                                    <span className="pg-required">
-                                        *
-                                    </span>
-                                </label>
-
-                                <input
-                                    className={`pg-input ${
-                                        errors.email
-                                            ? "pg-input-error"
-                                            : ""
-                                    }`}
-                                    type="email"
-                                    value={
-                                        email
-                                    }
-                                    onChange={(
-                                        event
-                                    ) =>
-                                        setEmail(
-                                            event.target.value
-                                        )
-                                    }
-                                    placeholder="tu@email.com"
-                                />
-
-                                {errors.email && (
-
-                                    <span className="pg-error">
-                                        {
-                                            errors.email
-                                        }
-                                    </span>
-
-                                )}
-
-                            </div>
-
-                        </div>
+                        <PaymentGatewayBillingData
+                            ref={billingDataRef}
+                            onFirstNameChanged={setFirstName}
+                            onLastNameChanged={setLastName}
+                            onEmailChanged={setEmail}
+                            onPostalCodeChanged={setPostalCode}
+                        />
 
                         <button
                             type="button"
@@ -1648,144 +591,16 @@ export default function PaymentGateway({
                 ================================================== */}
 
                 {currentStep === 3 && (
-
-                    <form
-                        className="pg-section-2"
-                        onSubmit={
-                            handleSubmit
-                        }
-                    >
-
-                        <h2 className="pg-title">
-                            Confirmar donación
-                        </h2>
-
-                        <div className="pg-form-column">
-
-                            {/* ======================================
-                                DNI / CÓDIGO POSTAL
-                            ======================================= */}
-
-                            <div className="pg-row">
-
-                                <Input
-                                    label="DNI"
-                                    value={
-                                        dni
-                                    }
-                                    onChange={
-                                        setDni
-                                    }
-                                    placeholder="Tu DNI"
-                                    error={
-                                        errors.dni
-                                    }
-                                />
-
-                                <Input
-                                    label="Código postal"
-                                    value={
-                                        postalCode
-                                    }
-                                    onChange={
-                                        setPostalCode
-                                    }
-                                    placeholder="Código postal"
-                                    error={
-                                        errors.postalCode
-                                    }
-                                />
-
-                            </div>
-
-                            {/* ======================================
-                                NÚMERO DE TARJETA
-                            ======================================= */}
-
-                            <div className="pg-field">
-
-                                <label className="pg-label">
-                                    Número de tarjeta
-                                    <span className="pg-required">
-                                        *
-                                    </span>
-                                </label>
-
-                                <div
-                                    id="pg-card-number"
-                                    className={`pg-mp-field ${
-                                        errors.payment
-                                            ? "pg-mp-field-error"
-                                            : ""
-                                    }`}
-                                />
-
-                            </div>
-
-                            {/* ======================================
-                                VENCIMIENTO / CVV
-                            ======================================= */}
-
-                            <div className="pg-row">
-
-                                <div className="pg-field">
-
-                                    <label className="pg-label">
-                                        Fecha de vencimiento
-                                        <span className="pg-required">
-                                            *
-                                        </span>
-                                    </label>
-
-                                    <div
-                                        id="pg-expiration-date"
-                                        className={`pg-mp-field ${
-                                            errors.payment
-                                                ? "pg-mp-field-error"
-                                                : ""
-                                        }`}
-                                    />
-
-                                </div>
-
-                                <div className="pg-field">
-
-                                    <label className="pg-label">
-                                        CVV
-                                        <span className="pg-required">
-                                            *
-                                        </span>
-                                    </label>
-
-                                    <div
-                                        id="pg-security-code"
-                                        className={`pg-mp-field ${
-                                            errors.payment
-                                                ? "pg-mp-field-error"
-                                                : ""
-                                        }`}
-                                    />
-
-                                </div>
-
-                            </div>
-
-                            {errors.payment && (
-
-                                <span className="pg-error">
-                                    {
-                                        errors.payment
-                                    }
-                                </span>
-
-                            )}
-
-                        </div>
-
+                    <div className="pg-section-2">
                         <div className="pg-donate-total">
+                            <PaymentGatewayPaymentData 
+                                ref={paymentDataRef} 
+                                onReady={setReady}
+                                onPaymentMethodIdChanged={setPaymentMethodId}
+                                onDniChanged={setDni}
+                            />
 
                             <div className="pg-total">
-
                                 $
                                 {Number(
                                     selectedAmount ||
@@ -1796,22 +611,25 @@ export default function PaymentGateway({
 
                             </div>
 
-                            <button
-                                type="submit"
-                                className="pg-primary-button"
-                                disabled={
-                                    !mercadoPagoReady ||
-                                    processingPayment
-                                }
-                            >
-                                {processingPayment
-                                    ? "Procesando..."
-                                    : "Donar"}
-                            </button>
-
+                            <form
+                            onSubmit={
+                                handleSubmit
+                            }>
+                                <button
+                                    type="submit"
+                                    className="pg-primary-button"
+                                    disabled={
+                                        !ready ||
+                                        processingPayment
+                                    }
+                                >
+                                    {processingPayment
+                                        ? "Procesando..."
+                                        : "Donar"}
+                                </button>
+                            </form>
                         </div>
-
-                    </form>
+                    </div>
                 )}
 
                 {/* ==================================================
