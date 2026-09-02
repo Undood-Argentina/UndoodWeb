@@ -8,7 +8,9 @@ import React, {
 import {
     loadMercadoPago,
 } from "@mercadopago/sdk-js";
-import { init } from "next/dist/compiled/webpack/webpack";
+
+
+import { PaymentGatewayField } from "./paymentGatewayField";
 
 // ============================================================
 // MERCADO PAGO TYPES
@@ -529,52 +531,6 @@ const PaymentGatewayPaymentData = forwardRef<
             </div>
         )
 });
-
-
-// TODO: mover a un archivo aparte
-function PaymentGatewayField(props: { required: boolean, label: string, inputType: string, placeholder: string, value: any, setValue: any, errors: any}) {
-    return (<div className="pg-field">
-            <label className="pg-label">
-                {props.label}
-                {props.required && (
-                    <span className="pg-required">
-                        *
-                    </span>
-                )}
-            </label>
-
-            <input
-                className={`pg-input ${
-                    props.errors
-                        ? "pg-input-error"
-                        : ""
-                }`}
-                type={props.inputType}
-                value={
-                    props.value
-                }
-                onChange={(
-                    event
-                ) =>
-                    props.setValue(
-                        event.target.value
-                    )
-                }
-                placeholder={props.placeholder}
-            />
-
-            {props.errors && (
-
-                <span className="pg-error">
-                    {
-                        props.errors
-                    }
-                </span>
-
-            )}
-
-        </div>)
-}
 
 
 export default PaymentGatewayPaymentData;
