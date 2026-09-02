@@ -28,7 +28,7 @@ export default function collaborate(){
                     <h2 id="donations-heading" className='collaborate-section-title'>¡Tu Apoyo lo hace posible!</h2>
                     <p className='collaborate-section-text'>El aporte de nuestros/as colaboradores/as nos permite transformar la realidad de niños, niñas y adolescentes en situación de vulnerabilidad familiar.</p>
                     <div className="donate-links" role="group" aria-label="Opciones de donación">
-                        <Link href="collaborate/card_billing" className="coll-buttons" aria-label="Realizar una donación única">Doná por única vez</Link>
+                        <Link href="https://link.mercadopago.com.ar/colaboracion3000" className="coll-buttons" aria-label="Realizar una donación única">Doná por única vez</Link>
                         <Link href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847379c3410173a5bad04f4caf&fbclid=PAZXh0bgNhZW0CMTEAAafa6WzcI3uFjEejt6Tq55KYQnDucawTUek4N-TuH-Lg4QsTIrCmCeQ8S-LMxw_aem_f6Pr-A0dLvP-tXOf7uSxpQ" className="coll-buttons" aria-label="Convertirse en donante mensual recurrente">Convertite en un donante mensual</Link>
                     </div>
                 </article>
