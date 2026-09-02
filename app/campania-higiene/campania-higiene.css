@@ -813,7 +813,8 @@ image {
 }
 
 .image-container {
-    min-width: 50%
+    min-width: 50%;
+    min-height: 50%
 }
 
 
@@ -902,6 +903,21 @@ image {
         padding-block: 60px;
     }
 
+    /* .higiene-donar-info-card {
+        padding-block: 16px;
+        flex-direction: column;
+        height: 100%;
+        text-align: center
+    }
+
+    .image-container {
+        height: 100%
+    }
+
+    .higiene-donar-info-card p {
+        overflow:visible
+    } */
+
     .higiene-donar-container {
         flex-direction: column;
     }
@@ -910,5 +926,23 @@ image {
         max-width: none;
         width: 100%;
         height: 500px;
+    }
+}
+
+
+@media (max-width: 1160px) {
+    .higiene-donar-info-card {
+        padding-block: 16px;
+        flex-direction: column;
+        height: 100%;
+        text-align: center
+    }
+
+    .image-container {
+        height: 100%
+    }
+
+    .higiene-donar-info-card p {
+        overflow:visible
     }
 }
