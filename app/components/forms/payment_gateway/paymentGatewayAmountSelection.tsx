@@ -4,6 +4,7 @@ import React, {
     useImperativeHandle,
     useState,
 } from "react";
+import { PaymentGatewayField } from "./paymentGatewayField";
 
 
 export type PaymentGatewayAmountSelectionRef = {
@@ -28,9 +29,7 @@ const PaymentGatewayAmountSelection = forwardRef<
     }, [amountSelected]);
 
     useEffect(() => {
-        if (finalAmount) {
-            props.onAmountSelected(finalAmount)
-        }
+        props.onAmountSelected(finalAmount || 0);
     }, [finalAmount])
 
     const isCustomAmount = amountSelected == "custom"
@@ -38,7 +37,7 @@ const PaymentGatewayAmountSelection = forwardRef<
     const [customAmount, setCustomAmount] = useState<string>("0");
 
     useEffect(() => {
-        setFinalAmount(parseInt(customAmount))
+        setFinalAmount(parseInt(customAmount));
     }, [customAmount])
 
     const [errors, setErrors] =
@@ -91,81 +90,52 @@ const PaymentGatewayAmountSelection = forwardRef<
                     ¿Cuánto querés donar?
                 </h2>
 
-                <div className="pg-amount-grid">
-                    <AmountButton amount={props.amount_option_1} selected={amountSelected === props.amount_option_1} onSelect={() => setAmountSelected(props.amount_option_1)}></AmountButton>
-                    <AmountButton amount={props.amount_option_2} selected={amountSelected === props.amount_option_2} onSelect={() => setAmountSelected(props.amount_option_2)}></AmountButton>
-                    <AmountButton amount={props.amount_option_3} selected={amountSelected === props.amount_option_3} onSelect={() => setAmountSelected(props.amount_option_3)}></AmountButton>
+                <div className="pg-amount-selection-container">
+                    <div className="pg-amount-grid">
+                        <AmountButton amount={props.amount_option_1} selected={amountSelected === props.amount_option_1} onSelect={() => setAmountSelected(props.amount_option_1)}></AmountButton>
+                        <AmountButton amount={props.amount_option_2} selected={amountSelected === props.amount_option_2} onSelect={() => setAmountSelected(props.amount_option_2)}></AmountButton>
+                        <AmountButton amount={props.amount_option_3} selected={amountSelected === props.amount_option_3} onSelect={() => setAmountSelected(props.amount_option_3)}></AmountButton>
 
-                    <button
-                        type="button"
-                        className={
-                            `pg-amount-option ${
-                                amountSelected === "custom"
-                                    ? "pg-amount-selected"
-                                    : ""
-                            }`
-                        }
-                        onClick={
-                            () => setAmountSelected("custom")
-                        }
-                    >
-                        Otro monto
-                    </button>
-
-                </div>
-                {errors.donationAmount &&
-                    !isCustomAmount && (
-
-                        <span className="pg-error pg-general-error">
-                            {
-                                errors.donationAmount
+                        <button
+                            type="button"
+                            className={
+                                `pg-amount-option ${
+                                    amountSelected === "custom"
+                                        ? "pg-amount-selected"
+                                        : ""
+                                }`
                             }
-                        </span>
+                            onClick={
+                                () => setAmountSelected("custom")
+                            }
+                        >
+                            Otro monto
+                        </button>
 
-                    )}
+                    </div>
+                    {errors.donationAmount &&
+                        !isCustomAmount && (
 
-                {isCustomAmount && (
-
-                    <div className="pg-custom-amount">
-
-                        <label className="pg-label">
-                            Monto
-                        </label>
-
-                        <div className="pg-money-input">
-
-                            <span>
-                                $
-                            </span>
-
-                            <input
-                                type="number"
-                                value={
-                                    customAmount
-                                }
-                                onChange={(
-                                    event
-                                ) =>
-                                    setCustomAmount(event.target.value)
-                                }
-                                placeholder="Ingresá el monto"
-                            />
-
-                        </div>
-                        
-
-                        {errors.donationAmount && (
-
-                            <span className="pg-error">
+                            <p className="pg-error pg-general-error">
                                 {
                                     errors.donationAmount
                                 }
-                            </span>
+                            </p>
 
                         )}
 
-                    </div>
+                </div>
 
+                {isCustomAmount && (
+                    <PaymentGatewayField
+                        required={false}
+                        label="Monto"
+                        value={customAmount}
+                        inputType="number"
+                        setValue={setCustomAmount}
+                        errors={errors.donationAmount}
+                        placeholder="Ingresá el monto"
+                        />
                 )}
 
             </div>)

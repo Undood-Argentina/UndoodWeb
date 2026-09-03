@@ -37,6 +37,9 @@ type HandlePaymentSubmitParams = {
 
     paymentDataRef: React.RefObject<any>;
 
+    billingDataRef: React.RefObject<any>;
+
+
     setErrors: React.Dispatch<
         React.SetStateAction<Record<string, string>>
     >;
@@ -59,6 +62,7 @@ export const handlePaymentSubmit = async ({
     processingPayment,
     setProcessingPayment,
     paymentDataRef,
+    billingDataRef,
     setErrors,
     firstName,
     lastName,
@@ -78,7 +82,8 @@ export const handlePaymentSubmit = async ({
     }
 
     const valid =
-        paymentDataRef.current?.validate();
+        paymentDataRef.current?.validate()
+        && billingDataRef.current?.validate();
 
     if (!valid) {
         return;

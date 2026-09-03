@@ -31,11 +31,11 @@ export function PaymentGatewayField(props: { required: boolean, label: string, i
 
             {props.errors && (
 
-                <span className="pg-error">
+                <p className="pg-error">
                     {
                         props.errors
                     }
-                </span>
+                </p>
 
             )}
 

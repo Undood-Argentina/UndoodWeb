@@ -84,6 +84,12 @@ const PaymentGatewayPaymentData = forwardRef<
     const [dni, setDni] = useState<string>("");
     useEffect(() => {
         props.onDniChanged(dni);
+        if ("dni" in errors) {
+            const newErrors = { ...errors };
+            delete newErrors.dni;
+            setErrors(newErrors);
+        }
+
     }, [dni])
     /*
     * IMPORTANTE:
@@ -198,18 +204,38 @@ const PaymentGatewayPaymentData = forwardRef<
                 // CARD NUMBER
                 // ====================================================
 
-                const cardNumberField =
-                    mp.fields.create(
-                        "cardNumber",
+                const cardNumberField =mp.fields.create("cardNumber", {
+                    placeholder: "0000 0000 0000 0000",
+                    style: {
+                        color: "#0F1D36",
+                        fontFamily: "Nunito Sans",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: "400",
+                    },
+                    customFonts: [
                         {
-                            placeholder:
-                                "0000 0000 0000 0000",
+                            src: "https://fonts.googleapis.com/css2?family=Nunito+Sans",
+                        },
+                    ],
+                } as any);
+
+                cardNumberField.on("change", () => {
+                    setErrors((prev) => {
+                        if (!("payment" in prev)) {
+                            return prev;
                         }
-                    );
+
+                        const newErrors = { ...prev };
+                        delete newErrors.payment;
+                        return newErrors;
+                    });
+                });
 
                 cardNumberField.mount(
                     "pg-card-number"
                 );
+                
 
                 cardNumberFieldRef.current =
                     cardNumberField;
@@ -224,8 +250,32 @@ const PaymentGatewayPaymentData = forwardRef<
                         {
                             placeholder:
                                 "MM/AA",
+                            style: {
+                                color: "#0F1D36",
+                                fontFamily: "Nunito Sans",
+                                fontSize: "14px",
+                                fontStyle: "normal",
+                                fontWeight: "400",
+                            },
+                            customFonts: [
+                                {
+                                    src: "https://fonts.googleapis.com/css2?family=Nunito+Sans",
+                                },
+                            ],
+                        } as any);
+
+
+                expirationDateField.on("change", () => {
+                    setErrors((prev) => {
+                        if (!("payment" in prev)) {
+                            return prev;
                         }
-                    );
+
+                        const newErrors = { ...prev };
+                        delete newErrors.payment;
+                        return newErrors;
+                    });
+                });
 
                 expirationDateField.mount(
                     "pg-expiration-date"
@@ -244,9 +294,32 @@ const PaymentGatewayPaymentData = forwardRef<
                         {
                             placeholder:
                                 "123",
-                        }
-                    );
+                            style: {
+                                color: "#0F1D36",
+                                fontFamily: "Nunito Sans",
+                                fontSize: "14px",
+                                fontStyle: "normal",
+                                fontWeight: "400",
+                            },
+                            customFonts: [
+                                {
+                                    src: "https://fonts.googleapis.com/css2?family=Nunito+Sans",
+                                },
+                            ],
+                        } as any);
 
+
+                securityCodeField.on("change", () => {
+                    setErrors((prev) => {
+                        if (!("payment" in prev)) {
+                            return prev;
+                        }
+
+                        const newErrors = { ...prev };
+                        delete newErrors.payment;
+                        return newErrors;
+                    });
+                });
                 securityCodeField.mount(
                     "pg-security-code"
                 );
@@ -416,8 +489,8 @@ const PaymentGatewayPaymentData = forwardRef<
     };
 
 
-    return (<div className="pg-donation-amount-info-container">
-                <h2 className="pg-title">
+    return (<div className="pg-personal-data-container">
+                <h2 className="pg-title-2">
                     Confirmar donación
                 </h2>
 
@@ -516,18 +589,17 @@ const PaymentGatewayPaymentData = forwardRef<
 
                     </div>
 
+                </div>
+
                     {errors.payment && (
 
-                        <span className="pg-error">
+                        <p className="pg-error">
                             {
                                 errors.payment
                             }
-                        </span>
+                        </p>
 
                     )}
-
-                </div>
-
             </div>
         )
 });

@@ -1,8 +1,11 @@
+"use client"
+// @ts-ignore: allow CSS side-effect import without module declarations
 import './campania-higiene.css'
 import Image from 'next/image'
 
 import { Flower } from "@mynaui/icons-react";
 import { Icon } from '@iconify/react';
+import CampaniaHigienePaymentGateway from './campaniaHigienePaymentGateway';
 
 export default function HigienePage() {
     return(<main>   
@@ -21,8 +24,24 @@ export default function HigienePage() {
                         </p>
                     </div>
                     <div className="higiene-header-actions"> 
-                        <button className="higiene-button higiene-button-pink">Donar ahora</button>
-                        <button className="higiene-button higiene-button-white">¿Cómo funciona?</button>
+                        
+                        <button 
+                            className="higiene-button higiene-button-pink" 
+                            onClick={() => {
+                            document
+                                .getElementById("donar-section")
+                                ?.scrollIntoView({ behavior: "smooth" });
+                        }}>
+                            Donar ahora
+                        </button>
+                        <button className="higiene-button higiene-button-white"
+                            onClick={() => {
+                                document
+                                    .getElementById("gestion-section")
+                                    ?.scrollIntoView({ behavior: "smooth" });
+                            }}>
+                            Cómo funciona?
+                        </button>
                     </div>
                 </div>
 
@@ -55,7 +74,7 @@ export default function HigienePage() {
             </div>
         </section>
 
-        <section className="higiene-donar">
+        <section className="higiene-donar" id="donar-section">
             <div className="higiene-donar-container">
                 <div className="higiene-donar-info">
                     <h1 className="higiene-donar-info-title">Tu donación permite que las adolescentes puedan acceder y elegir productos sanitarios de su preferencia.</h1>
@@ -78,8 +97,7 @@ export default function HigienePage() {
                         </div>
                     </div>
                 </div>
-
-                <div className="higiene-donar-pasarela"></div>
+                <CampaniaHigienePaymentGateway/>
             </div>
             <div className="higiene-blur-2"></div>
             <div className="higiene-blur-1"></div>
@@ -136,7 +154,7 @@ export default function HigienePage() {
         </section>
 
 
-        <section className="higiene-gestion">
+        <section className="higiene-gestion" id="gestion-section">
             <div className="higiene-gestion-container">
                 <h1>¿Cómo gestionamos tu donación?</h1>
                 <div className="higiene-gestion-row">
@@ -186,7 +204,16 @@ export default function HigienePage() {
             <div className="higiene-banner-container">
                 <div className="higiene-banner-content">
                     <h1>Sé la razón por la que una adolescente se sienta acompañada en su ciclo menstrual</h1>
-                    <button className="higiene-banner-button higiene-banner-button-pink">Quiero ayudar</button>
+                    <button 
+                        className="higiene-banner-button higiene-banner-button-pink"
+                        onClick={() => {
+                                document
+                                    .getElementById("donar-section")
+                                    ?.scrollIntoView({ behavior: "smooth" });
+                            }}
+                    >
+                        Quiero ayudar
+                    </button>
                 </div>
                 <div className="higiene-blur-3">
                     <img src={"/blur.svg"} className="higiene-glow" />

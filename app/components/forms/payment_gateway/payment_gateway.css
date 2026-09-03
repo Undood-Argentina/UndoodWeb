@@ -305,15 +305,6 @@
         border-color 0.2s ease;
 }
 
-/*
- * IMPORTANTE:
- *
- * Não existe box-shadow no focus.
- *
- * Isso evita o "brilho" que você tinha
- * anteriormente.
- */
-
 .pg-input:focus {
     outline: none;
 
