@@ -26,29 +26,6 @@ import PaymentGatewayPaymentData, {
 // TYPES
 // ============================================================
 
-interface PersonalData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    postalCode: string;
-}
-
-interface PaymentData {
-    dni: string;
-    // Token generado por Mercado Pago.
-    cardToken: string;
-
-    paymentMethodId: string;
-    installments: number;
-}
-
-interface DonationData {
-    donationAmount: number;
-    reports: boolean;
-    personalData: PersonalData;
-    paymentData: PaymentData;
-}
-
 interface PaymentGatewayProps {
     onSubmit?: (data: DonationData) => void;
 }
@@ -107,6 +84,9 @@ export default function CampaniaHigienePaymentGateway({
         useState<string>("");
 
     const [postalCode, setPostalCode] =
+        useState<string>("");
+
+    const [cardholderName, setCardholderName] =
         useState<string>("");
 
 
@@ -189,6 +169,7 @@ export default function CampaniaHigienePaymentGateway({
             lastName,
             email,
             dni,
+            cardholderName,
             postalCode,
             selectedAmount,
             paymentMethodId,
@@ -207,7 +188,6 @@ export default function CampaniaHigienePaymentGateway({
                     STEP 1 - DONACIÓN
                 ================================================== */}
 
-                {/* {currentStep === 1 && ( */}
                 <div className={`pg-step-pane ${currentStep === 1 ? "active" : "exit-left"}`}>
                     <div className="pg-section">
                         <div className="pg-higiene-donation-amount-selection">
@@ -251,13 +231,10 @@ export default function CampaniaHigienePaymentGateway({
                         
                     </div>
                 </div>
-                {/* )} */}
 
                 {/* ==================================================
                     STEP 2 - DATOS Y CONFIRMACION
                 ================================================== */}
-
-                {/* {currentStep === 2 && ( */}
 
                 <div className={`pg-step-pane ${currentStep === 2 ? "active" : "enter-right"}`}>
                     <div className="pg-section-2">
@@ -271,6 +248,7 @@ export default function CampaniaHigienePaymentGateway({
                             onReady={setReady}
                             onPaymentMethodIdChanged={setPaymentMethodId}
                             onDniChanged={setDni}
+                            onCardholderNameChanged={setCardholderName}
                         />
                         <PaymentGatewayBillingData
                             ref={billingDataRef}
@@ -310,6 +288,17 @@ export default function CampaniaHigienePaymentGateway({
                                     </button>
                                 </form>
 
+                                {errors.payment && (
+
+                                        <p className="pg-error">
+                                            {
+                                                errors.payment
+                                            }
+                                        </p>
+
+                                    )}
+
+
                                 <div className="pg-footer">
                                     <div className="pg-mp-icon" />
                                     <p>Pago seguro con Mercado Pago</p>
@@ -318,7 +307,6 @@ export default function CampaniaHigienePaymentGateway({
                         </div>
                     </div>
                 </div>
-                {/* )} */}
 
             </div>
     );

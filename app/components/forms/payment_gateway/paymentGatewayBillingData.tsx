@@ -111,7 +111,7 @@ const PaymentGatewayBillingData = forwardRef<
     return (<div className="pg-donation-amount-info-container">
         
                 <h2 className="pg-title">
-                    Datos de Facturación
+                    Datos de facturación
                 </h2>
 
                 <div className="pg-form-column">

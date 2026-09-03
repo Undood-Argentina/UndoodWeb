@@ -77,6 +77,7 @@ const PaymentGatewayPaymentData = forwardRef<
         onReady: (ready: boolean) => void;
         onPaymentMethodIdChanged: (paymentMethodId: string) => void;
         onDniChanged: (dni: string) => void;
+        onCardholderNameChanged: (cardholderName: string) => void;
     }
 >(function PaymentGatewayPaymentData(props, ref) {
 
@@ -91,6 +92,17 @@ const PaymentGatewayPaymentData = forwardRef<
         }
 
     }, [dni])
+
+    const [cardholderName, setCardholderName] = useState<string>("");
+    useEffect(() => {
+        props.onCardholderNameChanged(cardholderName);
+        if ("cardholderName" in errors) {
+            const newErrors = { ...errors };
+            delete newErrors.cardholderName;
+            setErrors(newErrors);
+        }
+
+    }, [cardholderName])
 
     // ========================================================
     // MERCADO PAGO REFS
@@ -505,7 +517,7 @@ const PaymentGatewayPaymentData = forwardRef<
 
     return (<div className="pg-personal-data-container">
                 <h2 className="pg-title-2">
-                    Confirmar donación
+                    Datos de pago
                 </h2>
 
                 <div className="pg-form-column">
@@ -602,6 +614,22 @@ const PaymentGatewayPaymentData = forwardRef<
                         </div>
 
                     </div>
+
+                    <PaymentGatewayField
+                        required={true}
+                        label="Titular de la tarjeta"
+                        value={
+                            cardholderName
+                        }
+                        setValue={
+                            setCardholderName
+                        }
+                        placeholder="Titular de la tarjeta"
+                        inputType="text"
+                        errors={
+                            errors.cardholderName
+                        }
+                    />
 
                 </div>
 

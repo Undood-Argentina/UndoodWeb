@@ -1,31 +1,5 @@
 import React from "react";
 
-interface PersonalData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    postalCode: string;
-}
-
-interface PaymentData {
-    dni: string;
-
-    // Token generado por Mercado Pago.
-    // Nunca se almacenan los datos reales de la tarjeta.
-    cardToken: string;
-
-    paymentMethodId: string;
-    installments: number;
-}
-
-interface DonationData {
-    donationAmount: number;
-    reports: boolean;
-
-    personalData: PersonalData;
-
-    paymentData: PaymentData;
-}
 
 type HandlePaymentSubmitParams = {
     event: React.FormEvent<HTMLFormElement>;
@@ -48,6 +22,7 @@ type HandlePaymentSubmitParams = {
     lastName: string;
     email: string;
     dni: string;
+    cardholderName: string;
     postalCode: string;
 
     selectedAmount: number;
@@ -68,6 +43,7 @@ export const handlePaymentSubmit = async ({
     lastName,
     email,
     dni,
+    cardholderName,
     postalCode,
     selectedAmount,
     paymentMethodId,
@@ -111,12 +87,6 @@ export const handlePaymentSubmit = async ({
             payment: "",
         }));
 
-        // ====================================================
-        // CARDHOLDER
-        // ====================================================
-
-        const cardholderName =
-            `${firstName.trim()} ${lastName.trim()}`;
 
         // ====================================================
         // CREATE MERCADO PAGO TOKEN
@@ -269,6 +239,7 @@ export const handlePaymentSubmit = async ({
             paymentData: {
 
                 dni,
+                cardholderName,
 
                 cardToken:
                     cardToken.id,
