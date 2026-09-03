@@ -825,6 +825,8 @@ image {
 
 
 .pg-card {
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-self: stretch;
 }
@@ -939,6 +941,8 @@ image {
     font-style: normal;
     font-weight: 600;
     line-height: 28px; /* 155.556% */
+
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .pg-amount-selected {
@@ -1098,6 +1102,8 @@ image {
     font-style: normal;
     font-weight: 400;
     line-height: 20px; /* 142.857% */
+    transition:
+        border-color 0.2s ease;
 }
 
 .pg-input:focus {
@@ -1215,15 +1221,6 @@ image {
 
 }
 
-.pg-mp-field:focus-within {
-    border:
-        1.53px
-        solid
-        #d1d5dc;
-
-    box-shadow: none;
-}
-
 .pg-mp-field-error {
     border-color: #dc2626;
 }
@@ -1234,6 +1231,49 @@ image {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.is-focused {
+    border:
+        1.53px
+        solid
+        #d1d5dc;
+
+    box-shadow: none;
+}
+
+
+/* Panel base de cada paso */
+.pg-step-pane {
+    width: 100%;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    opacity: 0;
+    pointer-events: none; /* Evita clics en el paso inactivo */
+}
+
+/* Paso visible */
+.pg-step-pane.active {
+    position: relative;
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Estado fuera a la izquierda (Paso 1 cuando estamos en el Paso 2) */
+.pg-step-pane.exit-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* Estado fuera a la derecha (Paso 2 cuando estamos en el Paso 1) */
+.pg-step-pane.enter-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(100%);
+    opacity: 0;
 }
 
 

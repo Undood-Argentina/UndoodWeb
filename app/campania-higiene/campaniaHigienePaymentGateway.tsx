@@ -207,8 +207,8 @@ export default function CampaniaHigienePaymentGateway({
                     STEP 1 - DONACIÓN
                 ================================================== */}
 
-                {currentStep === 1 && (
-
+                {/* {currentStep === 1 && ( */}
+                <div className={`pg-step-pane ${currentStep === 1 ? "active" : "exit-left"}`}>
                     <div className="pg-section">
                         <div className="pg-higiene-donation-amount-selection">
                             <PaymentGatewayAmountSelection
@@ -250,15 +250,16 @@ export default function CampaniaHigienePaymentGateway({
                         </div>
                         
                     </div>
-                )}
+                </div>
+                {/* )} */}
 
                 {/* ==================================================
                     STEP 2 - DATOS Y CONFIRMACION
                 ================================================== */}
 
-                {currentStep === 2 && (
+                {/* {currentStep === 2 && ( */}
 
-
+                <div className={`pg-step-pane ${currentStep === 2 ? "active" : "enter-right"}`}>
                     <div className="pg-section-2">
                         <button className="pg-back-button" onClick={handlePreviousFromStep2}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -316,7 +317,8 @@ export default function CampaniaHigienePaymentGateway({
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
+                {/* )} */}
 
             </div>
     );

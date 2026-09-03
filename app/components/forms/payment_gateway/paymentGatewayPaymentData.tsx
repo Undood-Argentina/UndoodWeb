@@ -91,18 +91,7 @@ const PaymentGatewayPaymentData = forwardRef<
         }
 
     }, [dni])
-    /*
-    * IMPORTANTE:
-    *
-    * NO existen estados:
-    *
-    * cardNumber
-    * expirationDate
-    * cvv
-    *
-    * Los maneja Mercado Pago dentro de sus
-    * campos seguros.
-    */
+
     // ========================================================
     // MERCADO PAGO REFS
     // ========================================================
@@ -232,6 +221,14 @@ const PaymentGatewayPaymentData = forwardRef<
                     });
                 });
 
+                cardNumberField.on('focus', () => {
+                    document.getElementById('pg-card-number')!.classList.add('is-focused');
+                });
+
+                cardNumberField.on('blur', () => {
+                    document.getElementById('pg-card-number')!.classList.remove('is-focused');
+                });
+
                 cardNumberField.mount(
                     "pg-card-number"
                 );
@@ -277,6 +274,15 @@ const PaymentGatewayPaymentData = forwardRef<
                     });
                 });
 
+
+                expirationDateField.on('focus', () => {
+                    document.getElementById('pg-expiration-date')!.classList.add('is-focused');
+                });
+
+                expirationDateField.on('blur', () => {
+                    document.getElementById('pg-expiration-date')!.classList.remove('is-focused');
+                });
+
                 expirationDateField.mount(
                     "pg-expiration-date"
                 );
@@ -319,6 +325,14 @@ const PaymentGatewayPaymentData = forwardRef<
                         delete newErrors.payment;
                         return newErrors;
                     });
+                });
+
+                securityCodeField.on('focus', () => {
+                    document.getElementById('pg-security-code')!.classList.add('is-focused');
+                });
+
+                securityCodeField.on('blur', () => {
+                    document.getElementById('pg-security-code')!.classList.remove('is-focused');
                 });
                 securityCodeField.mount(
                     "pg-security-code"
