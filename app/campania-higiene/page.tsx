@@ -1,6 +1,8 @@
 "use client"
 // @ts-ignore: allow CSS side-effect import without module declarations
 import './campania-higiene.css'
+// @ts-ignore: allow CSS side-effect import without module declarations
+import './pg.css'
 import Image from 'next/image'
 
 import { Flower } from "@mynaui/icons-react";

@@ -307,6 +307,11 @@ export default function CampaniaHigienePaymentGateway({
                         </div>
                     </div>
                 </div>
+                <div className={`pg-step-pane ${currentStep === 3 ? "active" : "enter-right"}`}>
+                    <div className="pg-section-3">
+                        <div className="pg-"></div>
+                    </div>
+                </div>
 
             </div>
     );
