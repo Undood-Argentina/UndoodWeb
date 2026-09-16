@@ -213,6 +213,35 @@ export const handlePaymentSubmit = async ({
         }
 
         // ====================================================
+        // SAVE DONATION TRACKER DATA
+        // ====================================================
+
+        try {
+            const donorPayload = {
+                dni: Number(dni.trim()),
+                nombre: firstName.trim(),
+                apellido: lastName.trim(),
+                cp: Number(postalCode.trim()),
+                email: email.trim(),
+                monto: Number(selectedAmount),
+                fecha: new Date().toISOString(),
+            };
+
+            await fetch(
+                "/api/donationTracker",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(donorPayload),
+                }
+            );
+        } catch (trackerError) {
+            console.error("Error guardando donación en PostgreSQL:", trackerError);
+        }
+
+        // ====================================================
         // SUCCESS
         // ====================================================
 

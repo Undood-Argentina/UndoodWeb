@@ -119,6 +119,9 @@ export default function PaymentGateway({
     const [dni, setDni] =
         useState<string>("");
 
+    const [cardholderName, setCardholderName] =
+        useState<string>("");
+
     const [postalCode, setPostalCode] =
         useState<string>("");
 
@@ -199,11 +202,13 @@ export default function PaymentGateway({
             processingPayment,
             setProcessingPayment,
             paymentDataRef,
+            billingDataRef,
             setErrors,
             firstName,
             lastName,
             email,
             dni,
+            cardholderName,
             postalCode,
             selectedAmount,
             paymentMethodId,
@@ -355,6 +360,7 @@ export default function PaymentGateway({
                                 onReady={setReady}
                                 onPaymentMethodIdChanged={setPaymentMethodId}
                                 onDniChanged={setDni}
+                                onCardholderNameChanged={setCardholderName}
                             />
 
                             <div className="pg-total">
