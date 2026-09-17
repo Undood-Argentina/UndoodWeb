@@ -16,15 +16,15 @@ export default function HigienePage() {
             <div className="higiene-header-container">
                 <div className="higiene-header-column">
                     <div className="higiene-header-content">
-                        <div>
-                            <h1 className="higiene-header-h1-text">
-                                <span className="higiene-text-black">Doná y cambia una realidad sobre la</span>{" "}
-                                <span className="higiene-text-pink">higiene menstrual</span>
-                            </h1>
+                        <h1 className="higiene-header-h1-text">
+                            <span className="higiene-text-black">Doná y cambia una realidad sobre la</span>{" "}
+                            <span className="higiene-text-pink">higiene menstrual</span>
+                        </h1>
+                        <div className="higiene-header-paragraph-container">
+                            <p className="higiene-header-paragraph-text">
+                                Tu donación permite que cada adolescente tenga acceso a productos de higiene menstrual, educación sobre su cuerpo y la dignidad que toda mujer merece.
+                            </p>
                         </div>
-                        <p className="higiene-header-paragraph-text">
-                            Tu donación permite que cada adolescente tenga acceso a productos de higiene menstrual, educación sobre su cuerpo y la dignidad que toda mujer merece.
-                        </p>
                     </div>
                     <div className="higiene-header-actions"> 
                         
@@ -57,21 +57,21 @@ export default function HigienePage() {
         <section className="higiene-problematica">
             <div className="higiene-problematica-container">
                 <div className="higiene-problematica-content">
-                    <h2 className="higiene-problematica-h2-text">En hogares transitorios, muchas adolescentes no tienen acceso a productos de higiene menstrual.</h2>
-                    <p className="higiene-problematica-paragraph-text">Queremos cambiar eso, dándoles acceso, posibilidad de elegir e información.</p>
+                    <h2 className="higiene-section-title">En hogares transitorios, muchas adolescentes no tienen acceso a productos de higiene menstrual.</h2>
+                    <p className="higiene-problematica-paragraph-text">Desde Undood Argentina, queremos brindar acceso, posibilidad de elegir e información sobre higiene y cuidado de cada producto.</p>
                 </div>
                 <div className="higiene-problematica-column">
                     <div className="higiene-problematica-card higiene-problematica-card-pink">
                         <div className="higiene-problematica-card-caption"><p>Realidad</p></div>
-                        <p className="higiene-problematica-card-paragraph">Detectamos junto a los hogares con los que trabajamos que el acceso a productos de higiene menstrual es una de las necesidades más frecuentes y difíciles de cubrir.</p>
+                        <p className="higiene-card-paragraph">Detectamos junto a los hogares con los que trabajamos que el acceso a productos de higiene menstrual es una de las necesidades más frecuentes y difíciles de cubrir.</p>
                     </div>
                     <div className="higiene-problematica-card higiene-problematica-card-red">
                         <div className="higiene-problematica-card-caption"><p>Impacto</p></div>
-                        <p className="higiene-problematica-card-paragraph">No tener acceso a estos productos significa no poder participar en sus actividades del día a día o tener que improvisar con lo que encuentren sin sentirse cuidadas.</p>
+                        <p className="higiene-card-paragraph">No tener acceso a estos productos significa no poder participar en sus actividades del día a día o tener que improvisar con lo que encuentren sin sentirse cuidadas.</p>
                     </div>
                     <div className="higiene-problematica-card higiene-problematica-card-blue">
                         <div className="higiene-problematica-card-caption"><p>Meta de Undood</p></div>
-                        <p className="higiene-problematica-card-paragraph">Abastecer a más de 10 hogares en la provincia de Buenos Aires, asegurando que cada adolescente pueda elegir el producto de higiene menstrual que mejor se adapte a sus necesidades.</p>
+                        <p className="higiene-card-paragraph">Abastecer a más de 10 hogares en la provincia de Buenos Aires, asegurando que cada adolescente pueda elegir el producto de higiene menstrual que mejor se adapte a sus necesidades.</p>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@ export default function HigienePage() {
         <section className="higiene-donar" id="donar-section">
             <div className="higiene-donar-container">
                 <div className="higiene-donar-info">
-                    <h1 className="higiene-donar-info-title">Tu donación permite que las adolescentes puedan acceder y elegir productos sanitarios de su preferencia.</h1>
+                    <h1 className="higiene-section-title">Tu donación permite que las adolescentes puedan acceder y elegir productos sanitarios de su preferencia.</h1>
                     <div className="higiene-donar-info-grid">
                         <div className="higiene-donar-info-card">
                             <div className="image-container"><div className="higiene-donar-image-1"></div></div>
@@ -108,18 +108,18 @@ export default function HigienePage() {
 
         <section className="higiene-promesas">
             <div className="higiene-promesas-container">
-                <h1 className="higiene-promesas-title">Promesas que guían la campaña</h1>
+                <h1 className="higiene-section-title">Promesas que guían la campaña</h1>
                 <div className="higiene-promesas-row">
                     <div className="higiene-promesas-card">
                         <div className="higiene-promesas-card-header">
                             <div className="higiene-promesas-card-header-caption">
                                 <Flower />
                             </div>
-                            <p className="higiene-promesas-card-header-title">
+                            <h3 className="higiene-card-title">
                                 Salud menstrual digna
-                            </p>
+                            </h3>
                         </div>
-                        <p className="higiene-promesas-card-paragraph">
+                        <p className="higiene-card-paragraph">
                             Recaudamos fondos para comprar productos y llevarlos directamente a los hogares con los que trabajamos hace más de 8 años.
                         </p>
                     </div>
@@ -129,11 +129,11 @@ export default function HigienePage() {
                             <div className="higiene-promesas-card-header-caption">
                                 <Icon icon="solar:hand-heart-outline" />
                             </div>
-                            <p className="higiene-promesas-card-header-title">
+                            <h3 className="higiene-card-title">
                                 Posibilidad de elegir
-                            </p>
+                            </h3>
                         </div>
-                        <p className="higiene-promesas-card-paragraph">
+                        <p className="higiene-card-paragraph">
                             Cada adolescente tiene necesidades y preferencias diferentes, y creemos que poder elegir también es parte del cuidado.
                         </p>
                     </div>
@@ -144,11 +144,11 @@ export default function HigienePage() {
                             <div className="higiene-promesas-card-header-caption">
                                 <Icon icon="ion:female" />
                             </div>
-                            <p className="higiene-promesas-card-header-title">
+                            <h3 className="higiene-card-title">
                                 Información y educación
-                            </p>
+                            </h3>
                         </div>
-                        <p className="higiene-promesas-card-paragraph">
+                        <p className="higiene-card-paragraph">
                             Trabajamos con una ginecóloga matriculada para generar contenido informativo sobre el uso, cuidados e higiene de cada producto. 
                         </p>
                     </div>
@@ -159,7 +159,7 @@ export default function HigienePage() {
 
         <section className="higiene-gestion" id="gestion-section">
             <div className="higiene-gestion-container">
-                <h1>¿Cómo gestionamos tu donación?</h1>
+                <h1 className="higiene-section-title">¿Cómo gestionamos tu donación?</h1>
                 <div className="higiene-gestion-row">
                     <div className="higiene-gestion-card">
                         <div className="higiene-gestion-card-caption">
@@ -168,9 +168,9 @@ export default function HigienePage() {
                         <div className="higiene-gestion-card-header higiene-gestion-card-red">
                             <GestionDonacionPaso1></GestionDonacionPaso1>
                         </div>
-                        <div className="higiene-gestion-card-content">
-                            <h3>Recibimos tu donación</h3>
-                            <p>Tu aporte llega directamente a Undood. Vos no tenés que comprar ni enviar ningún producto.</p>
+                        <div className="higiene-gestion-card-content higiene-gestion-card-content-red">
+                            <h3 className="higiene-card-title">Recibimos tu donación</h3>
+                            <p className="higiene-card-paragraph">Tu aporte llega directamente a Undood. Vos no tenés que comprar ni enviar ningún producto.</p>
                         </div>
                     </div>
 
@@ -181,9 +181,9 @@ export default function HigienePage() {
                         <div className="higiene-gestion-card-header higiene-gestion-card-pink">
                             <GestionDonacionPaso2></GestionDonacionPaso2>
                         </div>
-                        <div className="higiene-gestion-card-content">
-                            <h3>Compramos y cada adolescente elige</h3>
-                            <p>Con los fondos recaudados compramos los productos. Cada adolescente elige el de su preferencia.</p>
+                        <div className="higiene-gestion-card-content higiene-gestion-card-content-pink">
+                            <h3 className="higiene-card-title">Compramos y cada adolescente elige</h3>
+                            <p className="higiene-card-paragraph">Con los fondos recaudados compramos los productos. Cada adolescente elige el de su preferencia.</p>
                         </div>
                     </div>
 
@@ -194,9 +194,9 @@ export default function HigienePage() {
                         <div className="higiene-gestion-card-header higiene-gestion-card-blue">
                             <GestionDonacionPaso3></GestionDonacionPaso3>
                         </div>
-                        <div className="higiene-gestion-card-content">
-                            <h3>Entregamos en los hogares</h3>
-                            <p>Llevamos los productos directamente a los hogares. Las adolescentes los reciben de forma personalizada.</p>
+                        <div className="higiene-gestion-card-content higiene-gestion-card-content-blue">
+                            <h3 className="higiene-card-title">Entregamos en los hogares</h3>
+                            <p className="higiene-card-paragraph">Llevamos los productos directamente a los hogares. Las adolescentes los reciben de forma personalizada.</p>
                         </div>
                     </div>
                 </div>
@@ -208,7 +208,7 @@ export default function HigienePage() {
                 <div className="higiene-banner-content">
                     <h1>Sé la razón por la que una adolescente se sienta acompañada en su ciclo menstrual</h1>
                     <button 
-                        className="higiene-banner-button higiene-banner-button-pink"
+                        className="higiene-button higiene-button-pink"
                         onClick={() => {
                                 document
                                     .getElementById("donar-section")

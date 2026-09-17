@@ -20,8 +20,6 @@ import PaymentGatewayBillingData, {
 import PaymentGatewayPaymentData, {
     PaymentGatewayPaymentDataRef,
 } from "../components/forms/payment_gateway/paymentGatewayPaymentData";
-import { Info } from "@mynaui/icons-react";
-
 
 // ============================================================
 // TYPES

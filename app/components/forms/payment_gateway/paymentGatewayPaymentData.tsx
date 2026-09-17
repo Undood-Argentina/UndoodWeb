@@ -165,15 +165,15 @@ const PaymentGatewayPaymentData = forwardRef<
                 const cardNumberField = mp.fields.create("cardNumber", {
                     placeholder: "0000 0000 0000 0000",
                     style: {
-                        color: "#0F1D36",
-                        fontFamily: "Nunito Sans",
-                        fontSize: "14px",
+                        color: "#121212",
+                        fontFamily: "Raleway",
+                        fontSize: "16px",
                         fontStyle: "normal",
-                        fontWeight: "400",
+                        fontWeight: "500",
                     },
                     customFonts: [
                         {
-                            src: "https://fonts.googleapis.com/css2?family=Nunito+Sans",
+                            src: "https://fonts.googleapis.com/css2?family=Raleway",
                         },
                     ],
                 } as any);
@@ -221,15 +221,15 @@ const PaymentGatewayPaymentData = forwardRef<
                             placeholder:
                                 "MM/AA",
                             style: {
-                                color: "#0F1D36",
-                                fontFamily: "Nunito Sans",
-                                fontSize: "14px",
+                                color: "#121212",
+                                fontFamily: "Raleway",
+                                fontSize: "16px",
                                 fontStyle: "normal",
-                                fontWeight: "400",
+                                fontWeight: "500"
                             },
                             customFonts: [
                                 {
-                                    src: "https://fonts.googleapis.com/css2?family=Nunito+Sans",
+                                    src: "https://fonts.googleapis.com/css2?family=Raleway",
                                 },
                             ],
                         } as any);
@@ -279,15 +279,15 @@ const PaymentGatewayPaymentData = forwardRef<
                             placeholder:
                                 "123",
                             style: {
-                                color: "#0F1D36",
-                                fontFamily: "Nunito Sans",
-                                fontSize: "14px",
+                                color: "#121212",
+                                fontFamily: "Raleway",
+                                fontSize: "16px",
                                 fontStyle: "normal",
-                                fontWeight: "400",
+                                fontWeight: "500",
                             },
                             customFonts: [
                                 {
-                                    src: "https://fonts.googleapis.com/css2?family=Nunito+Sans",
+                                    src: "https://fonts.googleapis.com/css2?family=Raleway",
                                 },
                             ],
                         } as any);
@@ -646,7 +646,7 @@ const PaymentGatewayPaymentData = forwardRef<
 function VisaIcon() {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="11" viewBox="0 0 32 11" fill="none">
-            <g clip-path="url(#clip0_784_1781)">
+            <g clipPath="url(#clip0_784_1781)">
                 <path d="M16.5496 3.5025C16.5314 5.02872 17.8325 5.88035 18.8126 6.38675C19.8196 6.90627 20.1579 7.23945 20.1539 7.7041C20.1464 8.41513 19.3506 8.72896 18.606 8.74115C17.3069 8.76249 16.5515 8.36927 15.951 8.07187L15.483 10.3937C16.0855 10.688 17.2011 10.9447 18.358 10.956C21.0736 10.956 22.8503 9.53474 22.8599 7.33116C22.8705 4.53451 19.2114 4.37972 19.2364 3.12969C19.245 2.75066 19.5861 2.34617 20.3336 2.24333C20.7036 2.19138 21.725 2.15162 22.883 2.71699L23.3375 0.470609C22.7148 0.230199 21.9144 -6.67572e-06 20.9179 -6.67572e-06C18.3619 -6.67572e-06 16.5641 1.4406 16.5496 3.5025ZM27.7048 0.193487C27.2089 0.193487 26.791 0.500162 26.6045 0.970777L22.7254 10.791H25.439L25.979 9.20872H29.295L29.6082 10.791H32L29.9129 0.193487H27.7048ZM28.0844 3.05627L28.8675 7.03575H26.7227L28.0844 3.05627ZM13.2595 0.19362L11.1205 10.7909H13.7064L15.8444 0.193355L13.2595 0.19362ZM9.43412 0.19362L6.74263 7.40657L5.65387 1.27348C5.52612 0.588825 5.02163 0.193487 4.46138 0.193487H0.061625L0 0.501223C0.90325 0.709029 1.9295 1.0442 2.55125 1.40282C2.93175 1.6219 3.04025 1.8134 3.16525 2.33398L5.22738 10.791H7.96L12.1495 0.193487L9.43412 0.19362Z" fill="url(#paint0_linear_784_1781)"/>
             </g>
             <defs>
