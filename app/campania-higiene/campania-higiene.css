@@ -137,6 +137,12 @@ button {
     color: #500724
 }
 
+.higiene-expandable-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
 image {
     width: 576.4px;
     height: 205px;
@@ -227,6 +233,10 @@ image {
     color: #500724;
 }
 
+.higiene-expandable-button {
+    display: none;
+}
+
 .higiene-problematica-card-red {
     background-color: #FEF2F2;
 }
@@ -251,6 +261,13 @@ image {
 
 .higiene-problematica-card-blue .higiene-card-paragraph {
     color: #0D2C44;
+}
+
+.higiene-problematica-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
 }
 
 
@@ -462,18 +479,19 @@ image {
 }
 
 .higiene-banner-container {
-    overflow: hidden;
     position: relative;
     display: flex;
+    height: 502px;
+    width: 100%;
     max-width: 1280px;
     padding: 80px 56px;
-    flex: 1;
-    align-items: center;
-    justify-content: start;
-    gap: 120px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
     align-self: stretch;
     border-radius: 24px;
-    border-radius: 24px;
+    overflow-y: hidden;
     background: var(--linear1, linear-gradient(148deg, #F48DBB 46.3%, var(--Accent-Color-1-300, #F9A8D4) 102.22%));
 
 }
@@ -483,12 +501,13 @@ image {
     max-width: 645px;
     flex-direction: column;
     gap: 40px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .higiene-banner-content h1 {
     color: #FFF;
 
+    max-width: 466px;
     /* Display md/Bold */
     font-family: Montserrat;
     font-size: 36px;
@@ -498,32 +517,119 @@ image {
     letter-spacing: -0.72px;
 }
 
-.higiene-blur-3 {
+.higiene-banner-image {
+    width: 705.412px;
+    height: 648px;
     position: absolute;
-    width: 544px;
-    height: 544px;
-    position: absolute;
-    right: 33px;
-
-    top: -82px;
-    fill: #F9A8D4;
-    filter: blur(32px);
+    right: -21.412px;
+    bottom: -119px;
 }
 
-.higiene-banner-image-1 {
+.higiene-banner-chicas {
+    position: absolute;
+    top: 232px;
+    left: 20px;
     width: 650px;
     height: 300px;
     aspect-ratio: 13/6;
+    background: url(/campania-higiene-12.png) 0px 0px / 100% 100% no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-estrella {
     position: absolute;
-    right: 0;
-    bottom: -7.941px;
-    background: url(/campania-higiene-12.png) 50% / cover no-repeat;
+    top: 90px;
+    left: 345px;
+    width: 41px;
+    height: 40px;
+    aspect-ratio: 41/40;
+    background: url(/campania-higiene-19.png) 50% / cover no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-corazon-1 {
+    position: absolute;
+    top: 142px;
+    left: 510px;
+    width: 65.368px;
+    height: 63.866px;
+    background: url(/ilus.png);
+    /* transform: rotate(-53.888deg);
+    aspect-ratio: 65.37/63.87;
+    background: url(/campania-higiene-6.png)-1316.81px -415.513px / 2316.255% 1581.463% no-repeat; */
+    z-index: 2;
+}
+
+.higiene-banner-corazon-2 {
+    position: absolute;
+    top: 188.7px;
+    left: 90.7px;
+    width: 62.841px;
+    height: 70.449px;
+    background: url(/ilus2.png);
+    /* transform: rotate(-38.423deg);
+    aspect-ratio: 62.84/40.45;
+    background: url(/campania-higiene-6.png) -867.135px -403.38px / 1874.724% 1942.857% no-repeat; */
+    z-index: 2;
+}
+
+.higiene-banner-copa {
+    position: absolute;
+    top: 44px;
+    left: 366px;
+    width: 88.191px;
+    height: 156.149px;
+    transform: rotate(13.963deg);
+    aspect-ratio: 48/85;
+    background: url(/campania-higiene-16.png) -85px -15.659px / 312.571% 117.737% no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-toallita {
+    position: absolute;
+    top: 116px;
+    left: 0px;
+    width: 128px;
+    height: 130px;
+    aspect-ratio: 64/65;
+    background: url(/campania-higiene-14.png) -32.289px 0px / 152.197% 100% no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-toalla {
+    position: absolute;
+    top: 163px;
+    left: 563px;
+    width: 122.03px;
+    height: 162.706px;
+    transform: rotate(-7.574deg);
+    aspect-ratio: 3/4;
+    background: url(/campania-higiene-18.png) -14.615px -39.909px / 223.901% 145.103% no-repeat;
+    z-index: 2;
 }
 
 
-.higiene-banner-button-white {
-    background: var(--Color-White, #FFF);
-    color: var(--Accent-Color-1-950, #500724);
+.higiene-banner-blur-1 {
+    position: absolute;
+    top: 127px;
+    left: 91px;
+    fill: rgba(248, 198, 225, 0.60);
+    filter: blur(38.11764907836914px);
+    width: 473px;
+    height: 473px;
+    z-index: 1;
+}
+
+.higiene-banner-blur-2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 648px;
+    height: 648px;
+    fill: rgba(249, 168, 212, 0.20);
+    stroke-width: 1px;
+    stroke: rgba(255, 255, 255, 0.30);
+    z-index: 1;
 }
 
 
@@ -818,7 +924,15 @@ image {
     min-height: 50%
 }
 
-
+.higiene-banner-button {
+    display: flex;
+    padding: 10px 60px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    z-index: 3;
+}
 
 
 
@@ -931,6 +1045,10 @@ image {
         width: 100%;
     }
 
+    .higiene-banner-button {
+        align-self: center
+    }
+
     .higiene-problematica {
         flex-direction: column;
         gap: 80px;
@@ -1025,8 +1143,10 @@ image {
 
     .higiene-banner-container {
         flex-direction: column;
+        justify-content: start;
         gap: 60px;
         padding: 60px 24px 36px 24px;
+        height: 612px;
     }
 
     .higiene-banner-content {
@@ -1039,6 +1159,7 @@ image {
 
     .higiene-banner-content h1 {
         text-align: center;
+        max-width: none;
 
         /* Display sm/Bold */
         font-family: Montserrat;
@@ -1048,20 +1169,32 @@ image {
         line-height: 38px; /* 126.667% */
     }
 
-    .higiene-banner-image-1 {
-        visibility: hidden;
-        width: 346.917px;
-        height: 160.115px;
-        aspect-ratio: 13/6;
-        background: url(/campania-higiene-12.png) 0px 0px / 100% 100% no-repeat;
-    }
-
     .higiene-banner-content p {
         text-align: center;
         width: 308px;
     }
 
+    .higiene-banner-image {
+        position: absolute;
+        right: -165px;
+        bottom: -215px;
+        transform: scale(0.53);
+    }
+
     .higiene-problematica-content {
         max-width: max-content;
+    }
+
+
+    .higiene-expandable-button {
+        display: block;
+    }
+
+    .expandable {
+        display: none;
+    }
+
+    .expanded {
+        display: block;
     }
 }
