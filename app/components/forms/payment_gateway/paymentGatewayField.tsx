@@ -1,4 +1,4 @@
-export function PaymentGatewayField(props: { required: boolean, label: string, inputType: string, placeholder: string, value: any, setValue: any, errors: any}) {
+export function PaymentGatewayField(props: { disabled: boolean, required: boolean, label: string, inputType: string, placeholder: string, value: any, setValue: any, errors: any}) {
     return (<div className="pg-field">
             <label className="pg-label">
                 {props.label}
@@ -10,6 +10,7 @@ export function PaymentGatewayField(props: { required: boolean, label: string, i
             </label>
 
             <input
+                disabled={props.disabled}
                 className={`pg-input ${
                     props.errors
                         ? "pg-input-error"

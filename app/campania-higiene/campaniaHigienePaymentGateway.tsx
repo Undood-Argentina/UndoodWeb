@@ -124,6 +124,11 @@ export default function CampaniaHigienePaymentGateway({
         step: number
     ): void => {
 
+        document.getElementById("pg")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+
         setCurrentStep(
             step
         );
@@ -210,13 +215,19 @@ export default function CampaniaHigienePaymentGateway({
     // ========================================================
 
     return (
-            <div className="pg-card">
+            <div className="pg-card" id="pg">
 
                 {/* ==================================================
                     STEP 1 - DONACIÓN
                 ================================================== */}
 
-                <div className={`pg-step-pane ${currentStep === 1 ? "active" : "exit-left"}`}>
+                <div className={`pg-step-pane ${
+                    currentStep === 1
+                        ? "active"
+                        : currentStep > 1
+                        ? "exit-left"
+                        : "enter-right"
+                }`}>
                     <div className="pg-section">
                         <div className="pg-higiene-donation-amount-selection">
                             <PaymentGatewayAmountSelection
@@ -264,7 +275,13 @@ export default function CampaniaHigienePaymentGateway({
                     STEP 2 - DATOS Y CONFIRMACION
                 ================================================== */}
 
-                <div className={`pg-step-pane ${currentStep === 2 ? "active" : "enter-right"}`}>
+                <div className={`pg-step-pane ${
+                    currentStep === 2
+                        ? "active"
+                        : currentStep > 2
+                        ? "exit-left"
+                        : "enter-right"
+                }`}>
                     <div className="pg-section-2">
                         <div className="pg-section-2-header">
                             <button className="pg-back-button" onClick={handlePreviousFromStep2}>
@@ -281,6 +298,7 @@ export default function CampaniaHigienePaymentGateway({
                             onLastNameChanged={setLastName}
                             onEmailChanged={setEmail}
                             onPostalCodeChanged={setPostalCode}
+                            disabled={processingPayment}
                         />
                         <PaymentGatewayPaymentData 
                             ref={paymentDataRef} 
@@ -330,7 +348,13 @@ export default function CampaniaHigienePaymentGateway({
                         </div>
                     </div>
                 </div>
-                <div className={`pg-step-pane ${currentStep === 3 ? "active" : "enter-right"}`}>
+                <div className={`pg-step-pane ${
+                    currentStep === 3
+                        ? "active"
+                        : currentStep > 3
+                        ? "exit-left"
+                        : "enter-right"
+                }`}>
                     { accepted ? (
                     <div className="pg-section-3">
                         <div className="pg-female-container">

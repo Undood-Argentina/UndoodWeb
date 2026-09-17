@@ -818,7 +818,7 @@ image {
     padding-top: 120px;
     padding-bottom: 120px;
     padding-inline: 16px;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .higiene-donar .higiene-blur-2 {

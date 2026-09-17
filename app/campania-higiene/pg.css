@@ -5,6 +5,7 @@
     display: flex;
 }
 
+
 .pg-section {
     display: flex;
     width: 500px;
@@ -757,6 +758,8 @@
 }
 
 @media (max-width: 960px) {
+
+
     .pg-card {
         width: 100%;
         max-width: none;
@@ -769,6 +772,12 @@
     }
 
     .pg-section-2 {
+        width: 100%;
+        max-width: none;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .pg-section-3 {
         width: 100%;
         max-width: none;
         border-radius: 16px 16px 0 0;

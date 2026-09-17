@@ -20,6 +20,7 @@ const PaymentGatewayBillingData = forwardRef<
         onLastNameChanged: (lastName: string) => void,
         onEmailChanged: (email: string) => void,
         onPostalCodeChanged: (postalCode: string) => void,
+        disabled: boolean
     }
 >(function PaymentGatewayBillingData(props, ref) {
 
@@ -122,15 +123,15 @@ const PaymentGatewayBillingData = forwardRef<
 
                     <div className="pg-row">
 
-                        <PaymentGatewayField required={true} label="Nombre" inputType="text" placeholder="Tu nombre" value={firstName} setValue={setFirstName} errors={errors.firstName}/>
+                        <PaymentGatewayField disabled={props.disabled} required={true} label="Nombre" inputType="text" placeholder="Tu nombre" value={firstName} setValue={setFirstName} errors={errors.firstName}/>
 
-                        <PaymentGatewayField required={true} label="Apellido" inputType="text" placeholder="Tu apellido" value={lastName} setValue={setLastName} errors={errors.lastName}/>
+                        <PaymentGatewayField disabled={props.disabled} required={true} label="Apellido" inputType="text" placeholder="Tu apellido" value={lastName} setValue={setLastName} errors={errors.lastName}/>
 
                     </div>
 
-                    <PaymentGatewayField required={true} label="Correo electrónico" inputType="email" placeholder="tu@email.com" value={email} setValue={setEmail} errors={errors.email}/>
+                    <PaymentGatewayField disabled={props.disabled} required={true} label="Correo electrónico" inputType="email" placeholder="tu@email.com" value={email} setValue={setEmail} errors={errors.email}/>
 
-                    <PaymentGatewayField required={true} label="Código postal" inputType="text" placeholder="Tu código postal" value={postalCode} setValue={setPostalCode} errors={errors.postalCode}/>
+                    <PaymentGatewayField disabled={props.disabled} required={true} label="Código postal" inputType="text" placeholder="Tu código postal" value={postalCode} setValue={setPostalCode} errors={errors.postalCode}/>
 
                 </div>
 

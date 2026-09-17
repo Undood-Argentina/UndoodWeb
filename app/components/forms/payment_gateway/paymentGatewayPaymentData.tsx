@@ -173,7 +173,7 @@ const PaymentGatewayPaymentData = forwardRef<
                     },
                     customFonts: [
                         {
-                            src: "https://fonts.googleapis.com/css2?family=Raleway",
+                            src: "https://fonts.googleapis.com/css2?family=Raleway:wght@500",
                         },
                     ],
                 } as any);
@@ -229,7 +229,7 @@ const PaymentGatewayPaymentData = forwardRef<
                             },
                             customFonts: [
                                 {
-                                    src: "https://fonts.googleapis.com/css2?family=Raleway",
+                                    src: "https://fonts.googleapis.com/css2?family=Raleway:wght@500",
                                 },
                             ],
                         } as any);
@@ -287,7 +287,7 @@ const PaymentGatewayPaymentData = forwardRef<
                             },
                             customFonts: [
                                 {
-                                    src: "https://fonts.googleapis.com/css2?family=Raleway",
+                                    src: "https://fonts.googleapis.com/css2?family=Raleway:wght@500",
                                 },
                             ],
                         } as any);
@@ -505,6 +505,7 @@ const PaymentGatewayPaymentData = forwardRef<
                     ======================================= */}
 
                     <PaymentGatewayField
+                        disabled={false}
                         required={true}
                         label="DNI"
                         value={
@@ -622,6 +623,7 @@ const PaymentGatewayPaymentData = forwardRef<
                     </div>
 
                     <PaymentGatewayField
+                        disabled={false}
                         required={true}
                         label="Titular de la tarjeta"
                         value={
