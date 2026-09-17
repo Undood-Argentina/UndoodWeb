@@ -1,17 +1,12 @@
 import React from "react";
 
-
 type HandlePaymentSubmitParams = {
-    event: React.FormEvent<HTMLFormElement>;
+    mp: MercadoPagoInstance;
 
-    processingPayment: boolean;
     setProcessingPayment: React.Dispatch<
         React.SetStateAction<boolean>
     >;
 
-    paymentDataRef: React.RefObject<any>;
-
-    billingDataRef: React.RefObject<any>;
 
 
     setErrors: React.Dispatch<
@@ -33,12 +28,8 @@ type HandlePaymentSubmitParams = {
 };
 
 export const handlePaymentSubmit = async ({
-    event,
-    processingPayment,
     setProcessingPayment,
-    paymentDataRef,
-    billingDataRef,
-    setErrors,
+    mp,
     firstName,
     lastName,
     email,
@@ -49,44 +40,12 @@ export const handlePaymentSubmit = async ({
     paymentMethodId,
     reports,
     onSubmit,
-}: HandlePaymentSubmitParams): Promise<void> => {
+}: HandlePaymentSubmitParams): Promise<boolean> => {
 
-    event.preventDefault();
-
-    if (processingPayment) {
-        return;
-    }
-
-    const valid =
-        paymentDataRef.current?.validate()
-        && billingDataRef.current?.validate();
-
-    if (!valid) {
-        return;
-    }
-
-    const mp =
-        paymentDataRef.current?.getMercadoPagoInstance();
-
-    if (!mp) {
-        setErrors((prev) => ({
-            ...prev,
-            payment:
-                "El formulario de pago no está disponible.",
-        }));
-
-        return;
-    }
 
     try {
 
         setProcessingPayment(true);
-
-        setErrors((prev) => ({
-            ...prev,
-            payment: "",
-        }));
-
 
         // ====================================================
         // CREATE MERCADO PAGO TOKEN
@@ -105,15 +64,9 @@ export const handlePaymentSubmit = async ({
 
         if (!cardToken?.id) {
 
-            setErrors((prev) => ({
-                ...prev,
-                payment:
-                    "No se pudo validar la tarjeta.",
-            }));
-
             setProcessingPayment(false);
 
-            return;
+            return false;
         }
 
         // ====================================================
@@ -201,15 +154,9 @@ export const handlePaymentSubmit = async ({
 
             console.error(errorText);
 
-            setErrors((prev) => ({
-                ...prev,
-                payment:
-                    "No se pudo procesar el pago.",
-            }));
-
             setProcessingPayment(false);
 
-            return;
+            return false;
         }
 
         // ====================================================
@@ -283,6 +230,8 @@ export const handlePaymentSubmit = async ({
 
         setProcessingPayment(false);
 
+        return true;
+
     } catch (error) {
 
         console.error(
@@ -290,12 +239,8 @@ export const handlePaymentSubmit = async ({
             error
         );
 
-        setErrors((prev) => ({
-            ...prev,
-            payment:
-                "No se pudo procesar el pago.",
-        }));
-
         setProcessingPayment(false);
+
+        return false;
     }
 };

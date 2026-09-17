@@ -109,10 +109,14 @@ const PaymentGatewayBillingData = forwardRef<
 
 
     return (<div className="pg-donation-amount-info-container">
-        
-                <h2 className="pg-title">
-                    Datos de facturación
-                </h2>
+                <div className="pg-section-header">
+                    <h2 className="pg-title">
+                        Datos personales
+                    </h2>
+                    <p className="pg-section-description">
+                        Tus datos se usan para procesar el pago
+                    </p>
+                </div>
 
                 <div className="pg-form-column">
 

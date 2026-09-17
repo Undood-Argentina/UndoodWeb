@@ -10,9 +10,6 @@ import { Icon } from '@iconify/react';
 import CampaniaHigienePaymentGateway from './campaniaHigienePaymentGateway';
 
 export default function HigienePage() {
-    const onDonationSubmit = (data: DonationData) => {
-        alert(`Tu donación de $${data.donationAmount.toLocaleString('es-AR')} fue recibida con éxito.`)
-    }
 
     return(<main>   
         <header className="higiene-header">
@@ -103,7 +100,7 @@ export default function HigienePage() {
                         </div>
                     </div>
                 </div>
-                <CampaniaHigienePaymentGateway onSubmit={onDonationSubmit}/>
+                <CampaniaHigienePaymentGateway/>
             </div>
             <div className="higiene-blur-2"></div>
             <div className="higiene-blur-1"></div>

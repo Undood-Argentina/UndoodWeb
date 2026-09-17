@@ -86,9 +86,12 @@ const PaymentGatewayAmountSelection = forwardRef<
 
 
     return (<div className="pg-donation-amount-info-container">
-                <h2 className="pg-title">
-                    ¿Cuánto querés donar?
-                </h2>
+                <div className="pg-donation-amount-header">
+                    <h2 className="pg-title">
+                        ¿Cuánto querés donar?
+                    </h2>
+                    <p className="pg-step-indicator">Paso 1/2</p>
+                </div>
 
                 <div className="pg-amount-selection-container">
                     <div className="pg-amount-grid">
