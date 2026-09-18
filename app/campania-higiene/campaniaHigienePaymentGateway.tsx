@@ -208,7 +208,7 @@ export default function CampaniaHigienePaymentGateway({
         });
 
         if (success) {
-            setFirstName("")
+            // El primer nombre no se borra para que se pueda mostrar en el mensaje de confirmación
             setLastName("")
             setCardholderName("")
             setEmail("")
@@ -313,6 +313,7 @@ export default function CampaniaHigienePaymentGateway({
                             disabled={processingPayment}
                         />
                         <PaymentGatewayPaymentData 
+                            disabled={processingPayment}
                             ref={paymentDataRef} 
                             onReady={setReady}
                             onPaymentMethodIdChanged={setPaymentMethodId}

@@ -15,7 +15,7 @@ export function PaymentGatewayField(props: { disabled: boolean, required: boolea
                     props.errors
                         ? "pg-input-error"
                         : ""
-                }`}
+                } ${ props.disabled ? "disabled" : ""}`}
                 type={props.inputType}
                 value={
                     props.value
@@ -28,6 +28,7 @@ export function PaymentGatewayField(props: { disabled: boolean, required: boolea
                     )
                 }
                 placeholder={props.placeholder}
+
             />
 
             {props.errors && (

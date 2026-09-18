@@ -28,6 +28,7 @@ const PaymentGatewayPaymentData = forwardRef<
         onPaymentMethodIdChanged: (paymentMethodId: string) => void;
         onDniChanged: (dni: string) => void;
         onCardholderNameChanged: (cardholderName: string) => void;
+        disabled: boolean;
     }
 >(function PaymentGatewayPaymentData(props, ref) {
 
@@ -505,7 +506,7 @@ const PaymentGatewayPaymentData = forwardRef<
                     ======================================= */}
 
                     <PaymentGatewayField
-                        disabled={false}
+                        disabled={props.disabled}
                         required={true}
                         label="DNI"
                         value={
@@ -538,10 +539,8 @@ const PaymentGatewayPaymentData = forwardRef<
                         <div
                             id="pg-card-number"
                             className={`pg-mp-field ${
-                                errors.cardNumber
-                                    ? "pg-mp-field-error"
-                                    : ""
-                            }`}
+                                errors.cardNumber ? "pg-mp-field-error" : ""
+                            } ${props.disabled ? "disabled" : ""}`}
                         />
 
                         {errors.cardNumber && (
@@ -576,7 +575,7 @@ const PaymentGatewayPaymentData = forwardRef<
                                     errors.expirationDate
                                         ? "pg-mp-field-error"
                                         : ""
-                                }`}
+                                } ${props.disabled ? "disabled" : ""}`}
                             />
                             {errors.expirationDate && (
 
@@ -605,7 +604,7 @@ const PaymentGatewayPaymentData = forwardRef<
                                     errors.securityCode
                                         ? "pg-mp-field-error"
                                         : ""
-                                }`}
+                                } ${props.disabled ? "disabled" : ""}`}
                             />
                             {errors.securityCode && (
 
@@ -623,7 +622,7 @@ const PaymentGatewayPaymentData = forwardRef<
                     </div>
 
                     <PaymentGatewayField
-                        disabled={false}
+                        disabled={props.disabled}
                         required={true}
                         label="Titular de la tarjeta"
                         value={
