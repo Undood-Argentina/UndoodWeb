@@ -131,6 +131,7 @@ const PaymentGatewayAmountSelection = forwardRef<
 
                 {isCustomAmount && (
                     <PaymentGatewayField
+                        disabled={false}
                         required={false}
                         label="Monto"
                         value={customAmount}

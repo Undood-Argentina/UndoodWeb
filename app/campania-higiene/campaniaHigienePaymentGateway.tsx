@@ -207,6 +207,18 @@ export default function CampaniaHigienePaymentGateway({
             onSubmit,
         });
 
+        if (success) {
+            setFirstName("")
+            setLastName("")
+            setCardholderName("")
+            setEmail("")
+            setDni("")
+            setPostalCode("")
+            paymentDataRef.current?.getCardNumberField()?.unmount?.()
+            paymentDataRef.current?.getExpirationDateField()?.unmount?.()
+            paymentDataRef.current?.getSecurityCodeField()?.unmount?.()
+        }
+
         setAccepted(success)
         goToStep(3)
     };
