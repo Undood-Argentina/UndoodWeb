@@ -3,15 +3,6 @@ import React from "react";
 type HandlePaymentSubmitParams = {
     mp: MercadoPagoInstance;
 
-    setProcessingPayment: React.Dispatch<
-        React.SetStateAction<boolean>
-    >;
-
-
-
-    setErrors: React.Dispatch<
-        React.SetStateAction<Record<string, string>>
-    >;
 
     firstName: string;
     lastName: string;
@@ -28,7 +19,6 @@ type HandlePaymentSubmitParams = {
 };
 
 export const handlePaymentSubmit = async ({
-    setProcessingPayment,
     mp,
     firstName,
     lastName,
@@ -40,12 +30,11 @@ export const handlePaymentSubmit = async ({
     paymentMethodId,
     reports,
     onSubmit,
-}: HandlePaymentSubmitParams): Promise<boolean> => {
+}: HandlePaymentSubmitParams): Promise<String> => {
 
 
     try {
 
-        setProcessingPayment(true);
 
         // ====================================================
         // CREATE MERCADO PAGO TOKEN
@@ -64,9 +53,8 @@ export const handlePaymentSubmit = async ({
 
         if (!cardToken?.id) {
 
-            setProcessingPayment(false);
 
-            return false;
+            return "rejected";
         }
 
         // ====================================================
@@ -141,7 +129,13 @@ export const handlePaymentSubmit = async ({
                 }
             );
 
+        console.log("respuesta: ")
         console.log(response);
+
+        const data =
+            await response.json();
+
+        console.log(data);
 
         // ====================================================
         // ERROR
@@ -154,9 +148,7 @@ export const handlePaymentSubmit = async ({
 
             console.error(errorText);
 
-            setProcessingPayment(false);
-
-            return false;
+            return "rejected";
         }
 
         // ====================================================
@@ -192,10 +184,6 @@ export const handlePaymentSubmit = async ({
         // SUCCESS
         // ====================================================
 
-        const data =
-            await response.json();
-
-        console.log(data);
 
         const paymentData:
             DonationData = {
@@ -228,9 +216,11 @@ export const handlePaymentSubmit = async ({
 
         onSubmit(paymentData);
 
-        setProcessingPayment(false);
 
-        return true;
+        if (data.status == "processing") {
+            return "processing"
+        }
+        return "accepted";
 
     } catch (error) {
 
@@ -239,8 +229,6 @@ export const handlePaymentSubmit = async ({
             error
         );
 
-        setProcessingPayment(false);
-
-        return false;
+        return "rejected";
     }
 };

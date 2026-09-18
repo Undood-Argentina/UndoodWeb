@@ -105,6 +105,7 @@ export default function CampaniaHigienePaymentGateway({
     // DONATION HELPERS
     // ========================================================
 
+    const [pendingPayment, setPendingPayment] = useState<boolean>(false)
 
     const [selectedAmount, setSelectedAmount] = useState<number>(0)
 
@@ -173,12 +174,15 @@ export default function CampaniaHigienePaymentGateway({
         if (processingPayment) {
             return;
         }
+        
+        setProcessingPayment(true)
 
         const valid =
             billingDataRef.current?.validate() &&
             paymentDataRef.current?.validate()
 
         if (!valid) {
+            setProcessingPayment(false)
             return;
         }
 
@@ -188,13 +192,13 @@ export default function CampaniaHigienePaymentGateway({
         if (!mp) {
             setAccepted(false)
             goToStep(3)
+            setProcessingPayment(false)
             return;
         }
+
         
-        const success = await handlePaymentSubmit({
-            setProcessingPayment,
+        const status = await handlePaymentSubmit({
             mp,
-            setErrors,
             firstName,
             lastName,
             email,
@@ -207,7 +211,22 @@ export default function CampaniaHigienePaymentGateway({
             onSubmit,
         });
 
-        if (success) {
+        if (status == "accepted") {
+            await fetch(
+                "/api/donation_email",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                    },
+                    body:
+                        JSON.stringify({ email: email, accepted: true}),
+                }
+            );
+        }
+
+        if (status == "accepted" || status == "processing") {
             // El primer nombre no se borra para que se pueda mostrar en el mensaje de confirmación
             setLastName("")
             setCardholderName("")
@@ -217,10 +236,19 @@ export default function CampaniaHigienePaymentGateway({
             paymentDataRef.current?.getCardNumberField()?.unmount?.()
             paymentDataRef.current?.getExpirationDateField()?.unmount?.()
             paymentDataRef.current?.getSecurityCodeField()?.unmount?.()
+            setAccepted(true)
         }
 
-        setAccepted(success)
+        if (status == "processing") {
+            setPendingPayment(true)
+        }
+
+        if (status == "rejected") {
+            setAccepted(false)
+        }
+
         goToStep(3)
+        setProcessingPayment(false)
     };
     // ========================================================
     // RENDER
@@ -390,7 +418,7 @@ export default function CampaniaHigienePaymentGateway({
                                     <GreenCheckIcon />
                                 </div>
                                 <div className="pg-confirmed-alert-donation">
-                                    <p className="pg-confirmed-alert-donation-confirmation-text">Donación confirmada</p>
+                                    <p className="pg-confirmed-alert-donation-confirmation-text">{ pendingPayment ? "Pago en proceso" : "Donación confirmada"}</p>
                                     <p className="pg-confirmed-alert-donation-amount-text">                                    $
                                     {Number(
                                         selectedAmount ||
@@ -401,15 +429,16 @@ export default function CampaniaHigienePaymentGateway({
                                 </div>
                             </div>
                             <div className="pg-confirmed-alert-gratitude">
-                                <h1>¡Gracias, {firstName}!</h1>
-                                <p>Tu donación hace la diferencia. Gracias a tu aporte más adolescentes podrán acceder a salud menstrual digna.</p>
+                                <h1>{pendingPayment ? "Tu pago está siendo procesado" : `¡Gracias, ${firstName}!`}</h1>
+                                <p>{pendingPayment ? "Mercado Pago está procesando tu pago. Te avisaremos cuando tengamos el resultado." : "Tu donación hace la diferencia. Gracias a tu aporte más adolescentes podrán acceder a salud menstrual digna."}</p>
                             </div>
                         </div>
-                        <div className="pg-confirmed-alert-footer">
-                            
-                            <Icon icon="bxs:home-heart" className="pg-home-heart" />
-                            <p>Tu aporte ya está en manos de Undood</p>
-                        </div>
+                        {!pendingPayment && (
+                            <div className="pg-confirmed-alert-footer">
+                                <Icon icon="bxs:home-heart" className="pg-home-heart" />
+                                <p>Tu aporte ya está en manos de Undood</p>
+                            </div>
+                        )}
                     </div>)
                     :
                     (<div className="pg-section-3">
