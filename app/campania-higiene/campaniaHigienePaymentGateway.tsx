@@ -211,21 +211,6 @@ export default function CampaniaHigienePaymentGateway({
             onSubmit,
         });
 
-        if (status == "accepted") {
-            await fetch(
-                "/api/donation_email",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type":
-                            "application/json",
-                    },
-                    body:
-                        JSON.stringify({ email: email, accepted: true}),
-                }
-            );
-        }
-
         if (status == "accepted" || status == "processing") {
             // El primer nombre no se borra para que se pueda mostrar en el mensaje de confirmación
             setLastName("")

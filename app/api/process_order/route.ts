@@ -20,6 +20,21 @@ export async function POST(req: Request) {
     });
 
     const data = await response.json();
+
+    if (data.status === "processed") {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/donation_email`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                    "application/json",
+            },
+            body:
+                JSON.stringify({ email: body.payer.email, accepted: true }),
+        }
+      );
+    }
   
     return NextResponse.json(data, {
       status: response.status,
