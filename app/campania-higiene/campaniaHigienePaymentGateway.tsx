@@ -296,7 +296,10 @@ export default function CampaniaHigienePaymentGateway({
                 }`}>
                     <div className="pg-section-2">
                         <div className="pg-section-2-header">
-                            <button className="pg-back-button" onClick={handlePreviousFromStep2}>
+                            <button 
+                                className={`pg-back-button ${processingPayment ? "disabled" : ""}`}
+                                onClick={processingPayment ? undefined : handlePreviousFromStep2}
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M18 12C18 12.1989 17.921 12.3897 17.7803 12.5304C17.6397 12.671 17.4489 12.75 17.25 12.75L8.5605 12.75L11.781 15.969C11.9218 16.1099 12.0009 16.3009 12.0009 16.5C12.0009 16.6992 11.9218 16.8902 11.781 17.031C11.6402 17.1719 11.4492 17.251 11.25 17.251C11.0508 17.251 10.8598 17.1719 10.719 17.031L6.219 12.531C6.14916 12.4614 6.09374 12.3786 6.05593 12.2875C6.01812 12.1964 5.99866 12.0987 5.99866 12C5.99866 11.9014 6.01812 11.8037 6.05593 11.7126C6.09374 11.6215 6.14916 11.5387 6.219 11.469L10.719 6.96903C10.8598 6.8282 11.0508 6.74908 11.25 6.74908C11.4492 6.74908 11.6402 6.8282 11.781 6.96903C11.9218 7.10986 12.0009 7.30087 12.0009 7.50003C12.0009 7.69919 11.9218 7.8902 11.781 8.03103L8.5605 11.25L17.25 11.25C17.4489 11.25 17.6397 11.329 17.7803 11.4697C17.921 11.6104 18 11.8011 18 12Z" fill="black"/>
                                 </svg>
