@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+/*import { redirect } from 'next/navigation';
 import {ChristmasForm} from "@/app/components/forms/christmasForm";
 import Image from "next/image";
 import './christmas.css'
@@ -33,7 +33,7 @@ export default function ChristmasPage() {
                     Por favor completá la información a continuación y nos vamos a contactar con vos para enviarte la carta del niño/a
                 </p><br />
                 <h3><span style={{fontFamily: "Arial, sans-serif"}}>*</span> Indica que la pregunta es obligatoria</h3>
-                {/* Todos lo tienen, sacar si no se agregan campos */}
+                {/* Todos lo tienen, sacar si no se agregan campos */}/*
                 <ChristmasForm />
             </article>
             <article className="campaign-locations-info" id="retPoints">
@@ -60,4 +60,4 @@ export default function ChristmasPage() {
         </main>
     )
 
-}
+}*/
