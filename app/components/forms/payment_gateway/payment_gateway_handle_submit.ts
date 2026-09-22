@@ -3,7 +3,6 @@ import React from "react";
 type HandlePaymentSubmitParams = {
     mp: MercadoPagoInstance;
 
-
     firstName: string;
     lastName: string;
     email: string;
@@ -31,11 +30,7 @@ export const handlePaymentSubmit = async ({
     reports,
     onSubmit,
 }: HandlePaymentSubmitParams): Promise<String> => {
-
-
     try {
-
-
         // ====================================================
         // CREATE MERCADO PAGO TOKEN
         // ====================================================
@@ -52,8 +47,6 @@ export const handlePaymentSubmit = async ({
             });
 
         if (!cardToken?.id) {
-
-
             return "rejected";
         }
 
@@ -61,12 +54,21 @@ export const handlePaymentSubmit = async ({
         // AMOUNT
         // ====================================================
 
-        const amount =
-            String(selectedAmount);
+        const amount = Number(selectedAmount);
 
         // ====================================================
         // BODY
         // ====================================================
+
+        const paymentMethod: Record<string, string | number> = {
+            type: "credit_card",
+            token: cardToken.id,
+            installments: 1,
+        };
+
+        if (paymentMethodId?.trim()) {
+            paymentMethod.id = paymentMethodId.trim();
+        }
 
         const body = {
             type: "online",
@@ -81,7 +83,13 @@ export const handlePaymentSubmit = async ({
                 crypto.randomUUID(),
 
             payer: {
-                email,
+                email: email.trim(),
+                first_name: firstName.trim(),
+                last_name: lastName.trim(),
+                identification: {
+                    type: "DNI",
+                    number: dni.trim(),
+                },
             },
 
             transactions: {
@@ -89,19 +97,7 @@ export const handlePaymentSubmit = async ({
                     {
                         amount,
 
-                        payment_method: {
-                            id:
-                                paymentMethodId,
-
-                            type:
-                                "credit_card",
-
-                            token:
-                                cardToken.id,
-
-                            installments:
-                                1,
-                        },
+                        payment_method: paymentMethod,
                     },
                 ],
             },
@@ -132,24 +128,21 @@ export const handlePaymentSubmit = async ({
         console.log("respuesta: ")
         console.log(response);
 
-        const data =
-            await response.json();
-
-        console.log(data);
+        const data = await response
+            .json()
+            .catch(() => null);
 
         // ====================================================
         // ERROR
         // ====================================================
 
         if (!response.ok) {
-
-            const errorText =
-                await response.text();
-
-            console.error(errorText);
+            console.error("/api/process_order respondió error:", data);
 
             return "rejected";
         }
+
+        console.log(data);
 
         // ====================================================
         // SAVE DONATION TRACKER DATA
