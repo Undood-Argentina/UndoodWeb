@@ -54,7 +54,7 @@ export const handlePaymentSubmit = async ({
         // AMOUNT
         // ====================================================
 
-        const amount = Number(selectedAmount);
+        const amount = Number(selectedAmount).toFixed(2);
 
         // ====================================================
         // BODY
@@ -83,14 +83,37 @@ export const handlePaymentSubmit = async ({
                 .trim()
                 .toLowerCase();
 
-        if (allowedPaymentMethodIds.has(normalizedPaymentMethodId)) {
-            paymentMethod.id = normalizedPaymentMethodId;
-        } else if (normalizedPaymentMethodId) {
-            console.warn(
-                "payment_method.id inválido, se omite y Mercado Pago lo inferirá desde el token:",
-                normalizedPaymentMethodId
+        let resolvedPaymentMethodId = normalizedPaymentMethodId;
+
+        if (!allowedPaymentMethodIds.has(resolvedPaymentMethodId)) {
+            if (resolvedPaymentMethodId.includes("visa")) {
+                resolvedPaymentMethodId = "visa";
+            } else if (resolvedPaymentMethodId.includes("master")) {
+                resolvedPaymentMethodId = "master";
+            } else if (resolvedPaymentMethodId.includes("amex")) {
+                resolvedPaymentMethodId = "amex";
+            } else if (resolvedPaymentMethodId.includes("diners")) {
+                resolvedPaymentMethodId = "diners";
+            } else if (resolvedPaymentMethodId.includes("naranja")) {
+                resolvedPaymentMethodId = "naranja";
+            } else if (resolvedPaymentMethodId.includes("cabal")) {
+                resolvedPaymentMethodId = "cabal";
+            } else if (resolvedPaymentMethodId.includes("argencard")) {
+                resolvedPaymentMethodId = "argencard";
+            } else if (resolvedPaymentMethodId.includes("cencosud")) {
+                resolvedPaymentMethodId = "cencosud";
+            } else if (resolvedPaymentMethodId.includes("cmr")) {
+                resolvedPaymentMethodId = "cmr";
+            }
+        }
+
+        if (!allowedPaymentMethodIds.has(resolvedPaymentMethodId)) {
+            throw new Error(
+                `payment_method.id inválido para Orders API: ${normalizedPaymentMethodId}`
             );
         }
+
+        paymentMethod.id = resolvedPaymentMethodId;
 
         const body = {
             type: "online",
