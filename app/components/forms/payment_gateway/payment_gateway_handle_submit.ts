@@ -66,8 +66,30 @@ export const handlePaymentSubmit = async ({
             installments: 1,
         };
 
-        if (paymentMethodId?.trim()) {
-            paymentMethod.id = paymentMethodId.trim();
+        const allowedPaymentMethodIds = new Set([
+            "amex",
+            "argencard",
+            "cabal",
+            "cencosud",
+            "cmr",
+            "diners",
+            "master",
+            "naranja",
+            "visa",
+        ]);
+
+        const normalizedPaymentMethodId =
+            String(paymentMethodId ?? "")
+                .trim()
+                .toLowerCase();
+
+        if (allowedPaymentMethodIds.has(normalizedPaymentMethodId)) {
+            paymentMethod.id = normalizedPaymentMethodId;
+        } else if (normalizedPaymentMethodId) {
+            console.warn(
+                "payment_method.id inválido, se omite y Mercado Pago lo inferirá desde el token:",
+                normalizedPaymentMethodId
+            );
         }
 
         const body = {

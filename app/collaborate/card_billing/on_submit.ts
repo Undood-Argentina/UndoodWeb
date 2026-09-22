@@ -13,9 +13,9 @@ export const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     return;
   }
 
-  const amount = (
+  const amount = Number((
     document.getElementById("transactionAmount") as HTMLInputElement
-  ).value;
+  ).value);
   
   const email = (
     document.getElementById("form-checkout__email") as HTMLInputElement
@@ -38,28 +38,51 @@ export const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      type: "online",
-      processing_mode: "automatic",
-      total_amount: amount,
-      external_reference: crypto.randomUUID(),
-      payer: {
-        email,
-      },
-      transactions: {
-        payments: [
-          {
-            amount,
-            payment_method: {
-              id: paymentMethodId,
-              type: "credit_card",
-              token,
-              installments,
+    body: JSON.stringify((() => {
+      const paymentMethod: Record<string, string | number> = {
+        type: "credit_card",
+        token,
+        installments,
+      };
+
+      const allowedPaymentMethodIds = new Set([
+        "amex",
+        "argencard",
+        "cabal",
+        "cencosud",
+        "cmr",
+        "diners",
+        "master",
+        "naranja",
+        "visa",
+      ]);
+
+      const normalizedPaymentMethodId = String(paymentMethodId ?? "")
+        .trim()
+        .toLowerCase();
+
+      if (allowedPaymentMethodIds.has(normalizedPaymentMethodId)) {
+        paymentMethod.id = normalizedPaymentMethodId;
+      }
+
+      return {
+        type: "online",
+        processing_mode: "automatic",
+        total_amount: amount,
+        external_reference: crypto.randomUUID(),
+        payer: {
+          email,
+        },
+        transactions: {
+          payments: [
+            {
+              amount,
+              payment_method: paymentMethod,
             },
-          },
-        ],
-      },
-    }),
+          ],
+        },
+      };
+    })()),
   });
 
   if (!response.ok) {
