@@ -1,7 +1,7 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import pg from 'pg';
 
-const dbName = process.env.DB_NAME ?? 'undood_test';
+const dbName = process.env.DB_NAME ?? 'undood_temp';
 const dbUser = process.env.DB_USER ?? 'postgres';
 const dbPass = process.env.DB_PASS ?? 'postgres';
 const dbHost = process.env.DB_HOST ?? 'localhost';
@@ -66,9 +66,10 @@ export const Donacion = sequelize.define(
   'Donacion',
   {
     id_donacion: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(64),
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: false,
+      allowNull: false,
       field: 'id_donacion',
     },
     dni_donante: {
@@ -83,6 +84,11 @@ export const Donacion = sequelize.define(
     monto: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
+    },
+    pendiente: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
     fecha: {
       type: DataTypes.DATE,

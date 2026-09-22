@@ -156,13 +156,31 @@ export const handlePaymentSubmit = async ({
         // ====================================================
 
         try {
+            const orderId = String(data?.id ?? "").trim();
+
+            if (!orderId) {
+                throw new Error("OrderId inválido de Mercado Pago");
+            }
+
+            const pendingStatuses = new Set([
+                "processing",
+                "in_process",
+                "pending",
+            ]);
+
+            const pendiente = pendingStatuses.has(
+                String(data?.status ?? "").trim().toLowerCase()
+            );
+
             const donorPayload = {
+                orderId,
                 dni: Number(dni.trim()),
                 nombre: firstName.trim(),
                 apellido: lastName.trim(),
                 cp: Number(postalCode.trim()),
                 email: email.trim(),
                 monto: Number(selectedAmount),
+                pendiente,
                 fecha: new Date().toISOString(),
             };
 

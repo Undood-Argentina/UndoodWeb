@@ -3,6 +3,7 @@ import {
     WebhookSignatureValidator,
     InvalidWebhookSignatureError,
 } from "mercadopago";
+import { conectDB, Donacion } from "../../config";
 
 
 
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
 
         const body = await req.json();
 
-        const dataId = url.searchParams.get("data.id")?.toLowerCase() ?? "";
+        const dataId = url.searchParams.get("data.id") ?? "";
 
         const secret = process.env.MERCADOPAGO_WEBHOOK_SECRET;
 
@@ -73,7 +74,7 @@ export async function POST(req: Request) {
 
         // fetchear orderId y obtener mail
         const orderIdResponse = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/donationTracker/${orderId}`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/donationTracker/getMail/${orderId}`,
             {
                 method: "GET",
             }
@@ -88,9 +89,21 @@ export async function POST(req: Request) {
 
         const email = data.email
 
+        const orderStatus = String(order.status ?? "").toLowerCase();
+        const orderStatusDetail = String(order.status_detail ?? "").toLowerCase();
+        const isFinalState = ["processed", "failed", "cancelled", "expired"].includes(orderStatus);
+
+        if (isFinalState) {
+            await conectDB();
+            await Donacion.update(
+                { pendiente: false },
+                { where: { id_donacion: orderId } }
+            );
+        }
+
         if (
-            order.status === "processed" &&
-            order.status_detail === "accredited"
+            orderStatus === "processed" &&
+            orderStatusDetail === "accredited"
         ) {
             const response = await fetch(
                 `${process.env.NEXT_PUBLIC_BASE_URL}/api/donation_email`,
@@ -112,7 +125,7 @@ export async function POST(req: Request) {
             }
         }
 
-        if (order.status === "failed") {
+        if (orderStatus === "failed") {
             const response = await fetch(
                 `${process.env.NEXT_PUBLIC_BASE_URL}/api/donation_email`,
                 {
