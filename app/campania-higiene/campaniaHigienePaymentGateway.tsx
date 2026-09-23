@@ -164,6 +164,9 @@ export default function CampaniaHigienePaymentGateway({
     const [paymentMethodId, setPaymentMethodId] =
         useState<string>("");
 
+    const [paymentMethodType, setPaymentMethodType] =
+        useState<string>("");
+
     const [processingPayment, setProcessingPayment] = useState<boolean>(false);
 
     const handleSubmit = async (
@@ -207,6 +210,7 @@ export default function CampaniaHigienePaymentGateway({
             postalCode,
             selectedAmount,
             paymentMethodId,
+            paymentMethodType,
             reports,
             onSubmit,
         });
@@ -333,6 +337,7 @@ export default function CampaniaHigienePaymentGateway({
                             ref={paymentDataRef} 
                             onReady={setReady}
                             onPaymentMethodIdChanged={setPaymentMethodId}
+                            onPaymentMethodTypeChanged={setPaymentMethodType}
                             onDniChanged={setDni}
                             onCardholderNameChanged={setCardholderName}
                         />

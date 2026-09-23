@@ -26,6 +26,7 @@ const PaymentGatewayPaymentData = forwardRef<
     {
         onReady: (ready: boolean) => void;
         onPaymentMethodIdChanged: (paymentMethodId: string) => void;
+        onPaymentMethodTypeChanged: (paymentMethodType: string) => void;
         onDniChanged: (dni: string) => void;
         onCardholderNameChanged: (cardholderName: string) => void;
         disabled: boolean;
@@ -108,10 +109,17 @@ const PaymentGatewayPaymentData = forwardRef<
 
     const [paymentMethodId, setPaymentMethodId] =
         useState<string>("");
+
+    const [paymentMethodType, setPaymentMethodType] =
+        useState<string>("");
     
     useEffect(() => {
         props.onPaymentMethodIdChanged(paymentMethodId)
     }, [paymentMethodId])
+
+    useEffect(() => {
+        props.onPaymentMethodTypeChanged(paymentMethodType)
+    }, [paymentMethodType])
 
     const [mercadoPagoReady, setMercadoPagoReady] =
         useState<boolean>(false);
@@ -349,6 +357,10 @@ const PaymentGatewayPaymentData = forwardRef<
                                 ""
                             );
 
+                            setPaymentMethodType(
+                                ""
+                            )
+
                             return;
                         }
 
@@ -387,6 +399,23 @@ const PaymentGatewayPaymentData = forwardRef<
                             setPaymentMethodId(
                                 paymentMethod.id
                             );
+
+                            if (
+                                !paymentMethod?.payment_type_id
+                            ) {
+
+                                setPaymentMethodType(
+                                    ""
+                                );
+
+                                return;
+                            }
+
+                            setPaymentMethodType(
+                                paymentMethod.payment_type_id
+                            );
+
+
 
                         } catch (
                             error

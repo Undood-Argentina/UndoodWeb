@@ -12,6 +12,7 @@ type HandlePaymentSubmitParams = {
 
     selectedAmount: number;
     paymentMethodId: string;
+    paymentMethodType: string;
     reports: any;
 
     onSubmit: (data: DonationData) => void;
@@ -27,6 +28,7 @@ export const handlePaymentSubmit = async ({
     postalCode,
     selectedAmount,
     paymentMethodId,
+    paymentMethodType,
     reports,
     onSubmit,
 }: HandlePaymentSubmitParams): Promise<String> => {
@@ -61,7 +63,7 @@ export const handlePaymentSubmit = async ({
         // ====================================================
 
         const paymentMethod: Record<string, string | number> = {
-            type: "credit_card",
+            type: paymentMethodType,
             token: cardToken.id,
             installments: 1,
         };
@@ -69,12 +71,15 @@ export const handlePaymentSubmit = async ({
         const allowedPaymentMethodIds = new Set([
             "amex",
             "argencard",
+            "debcabal",
             "cabal",
             "cencosud",
             "cmr",
             "diners",
+            "debmaster",
             "master",
             "naranja",
+            "debvisa",
             "visa",
         ]);
 
@@ -87,9 +92,17 @@ export const handlePaymentSubmit = async ({
 
         if (!allowedPaymentMethodIds.has(resolvedPaymentMethodId)) {
             if (resolvedPaymentMethodId.includes("visa")) {
-                resolvedPaymentMethodId = "visa";
+                if (paymentMethodType == "debit_card") {
+                    resolvedPaymentMethodId = "debvisa"
+                } else {
+                    resolvedPaymentMethodId = "visa";
+                }
             } else if (resolvedPaymentMethodId.includes("master")) {
-                resolvedPaymentMethodId = "master";
+                if (paymentMethodType == "debit_card") {
+                    resolvedPaymentMethodId = "debmaster";
+                } else {
+                    resolvedPaymentMethodId = "master";
+                }
             } else if (resolvedPaymentMethodId.includes("amex")) {
                 resolvedPaymentMethodId = "amex";
             } else if (resolvedPaymentMethodId.includes("diners")) {
@@ -97,7 +110,11 @@ export const handlePaymentSubmit = async ({
             } else if (resolvedPaymentMethodId.includes("naranja")) {
                 resolvedPaymentMethodId = "naranja";
             } else if (resolvedPaymentMethodId.includes("cabal")) {
-                resolvedPaymentMethodId = "cabal";
+                if (paymentMethodType == "debit_card") {
+                    resolvedPaymentMethodId = "debcabal";
+                } else {
+                    resolvedPaymentMethodId = "cabal";
+                }
             } else if (resolvedPaymentMethodId.includes("argencard")) {
                 resolvedPaymentMethodId = "argencard";
             } else if (resolvedPaymentMethodId.includes("cencosud")) {

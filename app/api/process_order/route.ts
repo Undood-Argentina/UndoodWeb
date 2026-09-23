@@ -39,8 +39,9 @@ export async function POST(req: Request) {
     if (!response.ok) {
       console.error("Mercado Pago /v1/orders error:", {
         status: response.status,
-        data,
+        data: data.errors[0],
       });
+      console.error("Error", data.errors)
 
       return NextResponse.json(
         {
