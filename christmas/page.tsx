@@ -1,8 +1,8 @@
-/*import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import {ChristmasForm} from "@/app/components/forms/christmasForm";
 import Image from "next/image";
 import './christmas.css'
-import ChristmasLocationCard from "../components/cards/christmasLocationCard";
+//import ChristmasLocationCard from "../components/cards/christmasLocationCard";
 
 // Campaign disabled — redirect to home
 const CHRISTMAS_DISABLED = true;
@@ -33,12 +33,12 @@ export default function ChristmasPage() {
                     Por favor completá la información a continuación y nos vamos a contactar con vos para enviarte la carta del niño/a
                 </p><br />
                 <h3><span style={{fontFamily: "Arial, sans-serif"}}>*</span> Indica que la pregunta es obligatoria</h3>
-                {/* Todos lo tienen, sacar si no se agregan campos */}/*
+                {/* Todos lo tienen, sacar si no se agregan campos */}
                 <ChristmasForm />
             </article>
             <article className="campaign-locations-info" id="retPoints">
                 <p>Estos son los <span style={{backgroundColor:"white",fontWeight:"bold", color:"#064d79", padding: "0 1vw"}}>PUNTOS DE ENCUENTRO</span> habilitados para que dejes tu regalo entre el <br /><span style={{backgroundColor:"white",fontWeight:"bold", color:"#064d79", padding: "0 1vw"}}>14 DE NOVIEMBRE</span> y el <br /><span style={{backgroundColor:"white",fontWeight:"bold", color:"#064d79", padding: "0 1vw"}}>15 DE DICIEMBRE</span></p>
-                <ChristmasLocationCard />
+                {/*<ChristmasLocationCard />*/}
             </article>
             <article className="campaign-notTo">
                 <h2><strong>IMPORTANTE</strong> Tener en cuenta que - <span style={{backgroundColor:"#064d79", fontWeight:"bold", color:"white", padding:"0 1vw"}}>NO REGALAR</span></h2>
@@ -60,4 +60,4 @@ export default function ChristmasPage() {
         </main>
     )
 
-}*/
+}
