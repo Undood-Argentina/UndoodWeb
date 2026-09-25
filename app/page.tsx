@@ -10,11 +10,12 @@ function HidingBanner() {
                       <p>Campaña de salud menstrual</p>
                       <h1>Sé la razón por la que una adolescente se sienta acompañada en su ciclo menstrual.</h1>
                     </div>
-                    <button 
+                    <Link
+                        href="/campania-salud-menstrual"
                         className="higiene-button higiene-button-pink higiene-banner-button"
                     >
                         Donar kits menstruales
-                    </button>
+                    </Link>
                 </div>
 
                 <HigieneBannerImage/>

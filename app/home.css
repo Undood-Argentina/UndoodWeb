@@ -408,6 +408,7 @@
 
 
 .higiene-button {
+    text-decoration: none;
     border-style: none;
     border-radius: 12px;
     min-width: 152px;
