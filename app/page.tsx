@@ -4,18 +4,52 @@ import './home.css'
 
 function HidingBanner() {
   return (
-    <div className="hiding-banner">
-      <div id="banner-circle-1" className="background-banner-circle"></div>
-      <div id="banner-circle-2" className="background-banner-circle"></div>
-      <div id="banner-circle-3" className="background-banner-circle"></div>
-      {/* <Image id="banner-corazon-icon" src="/corazon_icon.png" alt="Campaña de higiene femenina" width={0} height={0} sizes="100%" /> */}
-      <div id="banner-content" className='background-banner-content'>
-        <h2>¡Se viene!</h2>
-        <p id="banner-copy">¡Nueva campaña de <span style={{'backgroundColor':'white','color':'#f12cae'}}>higiene femenina</span>!<br /> </p>
-        <div id="banner-date-container"><p id="banner-date">Viernes 18/9 </p></div>
-      </div>
-    </div>
-  )
+            <div className="higiene-banner-container">
+                <div className="higiene-banner-content">
+                    <div className="higiene-banner-heading">
+                      <p>Campaña de salud menstrual</p>
+                      <h1>Sé la razón por la que una adolescente se sienta acompañada en su ciclo menstrual.</h1>
+                    </div>
+                    <button 
+                        className="higiene-button higiene-button-pink higiene-banner-button"
+                    >
+                        Donar kits menstruales
+                    </button>
+                </div>
+
+                <HigieneBannerImage/>
+            
+            </div>)
+}
+
+function HigieneBannerImage() {
+    return (<div className="higiene-banner-image">
+                <div className="higiene-banner-chicas"></div>
+                <div className="higiene-banner-estrella"></div>
+                <div className="higiene-banner-corazon-1"></div>
+                <div className="higiene-banner-corazon-2"></div>
+                <div className="higiene-banner-copa"></div>
+                <div className="higiene-banner-toallita"></div>
+                <div className="higiene-banner-toalla"></div>
+                <svg className="higiene-banner-blur-1" xmlns="http://www.w3.org/2000/svg" width="334" height="255" viewBox="0 0 333.825 333.825" fill="none">
+                    <g filter="url(#filter0_f_824_2978)">
+                        <path d="M40.6885 166.913C40.6885 97.2008 97.201 40.6882 166.913 40.6882C236.625 40.6882 293.137 97.2008 293.137 166.913C293.137 236.624 236.625 293.137 166.913 293.137C97.201 293.137 40.6885 236.624 40.6885 166.913Z" fill="#F8C6E1" fillOpacity="0.6"/>
+                    </g>
+                    <defs>
+                        <filter id="filter0_f_824_2978" x="0.00031662" y="7.24792e-05" width="333.825" height="333.825" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                            <feGaussianBlur stdDeviation="20.3441" result="effect1_foregroundBlur_824_2978"/>
+                        </filter>
+                    </defs>
+                </svg>
+
+                <svg className="higiene-banner-blur-2" xmlns="http://www.w3.org/2000/svg" width="346" height="283" viewBox="0 0 345.849 345.849" fill="none">
+                    <path d="M0 172.925C0 77.421 77.421 0 172.925 0C268.428 0 345.849 77.421 345.849 172.925C345.849 268.428 268.428 345.849 172.925 345.849C77.421 345.849 0 268.428 0 172.925Z" fill="#F9A8D4" fillOpacity="0.2"/>
+                    <path d="M172.925 0.266602C268.281 0.266676 345.582 77.5686 345.582 172.925C345.582 268.281 268.281 345.582 172.925 345.582C77.5686 345.582 0.266676 268.281 0.266602 172.925C0.266602 77.5685 77.5685 0.266602 172.925 0.266602Z" stroke="white" strokeOpacity="0.3" strokeWidth="0.533718"/>
+                </svg>
+            </div>
+    )
 }
 
 

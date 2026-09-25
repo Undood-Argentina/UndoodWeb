@@ -405,3 +405,233 @@
         padding: 1vw 3vw;
     }
 }
+
+
+.higiene-button {
+    border-style: none;
+    border-radius: 12px;
+    min-width: 152px;
+    min-height: 52px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.higiene-button-pink {
+    background-color: #DB2777;
+    color: white;
+}
+
+.higiene-banner-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 100px 80px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    align-self: stretch;
+    overflow-y: hidden;
+    background: linear-gradient(140deg, #F48DBB 33.13%, var(--Accent-Color-1-300, #F9A8D4) 60.99%, #F9C3DD 114.8%);
+
+}
+
+.higiene-banner-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.higiene-banner-heading p {
+    display: flex;
+    padding: 4px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: rgba(190, 24, 93, 0.10);
+    color: #FFF;
+
+    color: var(--Accent-Color-1-50, #FDF2F8);
+
+    /* Text lg/Bold */
+    font-family: Raleway;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 155.556% */
+}
+
+.higiene-banner-content {
+    display: flex;
+    max-width: 645px;
+    flex-direction: column;
+    gap: 80px;
+    z-index: 3;
+}
+
+.higiene-banner-content h1 {
+    color: #FFF;
+
+    max-width: 581px;
+    /* Display md/Bold */
+    font-family: Montserrat;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 44px; /* 122.222% */
+    letter-spacing: -0.72px;
+}
+
+.higiene-banner-image {
+
+    width: 888.667px;
+    height: 684.626px;
+    position: absolute;
+    right: -140px;
+    bottom: -167.626px;
+    overflow: hidden;
+}
+
+.higiene-banner-chicas {
+    position: absolute;
+    top: 190px;
+    left: -130px;
+    width: 888.667px;
+    height: 496px;
+    aspect-ratio: 43/24;
+    background: url(/campania-higiene-12.png) 50% / cover no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-estrella {
+    position: absolute;
+    top: 90px;
+    left: 345px;
+    width: 41px;
+    height: 40px;
+    aspect-ratio: 41/40;
+    background: url(/campania-higiene-19.png) 50% / cover no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-corazon-1 {
+    position: absolute;
+    top: 142px;
+    left: 510px;
+    width: 65.368px;
+    height: 63.866px;
+    background: url(/ilus.png);
+    /* transform: rotate(-53.888deg);
+    aspect-ratio: 65.37/63.87;
+    background: url(/campania-higiene-6.png)-1316.81px -415.513px / 2316.255% 1581.463% no-repeat; */
+    z-index: 2;
+}
+
+.higiene-banner-corazon-2 {
+    position: absolute;
+    top: 188.7px;
+    left: 90.7px;
+    width: 62.841px;
+    height: 70.449px;
+    background: url(/ilus2.png);
+    /* transform: rotate(-38.423deg);
+    aspect-ratio: 62.84/40.45;
+    background: url(/campania-higiene-6.png) -867.135px -403.38px / 1874.724% 1942.857% no-repeat; */
+    z-index: 2;
+}
+
+.higiene-banner-copa {
+    position: absolute;
+    top: 44px;
+    left: 366px;
+    width: 88.191px;
+    height: 156.149px;
+    transform: rotate(13.963deg);
+    aspect-ratio: 48/85;
+    background: url(/campania-higiene-16.png) -85px -15.659px / 312.571% 117.737% no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-toallita {
+    position: absolute;
+    top: 116px;
+    left: 0px;
+    width: 128px;
+    height: 130px;
+    aspect-ratio: 64/65;
+    background: url(/campania-higiene-14.png) -32.289px 0px / 152.197% 100% no-repeat;
+    z-index: 2;
+}
+
+.higiene-banner-toalla {
+    position: absolute;
+    top: 163px;
+    left: 563px;
+    width: 122.03px;
+    height: 162.706px;
+    transform: rotate(-7.574deg);
+    aspect-ratio: 3/4;
+    background: url(/campania-higiene-18.png) -14.615px -39.909px / 223.901% 145.103% no-repeat;
+    z-index: 2;
+}
+
+
+.higiene-banner-blur-1 {
+    position: absolute;
+    top: 127px;
+    left: 91px;
+    fill: rgba(248, 198, 225, 0.60);
+    filter: blur(38.11764907836914px);
+    width: 473px;
+    height: 473px;
+    z-index: 1;
+}
+
+.higiene-banner-blur-2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 648px;
+    height: 648px;
+    fill: rgba(249, 168, 212, 0.20);
+    stroke-width: 1px;
+    stroke: rgba(255, 255, 255, 0.30);
+    z-index: 1;
+}
+
+
+.higiene-banner-circle {
+    position: absolute;
+    width: 426px;
+    height: 413px;
+    border-radius: 16777200px;
+    opacity: 0.2;
+    background: var(--Accent-Color-1-200, #FBCFE8);
+    z-index: 1;
+    /* Los coloca por detrás del contenido */
+    pointer-events: none;
+    /* Evita que tapen los botones o enlaces al hacer clic */
+}
+
+.higiene-banner-circle-1 {
+    bottom: -265.18px;
+    left: 0px;
+}
+
+.higiene-banner-circle-2 {
+    right: -65px;
+    top: -234px;
+}
+
+.higiene-banner-button {
+    display: flex;
+    padding: 10px 60px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    z-index: 3;
+}
