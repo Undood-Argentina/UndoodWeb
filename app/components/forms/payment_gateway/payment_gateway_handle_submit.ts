@@ -64,9 +64,11 @@ export const handlePaymentSubmit = async ({
 
         const paymentMethod: Record<string, string | number> = {
             type: paymentMethodType,
-            token: cardToken.id,
-            installments: 1,
+            token: cardToken.id
         };
+        if (paymentMethodType == "credit_card") {
+            paymentMethod.installments = 1
+        }
 
         const allowedPaymentMethodIds = new Set([
             "amex",
