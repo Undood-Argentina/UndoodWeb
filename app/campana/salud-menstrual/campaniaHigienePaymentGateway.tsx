@@ -6,20 +6,20 @@ import React, {
 } from "react";
 import { Icon } from '@iconify/react';
 
-import { handlePaymentSubmit } from "../components/forms/payment_gateway/payment_gateway_handle_submit";
+import { handlePaymentSubmit } from "../../components/forms/payment_gateway/payment_gateway_handle_submit";
 
 import PaymentGatewayAmountSelection, {
     PaymentGatewayAmountSelectionRef,
-} from "../components/forms/payment_gateway/paymentGatewayAmountSelection";
+} from "../../components/forms/payment_gateway/paymentGatewayAmountSelection";
 
 import PaymentGatewayBillingData, {
     PaymentGatewayBillingDataRef,
-} from "../components/forms/payment_gateway/paymentGatewayBillingData";
+} from "../../components/forms/payment_gateway/paymentGatewayBillingData";
 
 
 import PaymentGatewayPaymentData, {
     PaymentGatewayPaymentDataRef,
-} from "../components/forms/payment_gateway/paymentGatewayPaymentData";
+} from "../../components/forms/payment_gateway/paymentGatewayPaymentData";
 
 // ============================================================
 // TYPES

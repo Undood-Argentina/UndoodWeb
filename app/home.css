@@ -428,7 +428,7 @@
     width: 100%;
     padding: 100px 80px;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: flex-start;
     gap: 60px;
     align-self: stretch;
@@ -635,4 +635,48 @@
     gap: 8px;
     align-self: flex-start;
     z-index: 3;
+}
+
+
+@media (max-width: 1024px) {
+    .higiene-banner-container {
+        padding-inline: 24px;
+        height: 650px;
+        justify-content: start;
+    }
+
+    .higiene-banner-content {
+        gap: 24px;
+        display: flex;
+        flex-direction: column;
+        max-width: none;
+    }
+
+    .higiene-banner-content h1 {
+        max-width: none;
+    }
+    .higiene-banner-heading {
+        align-items: center;
+    }
+    .higiene-banner-button {
+        align-self: center;
+    }
+
+    .higiene-banner-heading h1 {
+        color: #FFF;
+        text-align: center;
+
+        /* Display sm/Bold */
+        font-family: Montserrat;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 38px; /* 126.667% */
+    }
+
+    .higiene-banner-image {
+        right: -280px;
+        bottom: -260px;
+        transform: scale(0.65, 0.65)
+    }
 }
