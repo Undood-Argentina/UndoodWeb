@@ -422,7 +422,7 @@
     color: white;
 }
 
-.higiene-banner-container {
+.higiene-banner-home-container {
     position: relative;
     display: flex;
     width: 100%;
@@ -437,7 +437,7 @@
 
 }
 
-.higiene-banner-heading {
+.higiene-banner-home-heading {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -445,7 +445,7 @@
     align-self: stretch;
 }
 
-.higiene-banner-heading p {
+.higiene-banner-home-heading p {
     display: flex;
     padding: 4px 16px;
     justify-content: center;
@@ -465,7 +465,7 @@
     line-height: 28px; /* 155.556% */
 }
 
-.higiene-banner-content {
+.higiene-banner-home-content {
     display: flex;
     max-width: 645px;
     flex-direction: column;
@@ -473,7 +473,7 @@
     z-index: 3;
 }
 
-.higiene-banner-content h1 {
+.higiene-banner-home-content h1 {
     color: #FFF;
 
     max-width: 581px;
@@ -627,7 +627,7 @@
     top: -234px;
 }
 
-.higiene-banner-button {
+.higiene-banner-home-button {
     display: flex;
     padding: 10px 60px;
     justify-content: center;
@@ -639,30 +639,30 @@
 
 
 @media (max-width: 1024px) {
-    .higiene-banner-container {
+    .higiene-banner-home-container {
         padding-inline: 24px;
         height: 650px;
         justify-content: start;
     }
 
-    .higiene-banner-content {
+    .higiene-banner-home-content {
         gap: 24px;
         display: flex;
         flex-direction: column;
         max-width: none;
     }
 
-    .higiene-banner-content h1 {
+    .higiene-banner-home-content h1 {
         max-width: none;
     }
-    .higiene-banner-heading {
+    .higiene-banner-home-heading {
         align-items: center;
     }
-    .higiene-banner-button {
+    .higiene-banner-home-button {
         align-self: center;
     }
 
-    .higiene-banner-heading h1 {
+    .higiene-banner-home-heading h1 {
         color: #FFF;
         text-align: center;
 

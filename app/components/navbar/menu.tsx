@@ -40,6 +40,15 @@ export default function Menu({isOpen, location, closeMenu, setMenuOpen}:MenuProp
             <div className="menu">
             <img src="logo.svg" alt="logo" />
                 <nav className="links">
+                    <div className="n-link n-link-salud-menstrual">
+                        <Link 
+                        href="/campana/salud-menstrual" 
+                        onClick={(() => setMenuOpen(false))}
+                        className={location.includes("/campana") ? "current-page" : undefined}
+                        >
+                        Salud Menstrual
+                        </Link>
+                    </div>   
                     <div className="n-link">
                         <Link 
                         href="/" 

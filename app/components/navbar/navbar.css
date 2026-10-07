@@ -122,6 +122,10 @@
     font-weight: 500;
 }
 
+.n-link-salud-menstrual a{
+    color: #DB2777;
+}
+
 .n-link a:active{
     color: #137ebeff!important;
 }

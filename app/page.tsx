@@ -4,15 +4,15 @@ import './home.css'
 
 function HidingBanner() {
   return (
-            <div className="higiene-banner-container">
-                <div className="higiene-banner-content">
-                    <div className="higiene-banner-heading">
+            <div className="higiene-banner-home-container">
+                <div className="higiene-banner-home-content">
+                    <div className="higiene-banner-home-heading">
                       <p>Campaña de salud menstrual</p>
                       <h1>Sé la razón por la que una adolescente se sienta acompañada en su ciclo menstrual.</h1>
                     </div>
                     <Link
                         href="/campana/salud-menstrual"
-                        className="higiene-button higiene-button-pink higiene-banner-button"
+                        className="higiene-button higiene-button-pink higiene-banner-home-button"
                     >
                         Donar kits menstruales
                     </Link>
