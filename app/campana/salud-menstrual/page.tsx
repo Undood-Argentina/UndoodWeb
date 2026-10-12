@@ -26,12 +26,12 @@ export default function HigienePage() {
                 <div className="higiene-header-column">
                     <div className="higiene-header-content">
                         <h1 className="higiene-header-h1-text">
-                            <span className="higiene-text-black">Doná kits menstruales,</span>{" "}
+                            <span className="higiene-text-black">Salud y dignidad menstrual:</span>{" "}
                             <span className="higiene-text-pink">cambiá una realidad.</span>
                         </h1>
                         <div className="higiene-header-paragraph-container">
                             <p className="higiene-header-paragraph-text">
-                                Tu donación le da a una adolescente en hogar transitorio acceso a productos para la salud menstrual, educación sobre su cuerpo y la dignidad que toda mujer merece.
+                                Acompañamos a más de 100 adolescentes en hogares convivenciales entregándoles los insumos menstruales que ellas mismas eligen, talleres de salud sexual a cargo de profesionales y alternativas sustentables para su futuro.
                             </p>
                         </div>
                     </div>
@@ -66,8 +66,8 @@ export default function HigienePage() {
         <section className="higiene-problematica">
             <div className="higiene-problematica-container">
                 <div className="higiene-problematica-content">
-                    <h2 className="higiene-section-title">En hogares transitorios, muchas adolescentes no tienen acceso a productos para la salud menstrual.</h2>
-                    <p className="higiene-problematica-paragraph-text">Desde Undood Argentina, queremos brindar acceso a estos productos, la posibilidad de elegir y la información necesaria para su cuidado.</p>
+                    <h2 className="higiene-section-title">En los hogares convivenciales, las adolescentes necesitan insumos de salud menstrual de forma constante.</h2>
+                    <p className="higiene-problematica-paragraph-text">Desde Undood Argentina brindamos un acompañamiento integral: aseguramos el acceso a los productos que ellas eligen, charlas de salud sexual a cargo de profesionales y la opción de explorar alternativas sustentables como solución a mediano plazo.</p>
                 </div>
                 <div className="higiene-problematica-column">
                     <div className="higiene-problematica-card higiene-problematica-card-pink">
@@ -83,7 +83,7 @@ export default function HigienePage() {
                             </button>
                         </div>
                         <p className={`higiene-card-paragraph expandable ${expanded[0] ? "expanded" : ""}`}>
-                            El acceso a productos para la salud menstrual es una de las necesidades más frecuentes y difíciles de cubrir en los hogares con los que trabajamos.
+                            En Argentina, el contexto socioeconómico dificulta el acceso de los hogares convivenciales a insumos de salud menstrual. Con el aumento constante de costos, sostener el abastecimiento de cada una de las adolescentes se vuelve cada vez más difícil.
                         </p>
                     </div>
 
@@ -100,7 +100,7 @@ export default function HigienePage() {
                             </button>
                         </div>
                         <p className={`higiene-card-paragraph expandable ${expanded[1] ? "expanded" : ""}`}>
-                            Sin los productos adecuados, muchas faltan a clase, dejan de participar en sus actividades o tienen que improvisar con lo que encuentren durante su período.
+                            Relevamos previamente las preferencias de cada joven para enviarles los insumos que ya usan. Sumamos charlas de salud sexual optativas a cargo de ginecólogas y acercamos la posibilidad de probar productos sustentables. 
                         </p>
                     </div>
 
@@ -117,7 +117,7 @@ export default function HigienePage() {
                             </button>
                         </div>
                         <p className={`higiene-card-paragraph expandable ${expanded[2] ? "expanded" : ""}`}>
-                            Abastecer a más de 10 hogares en la provincia de Buenos Aires, asegurando que cada adolescente pueda elegir el producto para la salud menstrual que mejor se adapte a sus necesidades.
+                            Acompañar a más de 100 adolescentes que viven en hogares convivenciales, garantizándoles los productos de salud menstrual de su preferencia, educación sexual y un alivio concreto a las instituciones que las alojan.
                         </p>
                     </div>
                 </div>
@@ -163,11 +163,11 @@ export default function HigienePage() {
                                 <Flower />
                             </div>
                             <h3 className="higiene-card-title">
-                                Salud menstrual digna
+                                Salud menstrual
                             </h3>
                         </div>
                         <p className="higiene-card-paragraph">
-                            Recaudamos fondos para comprar productos y llevarlos directamente a los hogares con los que trabajamos hace más de 8 años.
+                            Acompañamos a +100 adolescentes alojadas en hogares convivenciales en sus ciclos menstruales, aliviando la ardua y encomiable tarea de las instituciones que las alojan.
                         </p>
                     </div>
 
@@ -196,7 +196,7 @@ export default function HigienePage() {
                             </h3>
                         </div>
                         <p className="higiene-card-paragraph">
-                            Trabajamos con una ginecóloga matriculada para generar contenido informativo sobre el uso y el cuidado de cada producto.
+                            Espacio de formación en salud sexual y ciclo menstrual a cargo de ginecólogas matriculadas, con participación 100% voluntaria para las adolescentes que deseen sumarse.
                         </p>
                     </div>
 
