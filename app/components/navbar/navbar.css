@@ -126,13 +126,22 @@
     color: #DB2777;
 }
 
+
 .n-link a:active{
     color: #137ebeff!important;
+}
+
+.n-link-salud-menstrual a:active{
+    color: #DB2777!important;
 }
 
 
 .current-page{
     color: #137ebeff!important;
+}
+
+.current-page-salud-menstrual{
+    color: #DB2777!important;
 }
 
 .sub-prog-links{
@@ -173,6 +182,10 @@
     
     .n-link a:hover{
         color: #137ebeff;
+    }
+
+    .n-link-salud-menstrual a:hover{
+        color: #DB2777;
     }
     
     

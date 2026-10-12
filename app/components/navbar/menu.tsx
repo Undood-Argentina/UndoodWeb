@@ -44,7 +44,7 @@ export default function Menu({isOpen, location, closeMenu, setMenuOpen}:MenuProp
                         <Link 
                         href="/campana/salud-menstrual" 
                         onClick={(() => setMenuOpen(false))}
-                        className={location.includes("/campana") ? "current-page" : undefined}
+                        className={location.includes("/campana") ? "current-page current-page-salud-menstrual" : undefined}
                         >
                         Salud Menstrual
                         </Link>
