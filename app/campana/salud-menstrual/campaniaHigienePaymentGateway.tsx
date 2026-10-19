@@ -110,10 +110,10 @@ export default function CampaniaHigienePaymentGateway({
     const [selectedAmount, setSelectedAmount] = useState<number>(0)
 
     useEffect(()=>{
-        setKits(Math.floor(selectedAmount/5000))
+        setKits(selectedAmount/8500.0)
     }, [selectedAmount])
 
-    const [kits, setKits] = useState<number>(0)
+    const [kits, setKits] = useState<number>(0.0)
 
 
 
@@ -271,7 +271,7 @@ export default function CampaniaHigienePaymentGateway({
                                     <path d="M8 9.05001V8.95001M16 9.05001V8.95001" stroke="#11527B" strokeWidth="1.5" strokeLinecap="round"/>
                                     <path d="M16 14C15.5 15.5 14.21 17 12 17C9.79 17 8.5 15.5 8 14" stroke="#11527B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                <p>Equivale a {kits} packs de toallas descartables</p>
+                                <p>Con tu donación, acompañás a {Number.isInteger(kits) ? kits : kits.toFixed(1).replace(".", ",")} {kits === 1 ? "joven" : "jóvenes"} en su período.</p>
                             </div>
                         </div>
                         <div className="pg-next-step-container">
