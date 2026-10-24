@@ -261,9 +261,9 @@ export default function CampaniaHigienePaymentGateway({
                         <div className="pg-higiene-donation-amount-selection">
                             <PaymentGatewayAmountSelection
                             ref={amountSelectionRef}
-                            amount_option_1={6000}
-                            amount_option_2={10000}
-                            amount_option_3={15000}
+                            amount_option_1={8500}
+                            amount_option_2={17000}
+                            amount_option_3={25500}
                             onAmountSelected={(amount: number)=>{setSelectedAmount(amount)}}/>
                             <div className="pg-higiene-kits-notice">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -271,7 +271,7 @@ export default function CampaniaHigienePaymentGateway({
                                     <path d="M8 9.05001V8.95001M16 9.05001V8.95001" stroke="#11527B" strokeWidth="1.5" strokeLinecap="round"/>
                                     <path d="M16 14C15.5 15.5 14.21 17 12 17C9.79 17 8.5 15.5 8 14" stroke="#11527B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                <p>Con tu donación, acompañás a {Number.isInteger(kits) ? kits : kits.toFixed(1).replace(".", ",")} {kits === 1 ? "joven" : "jóvenes"} en su período.</p>
+                                <p>Con tu donación, acompañás a {Number(kits.toFixed(1)).toString().replace(".", ",")} {kits === 1 ? "joven" : "jóvenes"} en su período.</p>
                             </div>
                         </div>
                         <div className="pg-next-step-container">
