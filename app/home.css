@@ -486,7 +486,7 @@
     letter-spacing: -0.72px;
 }
 
-.higiene-banner-image {
+.higiene-banner-home-image {
 
     width: 888.667px;
     height: 684.626px;
@@ -640,8 +640,10 @@
 
 @media (max-width: 1024px) {
     .higiene-banner-home-container {
+        gap: 0px;
         padding-inline: 24px;
-        height: 650px;
+        padding-bottom: 0px;
+        height: 680px;
         justify-content: start;
     }
 
@@ -674,9 +676,14 @@
         line-height: 38px; /* 126.667% */
     }
 
-    .higiene-banner-image {
-        right: -280px;
-        bottom: -260px;
-        transform: scale(0.65, 0.65)
+    .higiene-banner-home-image {
+        position: relative;
+        transform: scale(0.63);
+        height: 70px;
+        overflow: visible;
+        bottom: 0px;
+        transform-origin: bottom bottom;
+        align-self: center;
+        right: -77px;
     }
 }

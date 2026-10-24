@@ -24,7 +24,7 @@ function HidingBanner() {
 }
 
 function HigieneBannerImage() {
-    return (<div className="higiene-banner-image">
+    return (<div className="higiene-banner-home-image">
                 <div className="higiene-banner-chicas"></div>
                 <div className="higiene-banner-estrella"></div>
                 <div className="higiene-banner-corazon-1"></div>

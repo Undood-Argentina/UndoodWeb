@@ -280,8 +280,7 @@ export default function HigienePage() {
                     </button>
                 </div>
 
-                <HigieneBannerImage/>
-            
+            <HigieneBannerImage/>
             </div>
         </section>
     </main>)
