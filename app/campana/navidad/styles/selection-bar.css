@@ -1,0 +1,123 @@
+/*
+ * Barra fija de abajo con las cartas elegidas (sólo en #listado).
+ * Markup: _components/SelectionBar.tsx · _components/common.tsx -> KidAvatarStack
+ */
+
+/* Espacio abajo para que la barra fija no tape el final de la página (la clase la pone page.tsx). */
+body.has-bar {
+  padding-bottom: 96px;
+}
+
+#navidad-campaign .bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--pine-950);
+  color: var(--text-inverse-primary);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+  transform: translateY(110%);
+  transition: transform 500ms var(--ease);
+}
+
+#navidad-campaign .bar.on {
+  transform: none;
+}
+
+#navidad-campaign .bar .wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 96px;
+}
+
+#navidad-campaign .stack {
+  display: flex;
+}
+
+#navidad-campaign .stack .avatar {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #fff;
+  animation: in-av 400ms var(--ease) both;
+}
+
+#navidad-campaign .stack .avatar img {
+  width: 44px;
+  height: 44px;
+}
+
+#navidad-campaign .stack .avatar+.avatar {
+  margin-left: -12px;
+}
+
+#navidad-campaign .bar .info {
+  flex: 1;
+  min-width: 0;
+}
+
+#navidad-campaign .bar .info b {
+  display: block;
+  white-space: nowrap;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+#navidad-campaign .bar .info>span {
+  color: var(--text-inverse-secondary);
+  font-size: 14px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#navidad-campaign .bar .bump {
+  animation: bump 400ms var(--ease);
+}
+
+#navidad-campaign .bar .mobile-only {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  #navidad-campaign .bar .wrap {
+    min-height: 72px;
+    gap: 12px;
+  }
+
+  #navidad-campaign .stack .avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  #navidad-campaign .stack .avatar img {
+    width: 32px;
+    height: 32px;
+  }
+
+  #navidad-campaign .bar .info b {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  #navidad-campaign .bar .info>span,
+  #navidad-campaign .bar .desktop-only {
+    display: none;
+  }
+
+  #navidad-campaign .bar .mobile-only {
+    display: inline-grid;
+  }
+}
+
+@keyframes in-av {
+  from { transform: scale(.4); opacity: 0; }
+}
+
+@keyframes bump {
+  30% { transform: scale(1.08); }
+}

@@ -1,0 +1,135 @@
+/*
+ * Botones: .btn + tamaño (.btn-sm / .btn-lg) + variante (.btn-primary, .btn-secondary, .btn-white, .btn-link).
+ */
+
+#navidad-campaign .btn {
+  --h: 40px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--h);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-base) var(--ease),
+    color var(--dur-base) var(--ease),
+    transform var(--dur-base) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+#navidad-campaign .btn:active {
+  transform: scale(.985);
+}
+
+#navidad-campaign .btn-sm {
+  --h: 36px;
+  padding: 6px 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+#navidad-campaign .btn-lg {
+  --h: 48px;
+  padding: 12px 24px;
+}
+
+#navidad-campaign .btn-primary {
+  background: var(--brand-600);
+  color: var(--text-inverse);
+}
+
+#navidad-campaign .btn-primary:hover {
+  background: var(--brand-100);
+  color: var(--brand-800);
+  transform: scale(.985);
+}
+
+#navidad-campaign .btn-secondary {
+  background: var(--brand-100);
+  color: var(--brand-800);
+}
+
+#navidad-campaign .btn-secondary:hover {
+  background: var(--brand-600);
+  color: var(--text-inverse);
+  transform: scale(.985);
+}
+
+#navidad-campaign .btn-white {
+  background: #fff;
+  color: var(--brand-800);
+}
+
+#navidad-campaign .btn-white:hover {
+  background: var(--brand-100);
+  color: var(--brand-700);
+  transform: scale(.985);
+}
+
+#navidad-campaign .btn-icon {
+  width: var(--h);
+  padding: 0;
+}
+
+/* Link: hover = Semibold. El ::after reserva el ancho en Semibold para que no salte el layout */
+#navidad-campaign .btn-link {
+  padding: 0;
+  min-height: auto;
+  color: var(--text-accent);
+  font-weight: 500;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#navidad-campaign .btn-link .link-label {
+  display: inline-grid;
+}
+
+#navidad-campaign .btn-link .link-label::after {
+  content: attr(data-text);
+  font-weight: 600;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+
+#navidad-campaign .btn-link .link-label,
+#navidad-campaign .btn-link .link-label::after {
+  grid-area: 1/1;
+}
+
+#navidad-campaign .btn-link:hover {
+  font-weight: 600;
+}
+
+#navidad-campaign .btn-link:hover .icon {
+  transform: translateX(3px);
+}
+
+#navidad-campaign .btn-link .icon {
+  transition: transform var(--dur-base) var(--ease);
+}
+
+#navidad-campaign .btn-link.gray {
+  color: var(--text-inverse-secondary);
+}
+
+#navidad-campaign .btn-link.gray:hover {
+  color: var(--text-inverse);
+}
+
+/* Ej.: "Confirmar" mientras se envía el formulario */
+#navidad-campaign .btn[disabled] {
+  background: var(--neutral-100);
+  color: var(--neutral-400);
+  cursor: not-allowed;
+  transform: none;
+}

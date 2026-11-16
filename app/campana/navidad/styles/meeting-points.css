@@ -1,0 +1,265 @@
+/*
+ * "Puntos de encuentro": lista de puntos (de la tabla punto_encuentro_navidad) + mapa de Google
+ * embebido, centrado en el punto elegido. En desktop la lista scrollea al lado del mapa; en mobile
+ * es un carrusel horizontal arriba del mapa.
+ * Markup: _components/MeetingPoints.tsx
+ */
+
+#navidad-campaign .puntos {
+  background: var(--surface-subtle);
+}
+
+#navidad-campaign .puntos .sec-head {
+  margin-bottom: 32px;
+}
+
+#navidad-campaign .fecha {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--brand-200);
+  color: var(--brand-800);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+#navidad-campaign .puntos-layout {
+  --puntos-height: 600px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+}
+
+#navidad-campaign .puntos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: var(--puntos-height);
+  overflow-y: auto;
+  padding-right: 4px;
+  /* que la barra de scroll no tape el borde de las cards */
+}
+
+/* ---------- Ordenar por código postal (arriba a la derecha del encabezado) ---------- */
+#navidad-campaign .cp-sort {
+  align-self: flex-start;
+  width: 260px;
+  flex: none;
+}
+
+#navidad-campaign .cp-sort-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+#navidad-campaign .cp-sort-row {
+  display: flex;
+  gap: 8px;
+}
+
+#navidad-campaign .cp-sort input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-full);
+  background: #fff;
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 500;
+}
+
+#navidad-campaign .cp-sort input:focus {
+  outline: none;
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 4px var(--brand-100);
+}
+
+#navidad-campaign .cp-sort .cp-sort-status { /* le gana a ".sec-head p" */
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+#navidad-campaign .cp-sort-clear {
+  color: var(--text-accent);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#navidad-campaign .cp-sort-error {
+  color: var(--cranberry-600);
+  font-weight: 600;
+}
+
+/* ---------- Card de un punto ---------- */
+#navidad-campaign .punto {
+  flex: none;
+  background: #fff;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+}
+
+#navidad-campaign .punto:hover {
+  border-color: var(--brand-300);
+}
+
+#navidad-campaign .punto.is-active {
+  border-color: var(--brand-600);
+  box-shadow: inset 0 0 0 1px var(--brand-600);
+}
+
+/* La parte clickeable que elige el punto (el link "Cómo llegar" queda afuera del botón). */
+#navidad-campaign .punto-select {
+  width: 100%;
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+}
+
+#navidad-campaign .punto-number {
+  grid-row: span 5; /* nombre, distancia, dirección, horarios, notas */
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--brand-100);
+  color: var(--brand-800);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  transition: background-color var(--dur-base), color var(--dur-base);
+}
+
+#navidad-campaign .punto.is-active .punto-number {
+  background: var(--brand-600);
+  color: #fff;
+}
+
+#navidad-campaign .punto b {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+#navidad-campaign .punto small {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+#navidad-campaign .punto-hours small {
+  color: var(--text-tertiary);
+}
+
+/* "a 2,3 km" (sólo cuando se ordenó por código postal) */
+#navidad-campaign .punto small.punto-distance {
+  color: var(--pine-700);
+  font-weight: 600;
+}
+
+#navidad-campaign .punto-notas {
+  font-style: italic;
+}
+
+#navidad-campaign .punto .como-llegar {
+  align-self: flex-start;
+  margin-left: 48px;
+  /* alineado con el texto: 32px del número + 16px de gap */
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ---------- Mapa ---------- */
+#navidad-campaign .map {
+  position: relative;
+  min-height: var(--puntos-height);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #ececec;
+}
+
+#navidad-campaign .map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* "Cargando…" / error, en lugar de la lista y el mapa */
+#navidad-campaign .puntos-status {
+  padding: 48px 16px;
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 767px) {
+  /* el encabezado pasa a columna (how-to-participate.css): el input va abajo del título, a lo ancho */
+  #navidad-campaign .cp-sort {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  #navidad-campaign .puntos-layout {
+    grid-template-columns: 1fr;
+  }
+
+  #navidad-campaign .puntos-list {
+    flex-direction: row;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    margin-right: -16px;
+    padding-right: 16px;
+    scrollbar-width: none;
+  }
+
+  #navidad-campaign .puntos-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  #navidad-campaign .punto {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+  }
+
+  #navidad-campaign .punto-select {
+    grid-template-columns: 1fr;
+  }
+
+  #navidad-campaign .punto-number {
+    display: none;
+  }
+
+  #navidad-campaign .punto .como-llegar {
+    margin-left: 0;
+  }
+
+  #navidad-campaign .map {
+    min-height: 320px;
+  }
+}

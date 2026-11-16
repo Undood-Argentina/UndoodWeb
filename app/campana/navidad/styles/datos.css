@@ -1,0 +1,318 @@
+/*
+ * Pantalla #datos: formulario + resumen de la selección + avisos (.aviso, .recordatorio).
+ * Markup: _components/DatosView.tsx · _components/SelectionSummary.tsx · _components/common.tsx
+ */
+
+#navidad-campaign .datos-view {
+  background: var(--surface-subtle);
+  min-height: 70vh;
+}
+
+#navidad-campaign .back {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin: 24px 0;
+}
+
+#navidad-campaign .back .btn {
+  --h: 36px;
+}
+
+#navidad-campaign .back:hover .btn {
+  background: var(--brand-600);
+  color: #fff;
+}
+
+#navidad-campaign .datos-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 440px;
+  gap: 48px;
+  align-items: start;
+  padding-bottom: 96px;
+}
+
+#navidad-campaign .panel {
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px;
+}
+
+#navidad-campaign .form-card {
+  padding: 48px;
+}
+
+#navidad-campaign .form-card .intro {
+  color: var(--text-secondary);
+  margin: 12px 0 40px;
+}
+
+#navidad-campaign .required-note {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+#navidad-campaign .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+#navidad-campaign .field label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#navidad-campaign .field input {
+  font: inherit;
+  height: 48px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: var(--text-primary);
+  appearance: none;
+  transition: border-color var(--dur-fast),box-shadow var(--dur-fast);
+}
+
+#navidad-campaign .field input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+#navidad-campaign .field input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 48px #fff inset;
+  -webkit-text-fill-color: var(--text-primary);
+}
+
+#navidad-campaign .field input:hover {
+  border-color: var(--border-strong);
+}
+
+#navidad-campaign .field input:focus {
+  outline: none;
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 4px var(--brand-100);
+}
+
+#navidad-campaign .field .hint {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-tertiary);
+}
+
+#navidad-campaign .field.has-error input {
+  border-color: var(--cranberry-600);
+}
+
+#navidad-campaign .field.has-error .hint {
+  color: var(--cranberry-600);
+  font-weight: 600;
+}
+
+/* Error que devuelve el servidor al confirmar (arriba del botón) */
+#navidad-campaign .form-error {
+  margin: -16px 0 24px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--cranberry-50);
+  color: var(--cranberry-600);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+#navidad-campaign .checks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 40px 0;
+}
+
+#navidad-campaign .checkbox-field {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+#navidad-campaign .checkbox-field input {
+  appearance: none;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 4px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  transition: background-color var(--dur-fast),border-color var(--dur-fast);
+  cursor: pointer;
+}
+
+#navidad-campaign .checkbox-field input:checked {
+  background: var(--brand-600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 14l3.5 3.5L19 6.5' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;
+  border-color: var(--brand-600);
+}
+
+#navidad-campaign .checkbox-field.has-error input {
+  border-color: var(--cranberry-600);
+}
+
+#navidad-campaign .checkbox-field a {
+  color: var(--text-primary);
+}
+
+#navidad-campaign .summary-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#navidad-campaign .summary-header h2 {
+  flex: 1;
+}
+
+#navidad-campaign .summary-header .selection-count {
+  color: var(--brand-800);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#navidad-campaign .summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#navidad-campaign .desktop-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#navidad-campaign .separator {
+  height: 1px;
+  background: var(--brand-100);
+  border: 0;
+  margin: 0;
+}
+
+#navidad-campaign .see-all-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 4px 0;
+}
+
+#navidad-campaign .aviso {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-primary);
+}
+
+#navidad-campaign .aviso .aviso-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+#navidad-campaign .aviso .icon {
+  color: var(--brand-600);
+}
+
+#navidad-campaign .recordatorio {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: linear-gradient(135deg,var(--pine-600),var(--pine-800));
+}
+
+#navidad-campaign .recordatorio .icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--alpha-white-20);
+  color: var(--pine-100);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+#navidad-campaign .recordatorio b {
+  display: block;
+  color: var(--text-inverse-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+#navidad-campaign .recordatorio span {
+  color: var(--text-inverse-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+#navidad-campaign .datos-view .btn-secondary.full-width {
+  width: 100%;
+}
+
+#navidad-campaign .mobile-summary {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  #navidad-campaign .datos-layout {
+    grid-template-columns: 1fr;
+  }
+
+  #navidad-campaign .datos-view .desktop-summary {
+    display: none;
+  }
+
+  #navidad-campaign .mobile-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #navidad-campaign .form-card {
+    padding: 24px 20px;
+  }
+}
+
+#navidad-campaign .mobile-stack {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#navidad-campaign .mobile-stack .caption {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+#navidad-campaign .summary-empty,
+#navidad-campaign .empty-selection {
+  color: var(--text-secondary);
+}

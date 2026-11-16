@@ -1,0 +1,141 @@
+/*
+ * Pantalla #confirmacion: hero con Papá y Mamá Noel, "Próximos pasos" y sección de avance.
+ * Markup: _components/ConfirmacionView.tsx
+ */
+
+#navidad-campaign .hero-conf .wrap {
+  display: grid;
+  grid-template-columns: 1fr minmax(0,600px) 1fr;
+  align-items: end;
+  gap: 24px;
+  padding-top: 64px;
+}
+
+#navidad-campaign .hero-conf .hero-conf-text {
+  text-align: center;
+  padding-bottom: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#navidad-campaign .hero-conf .h2 {
+  color: var(--text-inverse-primary);
+}
+
+#navidad-campaign .hero-conf p {
+  color: var(--text-inverse-secondary);
+}
+
+#navidad-campaign .hero-conf .character {
+  height: 300px;
+  width: auto;
+  justify-self: center;
+  animation: peek 900ms var(--ease) both;
+}
+
+#navidad-campaign .hero-conf .character-right {
+  animation-delay: 150ms;
+}
+
+@media (max-width: 899px) {
+  #navidad-campaign .hero-conf .wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #navidad-campaign .hero-conf .hero-conf-text {
+    grid-column: 1/-1;
+    grid-row: 1;
+    padding-bottom: 16px;
+  }
+
+  #navidad-campaign .hero-conf .h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  #navidad-campaign .hero-conf .character {
+    height: 170px;
+    margin-bottom: 8px;
+  }
+}
+
+#navidad-campaign .next-steps {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 24px;
+}
+
+#navidad-campaign .paso {
+  background: var(--surface-accent-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#navidad-campaign .paso .icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: var(--brand-600);
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+#navidad-campaign .paso h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+#navidad-campaign .paso p {
+  color: var(--text-secondary);
+}
+
+#navidad-campaign .paso .recordatorio .icon-box {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  #navidad-campaign .next-steps {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    margin-right: -16px;
+    padding-right: 16px;
+    scrollbar-width: none;
+  }
+
+  #navidad-campaign .next-steps>* {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+  }
+}
+
+#navidad-campaign .avance-sec {
+  background: var(--cream-100);
+}
+
+#navidad-campaign .avance-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url(/campana/navidad/img/pat-estrellas.png) 0 0/1440px 600px repeat;
+  opacity: .8;
+}
+
+#navidad-campaign .avance-sec .h3 {
+  margin-bottom: 32px;
+}
+
+@keyframes peek {
+  from { transform: translateY(60px); opacity: 0; }
+}

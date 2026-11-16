@@ -1,0 +1,233 @@
+/*
+ * Sección "Elegí una carta": encabezado, filtros (sidebar en desktop, barra + modal en mobile) y grilla.
+ * Markup: _components/ListadoView.tsx -> LettersSection, MobileFiltersBar · _components/FilterGroup.tsx
+ */
+
+#navidad-campaign .list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+#navidad-campaign .list-head .count {
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+#navidad-campaign .list-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+#navidad-campaign .filters {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  overflow: visible;
+}
+
+#navidad-campaign .filters h3 {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+#navidad-campaign .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#navidad-campaign .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-default);
+  background: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast);
+}
+
+#navidad-campaign .chip:hover {
+  border-color: var(--brand-300);
+  background: var(--brand-50);
+}
+
+#navidad-campaign .chip[aria-pressed="true"] {
+  background: var(--brand-100);
+  border-color: #2098d7;
+  color: var(--brand-800);
+}
+
+#navidad-campaign .chip[aria-pressed="true"]:hover {
+  background: var(--brand-200);
+}
+
+#navidad-campaign .chip.applied {
+  background: #fff;
+  border-color: #2098d7;
+  color: var(--brand-800);
+}
+
+#navidad-campaign .chip.applied:hover {
+  background: var(--brand-50);
+}
+
+#navidad-campaign .applied-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#navidad-campaign .applied-row .chip {
+  animation: chip-in 300ms var(--ease) both;
+}
+
+#navidad-campaign .grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 32px;
+}
+
+@media (min-width: 1600px) {
+  #navidad-campaign .grid {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+}
+
+#navidad-campaign .mobile-filters {
+  display: none;
+}
+
+#navidad-campaign .mobile-count {
+  color: var(--text-secondary);
+}
+
+#navidad-campaign .show-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+#navidad-campaign .empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 64px 16px;
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#navidad-campaign .empty p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1023px) {
+  #navidad-campaign .list-layout {
+    grid-template-columns: 1fr;
+  }
+
+  #navidad-campaign .filters {
+    display: none;
+  }
+
+  #navidad-campaign .grid {
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 24px;
+  }
+
+  #navidad-campaign .list-head {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    gap: 8px;
+  }
+
+  #navidad-campaign .list-head .count {
+    display: none;
+  }
+
+  /* Sin filtros: [Filtros] ··· N cartas disponibles. Con filtros: [Filtros][chips con scroll] y el conteo pasa abajo */
+
+  #navidad-campaign .mobile-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 8px;
+    row-gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  #navidad-campaign .mobile-filters #open-filters {
+    flex: none;
+  }
+
+  #navidad-campaign .mobile-filters.has-filters {
+    justify-content: flex-start;
+  }
+
+  #navidad-campaign .mobile-filters.has-filters .applied-row {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #navidad-campaign .mobile-filters.has-filters .mobile-count {
+    flex-basis: 100%;
+  }
+
+  #navidad-campaign .grid {
+    gap: 16px;
+  }
+
+  #navidad-campaign .applied-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    margin: 0 -16px 0 0;
+    padding-right: 16px;
+  }
+
+  #navidad-campaign .applied-row::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#navidad-campaign .filter-badge {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: var(--brand-600);
+  color: #fff;
+  font-size: 12px;
+}
+
+@keyframes chip-in {
+  from { opacity: 0; transform: scale(.85); }
+}

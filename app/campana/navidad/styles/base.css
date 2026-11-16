@@ -1,0 +1,194 @@
+/*
+ * Base: resets, contenedor .wrap, tipografía, cambio de pantallas (.view) y reduced-motion.
+ * .wrap: ancho fluido hasta 1100px, máx. 1280px hasta 1599px y 1400px desde 1600px.
+ */
+
+#navidad-campaign :where(*),
+#navidad-campaign,
+html:has(#navidad-campaign),
+body:has(#navidad-campaign),
+body:has(#navidad-campaign) main.content {
+  overflow: visible;
+}
+
+body:has(#navidad-campaign) {
+  height: auto;
+  min-height: 100vh;
+}
+
+body:has(#navidad-campaign)>header {
+  flex-shrink: 0;
+}
+
+html:has(body.lock #navidad-campaign),
+body.lock:has(#navidad-campaign) {
+  overflow: hidden;
+}
+
+/* body.lock = hay un modal abierto: no se scrollea la página de atrás (la clase la pone page.tsx). */
+body.lock {
+  overflow: hidden;
+}
+
+#navidad-campaign {
+  scroll-behavior: smooth;
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#navidad-campaign [hidden] {
+  display: none !important;
+}
+
+#navidad-campaign * {
+  box-sizing: border-box;
+}
+
+#navidad-campaign h1,
+#navidad-campaign h2,
+#navidad-campaign h3,
+#navidad-campaign h4 {
+  font-family: var(--font-heading);
+  margin: 0;
+  text-wrap: balance;
+}
+
+#navidad-campaign p {
+  margin: 0;
+}
+
+#navidad-campaign button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+#navidad-campaign img {
+  max-width: 100%;
+  display: block;
+}
+
+#navidad-campaign .icon {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+}
+
+#navidad-campaign :focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--brand-200);
+}
+
+#navidad-campaign .wrap {
+  width: 100%;
+  margin-inline: auto;
+  padding-left: max(clamp(16px,5.5vw,80px), env(safe-area-inset-left,0px));
+  padding-right: max(clamp(16px,5.5vw,80px), env(safe-area-inset-right,0px));
+}
+
+@media (min-width: 1100px) {
+  #navidad-campaign .wrap {
+    max-width: calc(1280px + 160px);
+  }
+}
+
+@media (min-width: 1600px) {
+  #navidad-campaign .wrap {
+    max-width: calc(1400px + 160px);
+  }
+}
+
+#navidad-campaign .section {
+  padding-block: var(--section-pad);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Tipos */
+#navidad-campaign .h1 {
+  font-size: 60px;
+  line-height: 72px;
+  font-weight: 700;
+}
+
+#navidad-campaign .h2 {
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 600;
+}
+
+#navidad-campaign .h3 {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+}
+
+#navidad-campaign .h4 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+#navidad-campaign .body-lg {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+#navidad-campaign .caption {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@media (max-width: 767px) {
+  #navidad-campaign .h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  #navidad-campaign .h3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  #navidad-campaign .h4 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  #navidad-campaign .body-lg {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+#navidad-campaign .view {
+  display: none;
+}
+
+#navidad-campaign .view.on {
+  display: block;
+  animation: fadein 500ms var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #navidad-campaign *,
+  #navidad-campaign *::before,
+  #navidad-campaign *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(8px); }
+}

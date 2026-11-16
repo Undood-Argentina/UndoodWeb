@@ -1,0 +1,34 @@
+/*
+ * Estilos de la campaña de Navidad (app/campana/navidad).
+ *
+ * Todos los selectores empiezan con `#navidad-campaign` para no pisar estilos del resto del sitio.
+ * Las únicas reglas sin ese prefijo son las que tocan <html>/<body> y los @keyframes.
+ * (No usamos CSS nesting a propósito: con webpack se manda tal cual al navegador y los
+ * navegadores viejos, p. ej. iOS < 17.2, lo ignoran por completo.)
+ *
+ * Un archivo por sección de la página; cada uno dice arriba en qué componente está su markup.
+ * El ORDEN de los imports importa: si dos reglas tienen la misma especificidad, gana la última.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Raleway:wght@400;500;600;700&display=swap');
+
+/* Fundamentos */
+@import "./tokens.css";
+@import "./base.css";
+@import "./buttons.css";
+
+/* Pantalla #listado (en el orden en que aparecen) */
+@import "./hero.css";
+@import "./progress.css";
+@import "./letters-list.css";
+@import "./kid-card.css";
+@import "./how-to-participate.css";
+@import "./meeting-points.css";
+@import "./faq.css";
+@import "./selection-bar.css";
+@import "./modals.css";
+
+/* Otras pantallas */
+@import "./datos.css";
+@import "./confirmacion.css";
+@import "./banner.css";

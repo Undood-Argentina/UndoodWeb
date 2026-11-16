@@ -1,0 +1,148 @@
+/*
+ * Hero de #listado (fondo verde con nieve animada). También lo reusan .hero-conf (confirmacion.css) y .banner (banner.css).
+ * Markup: _components/ListadoView.tsx -> HeroSection
+ */
+
+#navidad-campaign .hero {
+  background: var(--pine-950);
+  color: var(--text-inverse-primary);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+#navidad-campaign .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url(/campana/navidad/img/pat-nieve.png) 0 0/1440px 600px repeat;
+  z-index: -1;
+  animation: snow 90s linear infinite;
+}
+
+#navidad-campaign .snow-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 72px;
+  background: url(/campana/navidad/img/borde-nieve.png) center bottom/100% 72px no-repeat;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#navidad-campaign .hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(440px,720px) minmax(0,520px);
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+  padding-top: 64px;
+}
+
+#navidad-campaign .hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 96px;
+  overflow: visible;
+}
+
+#navidad-campaign .hero .pre {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: var(--pine-100);
+}
+
+#navidad-campaign .hero .bajada {
+  color: var(--text-inverse-secondary);
+  max-width: 600px;
+}
+
+@media (min-width: 900px) {
+  #navidad-campaign .hero-text .h1 {
+    font-size: 60px;
+    line-height: 72px;
+    white-space: nowrap;
+  }
+}
+
+#navidad-campaign .hero-ill {
+  position: relative;
+  align-self: end;
+  display: flex;
+  justify-content: center;
+}
+
+#navidad-campaign .hero-ill img {
+  width: min(100%,440px);
+}
+
+#navidad-campaign .hero .avance {
+  margin-top: 16px;
+  max-width: 520px;
+}
+
+@media (max-width: 1099px) {
+  #navidad-campaign .hero .wrap {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #navidad-campaign .hero-text {
+    padding-bottom: 32px;
+  }
+}
+
+@media (max-width: 899px) {
+  #navidad-campaign .hero .wrap {
+    padding-top: 64px;
+  }
+
+  #navidad-campaign .hero .pre {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+  }
+
+  #navidad-campaign .hero-ill {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #navidad-campaign .hero-ill img {
+    width: 260px;
+  }
+
+  #navidad-campaign .hero-ill .avance {
+    margin-top: -24px;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
+
+#navidad-campaign .desktop-progress {
+  display: block;
+}
+
+#navidad-campaign .mobile-progress {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  #navidad-campaign .desktop-progress {
+    display: none;
+  }
+
+  #navidad-campaign .mobile-progress {
+    display: block;
+  }
+}
+
+@keyframes snow {
+  to { background-position: 0 600px; }
+}

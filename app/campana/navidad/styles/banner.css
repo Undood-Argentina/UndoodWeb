@@ -1,0 +1,92 @@
+/*
+ * Pantalla #banner: preview del banner de la home. Se apoya en los estilos de .hero (hero.css).
+ * Markup: _components/BannerView.tsx
+ */
+
+#navidad-campaign .banner {
+  background: linear-gradient(180deg,#005243,#09352c);
+}
+
+#navidad-campaign .banner::before {
+  opacity: .5;
+}
+
+#navidad-campaign .banner .wrap {
+  grid-template-columns: minmax(0,560px) minmax(0,620px);
+}
+
+#navidad-campaign .banner .fecha-entrega {
+  color: #ffd76a;
+  font-weight: 600;
+}
+
+#navidad-campaign .banner .characters {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+}
+
+#navidad-campaign .banner .characters img {
+  height: 260px;
+  width: auto;
+}
+
+#navidad-campaign .banner .characters .avance {
+  position: absolute;
+  left: 50%;
+  bottom: 64px;
+  transform: translateX(-50%);
+  width: min(420px,90%);
+  z-index: 3;
+}
+
+#navidad-campaign .banner .h2 {
+  color: var(--text-inverse-primary);
+}
+
+@media (max-width: 899px) {
+  #navidad-campaign .banner .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  #navidad-campaign .banner .h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  #navidad-campaign .banner .characters img {
+    height: 160px;
+  }
+
+  #navidad-campaign .banner .characters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #navidad-campaign .banner .characters .characters-row {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  #navidad-campaign .banner .characters .avance {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin: -24px 0 56px;
+    width: 100%;
+  }
+}
+
+#navidad-campaign .banner-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#navidad-campaign .home-note {
+  color: var(--text-tertiary);
+  text-align: center;
+}

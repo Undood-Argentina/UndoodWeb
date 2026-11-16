@@ -1,0 +1,146 @@
+/*
+ * Barra "Avance de la campaña". .compacto = versión chica (hero/banner), .completo = versión grande (confirmación).
+ * Markup: _components/CampaignProgress.tsx
+ */
+
+#navidad-campaign .avance {
+  background: #fff;
+  color: var(--text-primary);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: visible;
+}
+
+#navidad-campaign .avance .label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+#navidad-campaign .avance .progress-number {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+#navidad-campaign .avance .gracias {
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+#navidad-campaign .avance.completo {
+  padding: 32px;
+}
+
+#navidad-campaign .avance.completo .progress-number {
+  font-size: 36px;
+  line-height: 44px;
+}
+
+#navidad-campaign .avance.completo .gracias {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+#navidad-campaign .avance.compacto {
+  padding: 16px 20px;
+  gap: 12px;
+}
+
+#navidad-campaign .avance.compacto .progress-number {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+#navidad-campaign .avance .progress-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#navidad-campaign .track {
+  position: relative;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--neutral-200);
+  margin-right: 40px;
+  overflow: visible;
+}
+
+#navidad-campaign .track .fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: inherit;
+  background: var(--pine-600);
+  transition: width 1.6s var(--ease);
+}
+
+#navidad-campaign .track .marker {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--pine-600);
+  color: var(--pine-600);
+  display: grid;
+  place-items: center;
+  transition: left 1.6s var(--ease);
+}
+
+#navidad-campaign .track .tree {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -26px;
+}
+
+#navidad-campaign .avance .legend {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+#navidad-campaign .avance .legend b {
+  color: var(--pine-700);
+  font-weight: 600;
+}
+
+#navidad-campaign .avance .legend span {
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 767px) {
+  #navidad-campaign .avance.completo {
+    padding: 20px;
+  }
+
+  #navidad-campaign .avance.completo .progress-number {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  #navidad-campaign .avance.completo .gracias {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+#navidad-campaign .avance.filled .fill {
+  width: var(--progress);
+}
+
+#navidad-campaign .avance.filled .marker {
+  left: var(--progress);
+}

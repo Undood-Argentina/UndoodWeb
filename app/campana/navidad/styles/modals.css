@@ -1,0 +1,205 @@
+/*
+ * Modales "Tu selección" (.fullscreen) y "Filtros" (.sheet), y la fila .elegida de cada carta elegida.
+ * Markup: _components/Modals.tsx · _components/common.tsx -> SelectedKidRow
+ */
+
+#navidad-campaign .overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--backdrop);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-base) var(--ease),visibility 0s linear var(--dur-base);
+}
+
+#navidad-campaign .overlay.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--dur-base) var(--ease);
+}
+
+#navidad-campaign .modal {
+  width: min(560px,100%);
+  max-height: min(640px,calc(100vh - 32px));
+  background: #fff;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(16px) scale(.96);
+  opacity: 0;
+  transition: transform var(--dur-base) var(--ease),opacity var(--dur-base) var(--ease);
+}
+
+#navidad-campaign .overlay.open .modal {
+  transform: none;
+  opacity: 1;
+}
+
+#navidad-campaign .modal header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 24px 16px;
+}
+
+#navidad-campaign .modal header h2 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+#navidad-campaign .modal header .selection-count {
+  color: var(--brand-800);
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+}
+
+#navidad-campaign .modal .body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#navidad-campaign .modal footer {
+  border-top: 1px solid var(--border-default);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#navidad-campaign .close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-primary);
+  transition: background-color var(--dur-fast);
+}
+
+#navidad-campaign .close-btn:hover {
+  background: var(--surface-muted);
+}
+
+#navidad-campaign .elegida {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  transition: opacity 300ms var(--ease),transform 300ms var(--ease);
+}
+
+#navidad-campaign .elegida .avatar {
+  width: 48px;
+  height: 48px;
+}
+
+#navidad-campaign .elegida .avatar img {
+  width: 44px;
+  height: 44px;
+}
+
+#navidad-campaign .elegida .elegida-info {
+  flex: 1;
+  min-width: 0;
+}
+
+#navidad-campaign .elegida .elegida-info b {
+  font-weight: 700;
+}
+
+#navidad-campaign .elegida .elegida-info .elegida-age {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-left: 8px;
+}
+
+#navidad-campaign .elegida .elegida-info p {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+#navidad-campaign .elegida .close-btn {
+  width: 32px;
+  height: 32px;
+}
+
+#navidad-campaign .elegida.leaving {
+  opacity: 0;
+  transform: translateX(24px);
+}
+
+/* Mobile: modal full screen que sube desde abajo; filtros = hoja inferior */
+@media (max-width: 767px) {
+  #navidad-campaign .overlay.fullscreen {
+    padding: 0;
+    place-items: stretch;
+  }
+
+  #navidad-campaign .overlay.fullscreen .modal {
+    width: 100%;
+    max-height: none;
+    height: 100%;
+    border-radius: 0;
+    transform: translateY(100%);
+    opacity: 1;
+  }
+
+  #navidad-campaign .overlay.fullscreen.open .modal {
+    transform: none;
+  }
+
+  #navidad-campaign .modal footer {
+    flex-direction: column-reverse;
+  }
+
+  #navidad-campaign .modal footer .btn {
+    width: 100%;
+  }
+}
+
+#navidad-campaign .overlay.sheet {
+  place-items: end stretch;
+  padding: 0;
+}
+
+#navidad-campaign .overlay.sheet .modal {
+  width: 100%;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transform: translateY(100%);
+  opacity: 1;
+  padding-bottom: env(safe-area-inset-bottom,0px);
+}
+
+#navidad-campaign .overlay.sheet.open .modal {
+  transform: none;
+}
+
+#navidad-campaign .sheet .sheet-handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--neutral-200);
+  margin: 8px auto 0;
+}
+
+#navidad-campaign .sheet .body {
+  gap: 24px;
+}

@@ -1,0 +1,156 @@
+/*
+ * Preguntas frecuentes (acordeón) y la caja "¿No encontrás tu respuesta?".
+ * Markup: _components/ListadoView.tsx -> FaqSection
+ */
+
+#navidad-campaign .faq {
+  background: var(--cranberry-900);
+  color: var(--text-inverse-primary);
+}
+
+#navidad-campaign .faq-layout {
+  display: grid;
+  grid-template-columns: minmax(0,400px) minmax(0,1fr);
+  gap: 64px;
+}
+
+#navidad-campaign .faq-intro p {
+  color: var(--text-inverse-secondary);
+  margin-top: 8px;
+}
+
+#navidad-campaign .faq-intro img {
+  margin-top: 40px;
+  width: 260px;
+}
+
+#navidad-campaign .faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#navidad-campaign .faq-item {
+  background: #fff;
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: background-color var(--dur-base) var(--ease);
+}
+
+#navidad-campaign .faq-item.open {
+  background: var(--cream-50);
+}
+
+#navidad-campaign .faq-item button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--brand-800);
+  border-radius: var(--radius-md);
+}
+
+#navidad-campaign .faq-item button .icon {
+  color: var(--brand-600);
+  transition: transform var(--dur-base) var(--ease);
+}
+
+#navidad-campaign .faq-item.open button .icon {
+  transform: rotate(180deg);
+}
+
+#navidad-campaign .faq-item .faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease);
+}
+
+#navidad-campaign .faq-item.open .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+#navidad-campaign .faq-item .faq-answer>div {
+  overflow: hidden;
+}
+
+#navidad-campaign .faq-item .faq-answer p {
+  padding: 0 24px 20px;
+  color: var(--text-primary);
+}
+
+#navidad-campaign .ayuda {
+  margin-top: 48px;
+  background: var(--alpha-white-10);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#navidad-campaign .ayuda .icon-box {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: var(--radius-md);
+  background: var(--alpha-white-10);
+  display: grid;
+  place-items: center;
+  color: var(--text-inverse-primary);
+}
+
+#navidad-campaign .ayuda .ayuda-text {
+  flex: 1;
+  min-width: 0;
+}
+
+#navidad-campaign .ayuda .ayuda-text b {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+#navidad-campaign .ayuda .ayuda-text span {
+  color: var(--text-inverse-secondary);
+}
+
+#navidad-campaign .ayuda .ayuda-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 899px) {
+  #navidad-campaign .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  #navidad-campaign .faq-intro img {
+    display: none;
+  }
+
+  #navidad-campaign .faq-item button {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 16px;
+  }
+
+  #navidad-campaign .faq-item .faq-answer p {
+    padding: 0 16px 16px;
+  }
+
+  #navidad-campaign .ayuda {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
