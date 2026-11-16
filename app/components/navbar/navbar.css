@@ -9,9 +9,18 @@
 
 /* end conditionals */
 
+/* globals.css pone overflow-x:hidden en *, y overflow no se hereda:
+   hay que pisarlo en cada elemento de la navbar */
+@media(min-width:1024px){
+    .navbar,
+    .navbar *{
+        overflow: visible;
+    }
+}
+
+
 .navbar{
     position: static;
-    overflow-x: hidden;
     height: 15vw;
     width: 100%;
     background-color: #ffffff;
@@ -126,6 +135,27 @@
     color: #DB2777;
 }
 
+.n-link-navidad{
+    --navidad-rayas: repeating-linear-gradient(
+        -45deg,
+        #C8102E 0 .6em,
+        #1B7F3B .6em .9em
+    );
+}
+
+.n-link-navidad a{
+    width: fit-content;
+    font-weight: 700;
+}
+
+.n-link-navidad .navidad-text{
+    background-image: var(--navidad-rayas);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
 
 .n-link a:active{
     color: #137ebeff!important;
@@ -186,6 +216,20 @@
 
     .n-link-salud-menstrual a:hover{
         color: #DB2777;
+    }
+
+    /* marco a rayas: gradiente recortado a un borde de 2px con mask */
+    .n-link-navidad a::before{
+        border: none;
+        padding: 2px;
+        background: var(--navidad-rayas);
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask:
+            linear-gradient(#000 0 0) content-box exclude,
+            linear-gradient(#000 0 0);
     }
     
     
