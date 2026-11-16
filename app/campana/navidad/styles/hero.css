@@ -114,6 +114,9 @@
 
   #navidad-campaign .hero-ill img {
     width: 260px;
+    height: auto;
+    position: relative;
+    bottom: -3vw;
   }
 
   #navidad-campaign .hero-ill .avance {
