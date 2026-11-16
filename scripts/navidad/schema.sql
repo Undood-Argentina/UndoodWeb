@@ -3,6 +3,22 @@
 
 BEGIN;
 
+-- Tablas base: un chico/a por carta y los regalos que pidió (las columnas extra se agregan abajo).
+CREATE TABLE IF NOT EXISTS "niño_navidad" (
+  id     integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  nombre text    NOT NULL,
+  hogar  text    NOT NULL,
+  edad   integer NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS regalo_navidad (
+  id        integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  regalo    text    NOT NULL,
+  talle     text,
+  link_ref  text,
+  "id_niño" integer NOT NULL REFERENCES "niño_navidad"(id)
+);
+
 -- Info extra de la carta que no es un regalo: "Además le gusta...", edad original, talles sin regalo, etc.
 ALTER TABLE "niño_navidad" ADD COLUMN IF NOT EXISTS observaciones text;
 
