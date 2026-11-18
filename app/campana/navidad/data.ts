@@ -94,7 +94,7 @@ export type MeetingPoint = {
 
 export const FAQS: { question: string; answer: string }[] = [
   { question: "¿Puedo elegir más de una carta?", answer: "Sí. Podés elegir todas las que quieras, siempre que puedas preparar un regalo por cada carta." },
-  { question: "¿Hasta cuándo puedo entregar el regalo?", answer: "Del viernes 14 de noviembre al domingo 15 de diciembre, en el horario de cada punto de encuentro." },
+  { question: "¿Hasta cuándo puedo entregar el regalo?", answer: "Del viernes 14 de noviembre al martes 15 de diciembre, en el horario de cada punto de encuentro." },
   { question: "¿Qué tengo que poner en la tarjeta?", answer: "El nombre, la edad y el hogar del niño o niña, pegada o atada al paquete. Así sabemos a quién entregarlo. No pongas datos personales tuyos." },
   { question: "¿Qué está prohibido regalar?", answer: "En esta campaña recibimos solo regalos. Si querés donar dinero, podés hacerlo desde el botón Doná del sitio." },
   { question: "¿Cómo sé que el regalo llegó?", answer: "Unos días después de que se entreguen los regalos, te escribimos para contarte cómo salió." },

@@ -219,7 +219,7 @@ function HowToParticipateSection({ isActive }: { isActive: boolean }) {
           <article className="step-card">
             <Image className="step-illustration" src={`${IMG_PATH}/paso-trineo.png`} alt="" width={360} height={193} />
             <h3>Lo llevás a un punto de encuentro</h3>
-            <p>Hay tiempo entre el viernes 14 de noviembre y el domingo 15 de diciembre, en el horario de cada local.</p>
+            <p>Hay tiempo entre el viernes 14 de noviembre y el martes 15 de diciembre, en el horario de cada local.</p>
             <ScrollLink className="btn btn-secondary btn-sm" to="puntos">Ver puntos de encuentro</ScrollLink>
           </article>
         </div>
