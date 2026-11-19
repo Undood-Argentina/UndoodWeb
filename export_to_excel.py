@@ -14,7 +14,7 @@ from openpyxl.utils import get_column_letter
 # --- Configuración -----------------------------------------------------------
 # MySQL:      "mysql+pymysql://usuario:clave@localhost:3306/mi_base?charset=utf8mb4"
 # PostgreSQL: "postgresql+psycopg2://usuario:clave@localhost:5432/mi_base"
-URL_DB = f"postgresql+psycopg2://Demian@localhost:5432/undood_temp?charset=utf8mb4"
+URL_DB = "postgresql+psycopg2://Demian@/undood_temp"
 ARCHIVO_SALIDA = "padrinos_navidad.xlsx"
 
 # --- Consultas ---------------------------------------------------------------
