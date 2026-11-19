@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python venv (se arma local, ver requirements.txt)
+/bin/
+/lib/
+/lib64
+/include/
+/share/
+/pyvenv.cfg
+__pycache__/
