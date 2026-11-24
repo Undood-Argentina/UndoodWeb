@@ -1,7 +1,8 @@
 // Consultas a las tablas de la campaña de Navidad:
 //   "niño_navidad"   un chico/a por carta (id_padrino NULL = carta disponible)
 //   regalo_navidad   los regalos que pidió cada uno
-//   padrino_navidad  quien eligió cartas desde la web
+//   padrino_navidad  quien eligió cartas desde la web o se anotó en la lista de espera
+//   lista_espera_navidad  cuántos regalos estima hacer cada padrino anotado en la lista de espera
 //   punto_encuentro_navidad  dónde se entregan los regalos (status 1 = visible)
 // El esquema está en scripts/navidad/schema.sql.
 
@@ -40,21 +41,25 @@ export type Padrino = {
   codigoPostal: string;
 };
 
-export type RegistroListaEspera = {
-  nombre: string;
-  email: string;
-  celular: string;
-  codigoPostal: string;
+export type RegistroListaEspera = Padrino & {
   cantidadRegalos: number;
 };
 
-/** Guarda el interés de alguien que quiere recibir un aviso si se agregan cartas. */
+/**
+ * Anota a alguien que quiere recibir un aviso si se agregan cartas.
+ * Sus datos van a padrino_navidad (reusando el padrino si ya existe) y lista_espera_navidad sólo guarda
+ * cuántos regalos estima hacer, apuntando a ese padrino.
+ */
 export async function registrarListaEspera(registro: RegistroListaEspera): Promise<void> {
-  await sequelize.query(
-    `INSERT INTO lista_espera_navidad (nombre, email, celular, codigo_postal, cantidad_regalos)
-     VALUES (:nombre, :email, :celular, :codigoPostal, :cantidadRegalos)`,
-    { type: QueryTypes.INSERT, replacements: registro }
-  );
+  const { cantidadRegalos, ...padrino } = registro;
+  await sequelize.transaction(async (transaction) => {
+    const padrinoId = await buscarOCrearPadrino(padrino, transaction);
+    await sequelize.query(
+      `INSERT INTO lista_espera_navidad (id_padrino, cantidad_regalos)
+       VALUES (:padrinoId, :cantidadRegalos)`,
+      { type: QueryTypes.INSERT, replacements: { padrinoId, cantidadRegalos }, transaction }
+    );
+  });
 }
 
 const CARTAS_SELECT = `
@@ -123,12 +128,7 @@ export type ResultadoEleccion =
  */
 export async function elegirCartas(padrino: Padrino, ids: number[]): Promise<ResultadoEleccion> {
   return sequelize.transaction(async (transaction) => {
-    const [inserted] = await sequelize.query<{ id: number }>(
-      `INSERT INTO padrino_navidad (nombre, email, celular, codigo_postal)
-       VALUES (:nombre, :email, :celular, :codigoPostal)
-       RETURNING id`,
-      { type: QueryTypes.SELECT, replacements: padrino, transaction }
-    );
+    const padrinoId = await buscarOCrearPadrino(padrino, transaction);
 
     // El "id_padrino IS NULL" hace que dos personas no puedan quedarse con la misma carta.
     const asignadas = await sequelize.query<{ id: number }>(
@@ -136,7 +136,7 @@ export async function elegirCartas(padrino: Padrino, ids: number[]): Promise<Res
        SET id_padrino = :padrinoId
        WHERE id IN (:ids) AND id_padrino IS NULL
        RETURNING id`,
-      { type: QueryTypes.SELECT, replacements: { padrinoId: inserted.id, ids }, transaction }
+      { type: QueryTypes.SELECT, replacements: { padrinoId, ids }, transaction }
     );
 
     if (asignadas.length !== ids.length) {
@@ -148,11 +148,45 @@ export async function elegirCartas(padrino: Padrino, ids: number[]): Promise<Res
 
     const cartas = await getCartasPorId(ids, transaction);
     const avance = await getAvance(transaction);
-    return { ok: true as const, padrinoId: inserted.id, cartas, avance };
+    return { ok: true as const, padrinoId, cartas, avance };
   }).catch((error) => {
     if (error instanceof CartasNoDisponiblesError) return { ok: false as const, noDisponibles: error.ids };
     throw error;
   });
+}
+
+/**
+ * Si ya hay un padrino con los mismos datos (nombre, mail, celular y código postal) devuelve su id;
+ * si no, lo crea. Se compara sin distinguir mayúsculas ni espacios de más, y el celular sólo por sus dígitos.
+ */
+async function buscarOCrearPadrino(padrino: Padrino, transaction: Transaction): Promise<number> {
+  // Lock por mail (se libera al terminar la transacción): si la misma persona manda el formulario
+  // dos veces a la vez, la segunda espera y encuentra el padrino que creó la primera.
+  await sequelize.query(`SELECT pg_advisory_xact_lock(hashtext(lower(trim(:email))))`, {
+    type: QueryTypes.SELECT,
+    replacements: { email: padrino.email },
+    transaction,
+  });
+
+  const [existente] = await sequelize.query<{ id: number }>(
+    `SELECT id FROM padrino_navidad
+     WHERE lower(trim(email)) = lower(trim(:email))
+       AND lower(regexp_replace(trim(nombre), '\\s+', ' ', 'g')) = lower(regexp_replace(trim(:nombre), '\\s+', ' ', 'g'))
+       AND regexp_replace(celular, '\\D', '', 'g') = regexp_replace(:celular, '\\D', '', 'g')
+       AND codigo_postal IS NOT DISTINCT FROM :codigoPostal
+     ORDER BY id
+     LIMIT 1`,
+    { type: QueryTypes.SELECT, replacements: padrino, transaction }
+  );
+  if (existente) return existente.id;
+
+  const [inserted] = await sequelize.query<{ id: number }>(
+    `INSERT INTO padrino_navidad (nombre, email, celular, codigo_postal)
+     VALUES (:nombre, :email, :celular, :codigoPostal)
+     RETURNING id`,
+    { type: QueryTypes.SELECT, replacements: padrino, transaction }
+  );
+  return inserted.id;
 }
 
 class CartasNoDisponiblesError extends Error {
