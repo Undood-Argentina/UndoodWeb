@@ -119,6 +119,8 @@ function LettersSection({ campaign, kidList, selection, onOpenFiltersModal }: Le
                   <Icon name="gift" size={32} />
                   <b className="h4">¡Ya se eligieron todas las cartas!</b>
                   <p>Gracias a todos los que se sumaron.</p>
+                  <p>¿Te interesaría sumarte si se agregan más cartas?</p>
+                  <a className="btn btn-secondary" href="#espera">Registrate en la lista de espera</a>
                 </div>
               )}
               {campaign.status === "ready" && campaign.kids.length > 0 && kidList.filteredKids.length === 0 && (
