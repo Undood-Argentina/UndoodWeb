@@ -30,6 +30,14 @@ function parseAvailability(raw, nombre) {
   const availability = JSON.parse(json);
   for (const day of Object.keys(availability)) {
     if (!/^[0-6]$/.test(day)) throw new Error(`${nombre}: día inválido "${day}" en availability_time`);
+    const hours = clean(availability[day]);
+    // "Cerrado" (o vacío) = el día no va: en el CSV un día que no está es un día cerrado.
+    if (!hours || /^cerrad/i.test(hours)) {
+      delete availability[day];
+      continue;
+    }
+    // "08:00-22:00" -> "8:00-22:00" (la web muestra la hora tal cual: "08 a 22 hs").
+    availability[day] = hours.replace(/\b0(\d:\d\d)/g, "$1");
   }
   return availability;
 }
