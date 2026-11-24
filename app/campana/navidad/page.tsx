@@ -24,15 +24,16 @@
 //   styles/      un CSS por sección; styles/index.css explica cómo están organizados
 
 import { useEffect, useRef, useState } from "react";
-import { chooseLetters } from "./api";
+import { chooseLetters, joinWaitlist } from "./api";
 import { VIEW_NAMES, type Confirmation, type ModalName, type ViewName } from "./data";
-import { joinNames, type ContactForm } from "./helpers";
+import { joinNames, normalizePostalCode, type ContactForm, type WaitlistForm } from "./helpers";
 import { useBodyClass, useModalAccessibility } from "./hooks";
 import { useCampaignData, useKidList, useMeetingPoints, useSelection } from "./state";
 import { BannerView } from "./_components/BannerView";
 import { ConfirmacionView } from "./_components/ConfirmacionView";
 import { DatosView } from "./_components/DatosView";
 import { ListadoView } from "./_components/ListadoView";
+import { ListaEsperaView } from "./_components/ListaEsperaView";
 import { FiltersModal, SelectionModal } from "./_components/Modals";
 import { SelectionBar } from "./_components/SelectionBar";
 import "./styles/index.css";
@@ -72,6 +73,7 @@ export default function NavidadCampaignPage() {
   const canShowView = useRef<(view: ViewName) => boolean>(() => true);
   canShowView.current = (view) => {
     if (view === "datos") return selection.count > 0;
+    if (view === "espera") return campaign.status === "ready" && campaign.kids.length === 0;
     if (view === "confirmacion") return confirmation !== null;
     return true;
   };
@@ -82,7 +84,7 @@ export default function NavidadCampaignPage() {
       const hash = window.location.hash.slice(1) as ViewName;
       const nextView = VIEW_NAMES.includes(hash) ? hash : activeView;
 
-      // #datos sin cartas elegidas o #confirmacion sin haber enviado nada no tienen sentido: vuelve al listado.
+      // #datos sin cartas o #espera con cartas disponibles no tienen sentido: vuelve al listado.
       if (!canShowView.current(nextView)) {
         window.location.hash = "listado";
         return;
@@ -136,6 +138,17 @@ export default function NavidadCampaignPage() {
     return result.message;
   };
 
+  const submitWaitlist = async (form: WaitlistForm): Promise<string | null> => {
+    const result = await joinWaitlist({
+      nombre: form.name,
+      email: form.email,
+      celular: form.phone,
+      codigoPostal: normalizePostalCode(form.postalCode) ?? "",
+      cantidadRegalos: Number(form.giftCount),
+    });
+    return result.status === "error" ? result.message : null;
+  };
+
   // .lock en el body evita que la página scrollee detrás de un modal abierto.
   useBodyClass("lock", openModal !== null);
   // .has-bar agrega espacio abajo para que la barra fija no tape el final de la página.
@@ -157,7 +170,11 @@ export default function NavidadCampaignPage() {
         selection={selection}
         onOpenSelectionModal={() => setOpenModal("selection")}
         onSubmit={submitSelection}
-   />
+      />
+      <ListaEsperaView
+        isActive={activeView === "espera"}
+        onSubmit={submitWaitlist}
+      />
       <ConfirmacionView
         isActive={activeView === "confirmacion"}
         confirmation={confirmation}

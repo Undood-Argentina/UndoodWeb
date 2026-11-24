@@ -34,6 +34,11 @@
   padding-bottom: 96px;
 }
 
+#navidad-campaign .waitlist-layout {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
+}
+
 #navidad-campaign .panel {
   background: #fff;
   border-radius: 24px;
@@ -123,6 +128,17 @@
   border-radius: var(--radius-md);
   background: var(--cranberry-50);
   color: var(--cranberry-600);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+#navidad-campaign .form-success {
+  margin: -16px 0 24px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: #e9f6ec;
+  color: #176b32;
   font-size: 14px;
   line-height: 20px;
   font-weight: 600;

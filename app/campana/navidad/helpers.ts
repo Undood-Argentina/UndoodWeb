@@ -151,3 +151,24 @@ export function validateContactForm(form: ContactForm): ContactFormErrors {
     acceptsTerms: !form.acceptsTerms,
   };
 }
+
+export type WaitlistForm = {
+  name: string;
+  email: string;
+  phone: string;
+  postalCode: string;
+  giftCount: string;
+};
+
+export type WaitlistFormErrors = Record<keyof WaitlistForm, boolean>;
+
+export function validateWaitlistForm(form: WaitlistForm): WaitlistFormErrors {
+  const giftCount = Number(form.giftCount);
+  return {
+    name: form.name.trim().length <= 2,
+    email: !/^\S+@\S+\.\S+$/.test(form.email),
+    phone: form.phone.replace(/\D/g, "").length < 10,
+    postalCode: normalizePostalCode(form.postalCode) === null,
+    giftCount: !/^\d+$/.test(form.giftCount) || !Number.isSafeInteger(giftCount) || giftCount < 1 || giftCount > 2_147_483_647,
+  };
+}

@@ -34,6 +34,17 @@ CREATE TABLE IF NOT EXISTS padrino_navidad (
 -- Código postal del padrino (para ordenar los puntos de encuentro por cercanía y armar el link del mail).
 ALTER TABLE padrino_navidad ADD COLUMN IF NOT EXISTS codigo_postal text;
 
+-- Personas interesadas en recibir un aviso si se agregan cartas (no implica elegir ni comprometerse).
+CREATE TABLE IF NOT EXISTS lista_espera_navidad (
+  id               integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  nombre           text        NOT NULL,
+  email            text        NOT NULL,
+  celular          text        NOT NULL,
+  codigo_postal    text        NOT NULL,
+  cantidad_regalos integer     NOT NULL CHECK (cantidad_regalos > 0),
+  fecha_registro   timestamptz NOT NULL DEFAULT now()
+);
+
 -- Caché de la ubicación de cada código postal (4 dígitos), sacada de OpenStreetMap (Nominatim).
 -- Nominatim pide no consultar lo mismo dos veces: se busca una sola vez por código postal.
 -- latitud/longitud NULL = Nominatim no lo encontró (también se guarda, para no volver a preguntar).

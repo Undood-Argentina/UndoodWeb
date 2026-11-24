@@ -34,10 +34,10 @@ export type Confirmation = { kids: Kid[]; emailSent: boolean };
 
 /**
  * Las "pantallas" de la página. Se navega entre ellas con el hash de la URL
- * (#listado, #datos, #confirmacion, #banner).
+ * (#listado, #datos, #espera, #confirmacion, #banner).
  */
-export type ViewName = "listado" | "datos" | "confirmacion" | "banner";
-export const VIEW_NAMES: ViewName[] = ["listado", "datos", "confirmacion", "banner"];
+export type ViewName = "listado" | "datos" | "espera" | "confirmacion" | "banner";
+export const VIEW_NAMES: ViewName[] = ["listado", "datos", "espera", "confirmacion", "banner"];
 
 export type ModalName = "selection" | "filters";
 

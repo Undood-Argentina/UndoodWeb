@@ -40,6 +40,23 @@ export type Padrino = {
   codigoPostal: string;
 };
 
+export type RegistroListaEspera = {
+  nombre: string;
+  email: string;
+  celular: string;
+  codigoPostal: string;
+  cantidadRegalos: number;
+};
+
+/** Guarda el interés de alguien que quiere recibir un aviso si se agregan cartas. */
+export async function registrarListaEspera(registro: RegistroListaEspera): Promise<void> {
+  await sequelize.query(
+    `INSERT INTO lista_espera_navidad (nombre, email, celular, codigo_postal, cantidad_regalos)
+     VALUES (:nombre, :email, :celular, :codigoPostal, :cantidadRegalos)`,
+    { type: QueryTypes.INSERT, replacements: registro }
+  );
+}
+
 const CARTAS_SELECT = `
   SELECT
     n.id,

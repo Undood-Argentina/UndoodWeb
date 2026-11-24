@@ -69,6 +69,31 @@ export async function chooseLetters(request: ChooseLettersRequest): Promise<Choo
   }
 }
 
+export type JoinWaitlistRequest = {
+  nombre: string;
+  email: string;
+  celular: string;
+  codigoPostal: string;
+  cantidadRegalos: number;
+};
+
+export type JoinWaitlistResult = { status: "ok" } | { status: "error"; message: string };
+
+export async function joinWaitlist(request: JoinWaitlistRequest): Promise<JoinWaitlistResult> {
+  try {
+    const response = await fetch("/api/navidad/lista-espera", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+    });
+    const data = await response.json();
+    if (response.ok) return { status: "ok" };
+    return { status: "error", message: data.error ?? "No pudimos anotarte. Probá de nuevo." };
+  } catch {
+    return { status: "error", message: "No pudimos conectarnos. Revisá tu conexión y probá de nuevo." };
+  }
+}
+
 /** Lo que devuelve GET /api/navidad/puntos (ver app/api/navidad/queries.ts -> PuntoEncuentro). */
 type PuntoApi = {
   id: number;
